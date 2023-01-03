@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
 
 namespace ZombieChezLeComte
 {
@@ -8,6 +10,7 @@ namespace ZombieChezLeComte
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private readonly ScreenManager _screenManager = new ScreenManager();
 
         public Game1()
         {
@@ -20,7 +23,13 @@ namespace ZombieChezLeComte
         {
             // TODO: Add your initialization logic here
 
+            _graphics.PreferredBackBufferHeight = Constantes.WINDOW_HEIGHT;
+            _graphics.PreferredBackBufferWidth = Constantes.WINDOW_WIDTH;
+
+            Components.Add(_screenManager);
             base.Initialize();
+
+            LoadMainMenu();
         }
 
         protected override void LoadContent()
@@ -42,11 +51,16 @@ namespace ZombieChezLeComte
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        private void LoadMainMenu()
+        {
+            _screenManager.LoadScreen(new MainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
     }
 }

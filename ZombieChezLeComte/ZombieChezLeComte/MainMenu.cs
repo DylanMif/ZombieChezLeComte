@@ -35,6 +35,9 @@ namespace ZombieChezLeComte
 
         private Vector2 titlePosition;
 
+        private Vector2 mainMenuImagePosition;
+        private Texture2D mainMenuTexture;
+
         private Song mainSong;
 
         private SpriteFont pixelFont;
@@ -53,6 +56,7 @@ namespace ZombieChezLeComte
                 Color.Transparent, 0, 0, Color.Gray, Color.White, Color.Red, "Quitter <<");
 
             titlePosition = new Vector2(50, 50);
+            mainMenuImagePosition = new Vector2(500, 350);
             base.Initialize();
         }
 
@@ -68,6 +72,8 @@ namespace ZombieChezLeComte
             quitButton.LoadContent(pixelFont, buttonBgTex);
 
             mainSong = Content.Load<Song>("mainMusic");
+            mainMenuTexture = Content.Load<Texture2D>("mainMenuImage.png");
+
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(mainSong);
             base.LoadContent();
@@ -90,6 +96,7 @@ namespace ZombieChezLeComte
             continueButton.Draw(Game.SpriteBatch);
             commandButton?.Draw(Game.SpriteBatch);
             quitButton.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.Draw(mainMenuTexture, mainMenuImagePosition, Color.White);
             Game.SpriteBatch.End();
         }
     }

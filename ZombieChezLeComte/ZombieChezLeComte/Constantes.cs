@@ -8,7 +8,9 @@ namespace ZombieChezLeComte
 {
     public class Constantes
     {
-        public static int WINDOW_WIDTH = 1080;
-        public static int WINDOW_HEIGHT = 720;
+        public const int WINDOW_WIDTH = 1080;
+        public const int WINDOW_HEIGHT = 720;
+        public const int VITESSE_JOUEUR = 150;
+        public const int VITESSE_ZOMBIE = 120;
     }
 }

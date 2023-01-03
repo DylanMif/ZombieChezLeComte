@@ -11,11 +11,11 @@ namespace ZombieChezLeComte
 {
     public class Constantes
     {
+        public const string GAME_TITLE = "Zombie Chez le Comte";
         public const int WINDOW_WIDTH = 1080;
         public const int WINDOW_HEIGHT = 720;
         public const int VITESSE_JOUEUR = 150;
         public const int VITESSE_ZOMBIE = 120;
-
 
         public const Keys upKeys = Keys.Z;
         public const Keys downKeys = Keys.S;

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using Microsoft.Xna.Framework.Media;
 
 namespace ZombieChezLeComte
 {
@@ -24,11 +25,20 @@ namespace ZombieChezLeComte
         private int continueButtonXPos = 50;
         private int continueButtonYPos = 350;
 
+        private Button commandButton = new Button();
+        private int commandButtonXPos = 50;
+        private int commandButtonYPos = 450;
+
         private Button quitButton = new Button();
         private int quitButtonXPos = 50;
-        private int quitButtonYPos = 450;
+        private int quitButtonYPos = 550;
+
+        private Vector2 titlePosition;
+
+        private Song mainSong;
 
         private SpriteFont pixelFont;
+        private SpriteFont pixelTitleFont;
         private Texture2D buttonBgTex;
 
         public override void Initialize()
@@ -37,19 +47,29 @@ namespace ZombieChezLeComte
                 Color.Transparent, 0, 0, Color.Gray, Color.White, Color.Red, "Nouvelle Partie <<");
             continueButton.Initialize("Continuer", Color.Transparent, new Vector2(continueButtonXPos, continueButtonYPos), 600, 50,
                 Color.Transparent, 0, 0, Color.Gray, Color.White, Color.Red, "Continuer <<");
+            commandButton.Initialize("Commandes", Color.Transparent, new Vector2(commandButtonXPos, commandButtonYPos), 600, 50,
+                Color.Transparent, 0, 0, Color.Gray, Color.White, Color.Red, "Commandes <<");
             quitButton.Initialize("Quitter", Color.Transparent, new Vector2(quitButtonXPos, quitButtonYPos), 600, 50,
                 Color.Transparent, 0, 0, Color.Gray, Color.White, Color.Red, "Quitter <<");
 
+            titlePosition = new Vector2(50, 50);
             base.Initialize();
         }
 
         public override void LoadContent()
         {
             pixelFont = Content.Load<SpriteFont>("police");
+            pixelTitleFont = Content.Load<SpriteFont>("TitleFont");
+
             buttonBgTex = Content.Load<Texture2D>("rectangle");
             newGameButton.LoadContent(pixelFont, buttonBgTex);
             continueButton.LoadContent(pixelFont, buttonBgTex);
+            commandButton.LoadContent(pixelFont, buttonBgTex);
             quitButton.LoadContent(pixelFont, buttonBgTex);
+
+            mainSong = Content.Load<Song>("mainMusic");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(mainSong);
             base.LoadContent();
         }
 
@@ -57,15 +77,20 @@ namespace ZombieChezLeComte
         {
             newGameButton.Update(Mouse.GetState());
             continueButton.Update(Mouse.GetState());
+            commandButton.Update(Mouse.GetState());
             quitButton.Update(Mouse.GetState());
         }
 
         public override void Draw(GameTime gameTime)
         {
             Game.GraphicsDevice.Clear(new Color(0, 0, 0));
+            Game.SpriteBatch.Begin();
+            Game.SpriteBatch.DrawString(pixelTitleFont, Constantes.GAME_TITLE, titlePosition, Color.White);
             newGameButton.Draw(Game.SpriteBatch);
             continueButton.Draw(Game.SpriteBatch);
+            commandButton?.Draw(Game.SpriteBatch);
             quitButton.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.End();
         }
     }
 }

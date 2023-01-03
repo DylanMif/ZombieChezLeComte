@@ -10,13 +10,28 @@ namespace ZombieChezLeComte
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private readonly ScreenManager _screenManager = new ScreenManager();
+        private readonly ScreenManager _screenManager;
+
+        public SpriteBatch SpriteBatch
+        {
+            get
+            {
+                return _spriteBatch;
+            }
+
+            set
+            {
+                _spriteBatch = value;
+            }
+        }
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _screenManager = new ScreenManager();
+            Components.Add(_screenManager);
         }
 
         protected override void Initialize()
@@ -25,8 +40,7 @@ namespace ZombieChezLeComte
 
             _graphics.PreferredBackBufferHeight = Constantes.WINDOW_HEIGHT;
             _graphics.PreferredBackBufferWidth = Constantes.WINDOW_WIDTH;
-
-            Components.Add(_screenManager);
+            _graphics.ApplyChanges();
             base.Initialize();
 
             LoadMainMenu();
@@ -34,7 +48,7 @@ namespace ZombieChezLeComte
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -45,7 +59,7 @@ namespace ZombieChezLeComte
                 Exit();
 
             // TODO: Add your update logic here
-
+            
             base.Update(gameTime);
         }
 

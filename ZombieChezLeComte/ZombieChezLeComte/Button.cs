@@ -144,7 +144,7 @@ namespace ZombieChezLeComte
             }
         }
 
-        private string WriteText
+        public string WriteText
         {
             get
             {
@@ -262,7 +262,7 @@ namespace ZombieChezLeComte
         }
 
         public void Initialize(string _text, Color _bgColor, Vector2 _position, uint _width, uint _height, Color _clickBgColor, 
-            uint _paddingTop, uint _paddingLeft, Color _textColor, Color _hoverTextColor, Color _clickTextColor)
+            uint _paddingTop, uint _paddingLeft, Color _textColor, Color _hoverTextColor, Color _clickTextColor, string _hoverText)
         {
             this.Text = _text;
             this.BgColor = _bgColor;
@@ -275,6 +275,8 @@ namespace ZombieChezLeComte
             this.TextColor = _textColor;
             this.HoverTextColor = _hoverTextColor;
             this.ClickTextColor = _clickTextColor;
+            this.HoverText = _hoverText;
+            this.WriteText = this.Text;
         }
 
         public void LoadContent(SpriteFont _font, Texture2D _rectText)
@@ -285,28 +287,38 @@ namespace ZombieChezLeComte
 
         public void Update(MouseState _ms)
         {
+            if (_ms.LeftButton == ButtonState.Pressed && this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
+            {
+                this.CurrentColor = this.ClickBgColor;
+                this.CurrentTextColor = this.ClickTextColor;
+                return;
+            }
+            else
+            {
+                this.CurrentColor = this.BgColor;
+                this.CurrentTextColor = this.TextColor;
+            }
+
             if (this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
             {
                 this.WriteText = this.HoverText;
+                this.CurrentTextColor = this.HoverTextColor;
             } else
             {
                 this.WriteText = this.Text;
+                this.CurrentTextColor = this.TextColor;
             }
 
-            if(_ms.LeftButton == ButtonState.Pressed && this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
-            {
-                this.CurrentColor = this.ClickBgColor;
-            } else
-            {
-                this.CurrentColor = this.BgColor;
-            }
+           
         }
 
         public void Draw(SpriteBatch _sb)
         {
             _sb.Begin();
-            _sb.Draw(this.RectTex, this.Position, this.CurrentColor);
-            _sb.DrawString(this.Font, this.WriteText, this.Position + new Vector2(this.PaddingLeft, this.PaddindTop), this.CurrentTextColor);
+            _sb.Draw(this.RectTex, this.ButtonRect, this.BgColor);
+            _sb.DrawString(this.Font, this.WriteText, this.Position + new Vector2(this.PaddingLeft, this.PaddindTop),
+                this.CurrentTextColor);
+            _sb.End();
         }
     }
 }

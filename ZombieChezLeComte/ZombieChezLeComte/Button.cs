@@ -314,11 +314,9 @@ namespace ZombieChezLeComte
 
         public void Draw(SpriteBatch _sb)
         {
-            _sb.Begin();
             _sb.Draw(this.RectTex, this.ButtonRect, this.BgColor);
             _sb.DrawString(this.Font, this.WriteText, this.Position + new Vector2(this.PaddingLeft, this.PaddindTop),
                 this.CurrentTextColor);
-            _sb.End();
         }
     }
 }

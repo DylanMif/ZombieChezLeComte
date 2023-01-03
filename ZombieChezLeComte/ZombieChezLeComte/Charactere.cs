@@ -112,7 +112,9 @@ namespace ZombieChezLeComte
 
         public void Update(GameTime gameTime)
         {
+            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             this.Perso.Play(this.CurrentAnimation);
+            this.Perso.Update(deltaSeconds);
         }
 
         public void Draw(SpriteBatch _spriteBatch)

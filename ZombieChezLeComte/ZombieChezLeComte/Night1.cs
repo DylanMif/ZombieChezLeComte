@@ -14,6 +14,7 @@ namespace ZombieChezLeComte
 {
     internal class Night1 : GameScreen
     {
+        
         private new Game1 Game => (Game1)base.Game;
         public Night1(Game1 game) : base(game) { }
 

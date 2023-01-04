@@ -35,6 +35,13 @@
 /processorParam:TextureFormat=Color
 /build:fantome.png
 
+#begin LittleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:LittleFont.spritefont
+
 #begin mainMenuImage.png
 /importer:TextureImporter
 /processor:TextureProcessor

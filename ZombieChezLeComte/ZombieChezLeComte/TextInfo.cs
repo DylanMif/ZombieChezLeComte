@@ -172,7 +172,6 @@ namespace ZombieChezLeComte
                 this.WriteText = "";
                 this.IsFinished = true;
             }
-            Console.WriteLine(this.IsFinished);
         }
 
         public void Draw(SpriteBatch _sb)

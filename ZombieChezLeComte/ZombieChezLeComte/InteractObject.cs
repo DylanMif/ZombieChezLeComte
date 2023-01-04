@@ -50,5 +50,11 @@ namespace ZombieChezLeComte
         {
             return this.InteractRect.Contains(pos);
         }
+
+        public void Destroy()
+        {
+            //On le sort de l'écran
+            this.InteractRect = new Rectangle(-150, -150, 1, 1);
+        }
     }
 }

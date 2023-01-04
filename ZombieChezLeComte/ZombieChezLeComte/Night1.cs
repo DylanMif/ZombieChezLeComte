@@ -9,8 +9,11 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended.Sprites;
+using MonoGame.Extended.Content;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using MonoGame.Extended.Serialization;
 
 namespace ZombieChezLeComte
 {
@@ -29,7 +32,8 @@ namespace ZombieChezLeComte
         }
         public override void LoadContent()
         {
-            _nuit1.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"));
+            _nuit1.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"), 
+                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
 
             base.LoadContent();
         }
@@ -42,7 +46,7 @@ namespace ZombieChezLeComte
         public override void Draw(GameTime gameTime)
         {
             Game.GraphicsDevice.Clear(Color.White);
-            _nuit1.Draw();
+            _nuit1.Draw(Game.SpriteBatch);
         }
     }
 }

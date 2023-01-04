@@ -14,27 +14,14 @@ using MonoGame.Extended.Content;
 
 namespace ZombieChezLeComte
 {
-    internal class Charactere
+    public class Charactere
     {
-        private Texture2D _texture;
         private Vector2 _position;
         private int _vitesse;
         private AnimatedSprite _perso;
         private SpriteSheet _spriteSheet;
         private String _currentAnimation;
 
-        public Texture2D Texture
-        {
-            get
-            {
-                return this._texture;
-            }
-
-            set
-            {
-                this._texture = value;
-            }
-        }
         public Vector2 Position
         {
             get
@@ -96,10 +83,9 @@ namespace ZombieChezLeComte
             }
         }
 
-        public void Initialize(Texture2D _texture2D, Vector2 _position, int _vitesse)
+        public void Initialize( Vector2 _position, int _vitesse)
         {
             this.Position = _position;
-            this.Texture = _texture2D;
             this.Vitesse = _vitesse;
             this.CurrentAnimation="idle";
         }
@@ -120,7 +106,7 @@ namespace ZombieChezLeComte
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(this.Texture, this.Position, Color.White);
+            _spriteBatch.Draw(this.Perso, this.Position);
             _spriteBatch.End();
         }
         public void Movement(Vector2 _vector2, float _delattime)

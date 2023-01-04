@@ -11,6 +11,8 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace ZombieChezLeComte
 {
@@ -19,6 +21,8 @@ namespace ZombieChezLeComte
         private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
         private Charactere _player = new Charactere();
+        private OrthographicCamera _camera;
+        private Vector2 _cameraPosition;
 
 
         public TiledMap TiledMap
@@ -57,10 +61,38 @@ namespace ZombieChezLeComte
                 this._player = value;
             }
         }
-
-        public void Initialize()
+        public OrthographicCamera Camera
         {
-            this.Player.Initialize(Constantes.POSITION_JOUEUR, Constantes.VITESSE_JOUEUR);
+            get
+            {
+                return this._camera;
+            }
+
+            set
+            {
+                this._camera = value;
+            }
+        }
+        public Vector2 CameraPosition
+        {
+            get
+            {
+                return this._cameraPosition;
+            }
+
+            set
+            {
+                this._cameraPosition = value;
+            }
+        }
+
+
+        public void Initialize(GameWindow gameWindow, GraphicsDevice graphics)
+        {
+            this.Player.Initialize(new Vector2(360, 360), Constantes.VITESSE_JOUEUR);
+            var viewportadapter = new BoxingViewportAdapter(gameWindow, graphics, 800, 600);
+            this.Camera = new OrthographicCamera(viewportadapter);
+            this.CameraPosition = Constantes.POSITION_JOUEUR;
         }
         public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet)
         {
@@ -72,12 +104,54 @@ namespace ZombieChezLeComte
         {
             this.TiledMapRenderer.Update(_gameTime);
             this.Player.Update(_gameTime);
-            this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())), (float) _gameTime.ElapsedGameTime.TotalSeconds);
+            this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
+                (float)_gameTime.ElapsedGameTime.TotalSeconds, true, true);
+            this.MoveCamera(_gameTime);
+            this.Camera.LookAt(this.CameraPosition);
+            Console.WriteLine(CameraPosition);
         }
         public void Draw(SpriteBatch _spriteBatch)
         {
-            this.TiledMapRenderer?.Draw();
+            this.TiledMapRenderer.Draw(this.Camera.GetInverseViewMatrix());
             this.Player.Draw(_spriteBatch);
+            
+        }
+        private Vector2 GetMovementDirection()
+        {
+            var movementDirection = Vector2.Zero;
+            var state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.Z))
+            {
+                movementDirection += Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.S))
+            {
+                movementDirection -= Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.D))
+            {
+                movementDirection -= Vector2.UnitX;
+            }
+            if (state.IsKeyDown(Keys.Q))
+            {
+                movementDirection += Vector2.UnitX;
+            }
+
+            // Can't normalize the zero vector so test for it before normalizing
+            if (movementDirection != Vector2.Zero)
+            {
+                movementDirection.Normalize();
+            }
+
+            return movementDirection;
+        }
+
+        private void MoveCamera(GameTime gameTime)
+        {
+            var speed = 200;
+            var seconds = gameTime.GetElapsedSeconds();
+            var movementDirection = GetMovementDirection();
+            this.CameraPosition += speed * movementDirection * seconds;
         }
     }
 }

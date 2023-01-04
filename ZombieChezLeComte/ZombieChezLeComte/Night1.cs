@@ -26,7 +26,7 @@ namespace ZombieChezLeComte
 
         public override void Initialize()
         {
-            _nuit1.Initialize();
+            _nuit1.Initialize(Game.Window, Game.GraphicsDevice);
 
             base.Initialize();
         }

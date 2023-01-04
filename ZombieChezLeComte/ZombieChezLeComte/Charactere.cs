@@ -109,7 +109,7 @@ namespace ZombieChezLeComte
             _spriteBatch.Draw(this.Perso, this.Position);
             _spriteBatch.End();
         }
-        public void Movement(Vector2 _vector2, float _delattime)
+        public void Movement(Vector2 _vector2, float _delattime, bool isPlayer, bool collisionActive)
         {
             if(_vector2.X == 0 && _vector2.Y == 0)
             {
@@ -131,7 +131,13 @@ namespace ZombieChezLeComte
             {
                 this.CurrentAnimation = "northWalk";
             }
-            this.Position += _vector2 * this.Vitesse * _delattime;
+            if(!isPlayer)
+                this.Position += _vector2 * this.Vitesse * _delattime;
+
+            if (collisionActive)
+            {
+
+            }
         }
     }
 }

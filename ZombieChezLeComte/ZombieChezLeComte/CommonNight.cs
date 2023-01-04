@@ -117,23 +117,22 @@ namespace ZombieChezLeComte
         }
         public void Update(GameTime _gameTime)
         {
+            Player.CurrentAnimation = "idle";
             Vector2 newPlayerPos = Additions.Normalize(Additions.GetAxis(Keyboard.GetState())) * 
                 Constantes.VITESSE_JOUEUR * (float)_gameTime.ElapsedGameTime.TotalSeconds;
-            float x = (-this.CameraPosition.X + 1080 - 180 + newPlayerPos.X) / TiledMap.TileWidth;
-            float y = (-this.CameraPosition.Y + 720 + newPlayerPos.Y) / TiledMap.TileHeight;
-            TiledMapTile? tile;
-            Console.WriteLine(x + ", " + y);
-            mapLayer.TryGetTile((ushort)x, (ushort)y, out tile);
-            Console.WriteLine(tile);
+            float nextX = (-this.CameraPosition.X + 1080 - 180 + newPlayerPos.X) / TiledMap.TileWidth;
+            float nextY = (-this.CameraPosition.Y + 720 + newPlayerPos.Y) / TiledMap.TileHeight + 0.4f;
 
             this.TiledMapRenderer.Update(_gameTime);
-            this.Player.Update(_gameTime);
-            if (!IsCollision((ushort)x, (ushort)y))
+            
+            if (!IsCollision((ushort)nextX, (ushort)nextY))
             {
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
-                    (float)_gameTime.ElapsedGameTime.TotalSeconds, true, true);
+                    (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
                 this.MoveCamera(_gameTime, -Additions.GetAxis(Keyboard.GetState()));
             }
+            //Console.WriteLine(-Camera.Position);
+            this.Player.Update(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
 
         }

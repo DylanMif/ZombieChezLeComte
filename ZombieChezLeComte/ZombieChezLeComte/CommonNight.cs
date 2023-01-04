@@ -113,16 +113,34 @@ namespace ZombieChezLeComte
             this.Player.LoadContent(_spriteSheet);
             this.TiledMap = _tilMap;
             this.TiledMapRenderer = new TiledMapRenderer(_graphicsDevice, this.TiledMap);
-            this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Collision");
+            this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Sol");
         }
         public void Update(GameTime _gameTime)
         {
             this.TiledMapRenderer.Update(_gameTime);
+
             this.Player.Update(_gameTime);
+
+            this.Camera.LookAt(this.CameraPosition);
+            float x = (-this.CameraPosition.X + 360) / this.TiledMap.TileWidth;
+            float y = (-this.CameraPosition.Y + 360) / this.TiledMap.TileHeight;
+            /*if (IsCollision((ushort)x, (ushort)y))
+            {
+                return;
+            }*/
+
             this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
                 (float)_gameTime.ElapsedGameTime.TotalSeconds, true, true);
-            this.MoveCamera(_gameTime);
-            this.Camera.LookAt(this.CameraPosition);
+
+            this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
+
+            TiledMapTile? tile;
+            /*Console.WriteLine(mapLayer.TryGetTile((ushort)x, (ushort)y, out tile));
+            Console.WriteLine(tile.ToString());*/
+
+            Console.WriteLine(-this.CameraPosition);
+
+            
             
         }
         public void Draw(SpriteBatch _spriteBatch)
@@ -134,6 +152,7 @@ namespace ZombieChezLeComte
         private bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)
+            Console.WriteLine(x + ", " + y);
             TiledMapTile? tile;
             if (mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
@@ -176,12 +195,11 @@ namespace ZombieChezLeComte
             return movementDirection;
         }
 
-        private void MoveCamera(GameTime gameTime)
+        private void MoveCamera(GameTime gameTime, Vector2 dir)
         {
             var speed = 200;
             var seconds = gameTime.GetElapsedSeconds();
-            var movementDirection = GetMovementDirection();
-            this.CameraPosition += speed * movementDirection * seconds;
+            this.CameraPosition += speed * dir * seconds;
         }
     }
 }

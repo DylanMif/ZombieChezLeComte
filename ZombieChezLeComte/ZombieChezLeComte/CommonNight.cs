@@ -104,7 +104,7 @@ namespace ZombieChezLeComte
         public void Initialize(GameWindow gameWindow, GraphicsDevice graphics)
         {
             this.Player.Initialize(new Vector2(360, 360), Constantes.VITESSE_JOUEUR);
-            var viewportadapter = new BoxingViewportAdapter(gameWindow, graphics, 800, 600);
+            var viewportadapter = new BoxingViewportAdapter(gameWindow, graphics, 1080, 720);
             this.Camera = new OrthographicCamera(viewportadapter);
             this.CameraPosition = Constantes.POSITION_JOUEUR;
         }
@@ -113,35 +113,29 @@ namespace ZombieChezLeComte
             this.Player.LoadContent(_spriteSheet);
             this.TiledMap = _tilMap;
             this.TiledMapRenderer = new TiledMapRenderer(_graphicsDevice, this.TiledMap);
-            this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Sol");
+            this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Collision");
         }
         public void Update(GameTime _gameTime)
         {
-            this.TiledMapRenderer.Update(_gameTime);
-
-            this.Player.Update(_gameTime);
-
-            this.Camera.LookAt(this.CameraPosition);
-            float x = (-this.CameraPosition.X + 360) / this.TiledMap.TileWidth;
-            float y = (-this.CameraPosition.Y + 360) / this.TiledMap.TileHeight;
-            /*if (IsCollision((ushort)x, (ushort)y))
-            {
-                return;
-            }*/
-
-            this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
-                (float)_gameTime.ElapsedGameTime.TotalSeconds, true, true);
-
-            this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
-
+            Vector2 newPlayerPos = Additions.Normalize(Additions.GetAxis(Keyboard.GetState())) * 
+                Constantes.VITESSE_JOUEUR * (float)_gameTime.ElapsedGameTime.TotalSeconds;
+            float x = (-this.CameraPosition.X + 1080 - 180 + newPlayerPos.X) / TiledMap.TileWidth;
+            float y = (-this.CameraPosition.Y + 720 + newPlayerPos.Y) / TiledMap.TileHeight;
             TiledMapTile? tile;
-            /*Console.WriteLine(mapLayer.TryGetTile((ushort)x, (ushort)y, out tile));
-            Console.WriteLine(tile.ToString());*/
+            Console.WriteLine(x + ", " + y);
+            mapLayer.TryGetTile((ushort)x, (ushort)y, out tile);
+            Console.WriteLine(tile);
 
-            Console.WriteLine(-this.CameraPosition);
+            this.TiledMapRenderer.Update(_gameTime);
+            this.Player.Update(_gameTime);
+            if (!IsCollision((ushort)x, (ushort)y))
+            {
+                this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
+                    (float)_gameTime.ElapsedGameTime.TotalSeconds, true, true);
+                this.MoveCamera(_gameTime, -Additions.GetAxis(Keyboard.GetState()));
+            }
+            this.Camera.LookAt(this.CameraPosition);
 
-            
-            
         }
         public void Draw(SpriteBatch _spriteBatch)
         {
@@ -152,54 +146,20 @@ namespace ZombieChezLeComte
         private bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)
-            Console.WriteLine(x + ", " + y);
             TiledMapTile? tile;
             if (mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;
             return false;
-        }
-        private Vector2 GetMovementDirection()
-        {
-            var movementDirection = Vector2.Zero;
-            var state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.Z))
-            {
-                ushort tx = (ushort)(this.Player.Position.X / this.TiledMap.TileWidth);
-                ushort ty = (ushort)(this.Player.Position.Y / this.TiledMap.TileHeight - 1);
-                if(!IsCollision(tx, ty))
-                {
-                    movementDirection += Vector2.UnitY;
-                } 
-            }
-            if (state.IsKeyDown(Keys.S))
-            {
-                movementDirection -= Vector2.UnitY;
-            }
-            if (state.IsKeyDown(Keys.D))
-            {
-                movementDirection -= Vector2.UnitX;
-            }
-            if (state.IsKeyDown(Keys.Q))
-            {
-                movementDirection += Vector2.UnitX;
-            }
+        } 
 
-            // Can't normalize the zero vector so test for it before normalizing
-            if (movementDirection != Vector2.Zero)
-            {
-                movementDirection.Normalize();
-            }
-
-            return movementDirection;
-        }
-
-        private void MoveCamera(GameTime gameTime, Vector2 dir)
+        private void MoveCamera(GameTime gameTime, Vector2 _dir)
         {
             var speed = 200;
             var seconds = gameTime.GetElapsedSeconds();
-            this.CameraPosition += speed * dir * seconds;
+            var movementDirection = _dir;
+            this.CameraPosition += speed * movementDirection * seconds;
         }
     }
 }

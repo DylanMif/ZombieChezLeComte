@@ -26,22 +26,23 @@ namespace ZombieChezLeComte
 
         private InteractObject bookshelfInteract = new InteractObject();
         private InteractObject[] kitchenPapers = new InteractObject[6];
+        private SpriteFont pixelFont;
 
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
 
-            bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio");
+            bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio", "Vous avez range la bibliotheque");
             for(int i = 0; i < 6; i++)
             {
                 kitchenPapers[i] = new InteractObject();
             }
-            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1");
-            kitchenPapers[0].Initialize(new Vector2(3925, 6572), 31, 38, "papier2");
-            kitchenPapers[0].Initialize(new Vector2(3955, 6632), 42, 35, "papier3");
-            kitchenPapers[0].Initialize(new Vector2(4021, 6572), 30, 27, "papier4");
-            kitchenPapers[0].Initialize(new Vector2(4086, 6571), 36, 27, "papier5");
-            kitchenPapers[0].Initialize(new Vector2(4120, 6605), 36, 27, "papier6");
+            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "tache 1");
+            kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "tache 2");
+            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "tache 3");
+            kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "tache 4");
+            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "tache 5");
+            kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "tache 6");
 
             base.Initialize();
         }
@@ -50,6 +51,7 @@ namespace ZombieChezLeComte
         {
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+            pixelFont = Game.Content.Load<SpriteFont>("police");
 
             base.LoadContent();
         }
@@ -64,6 +66,13 @@ namespace ZombieChezLeComte
                     Console.WriteLine("Biblio");
                     bookshelfInteract.Destroy();
                 }
+                foreach(InteractObject paperInteract in kitchenPapers)
+                {
+                    if(paperInteract.InteractWith(-commonNight.Camera.Position))
+                    {
+                        Console.WriteLine(paperInteract.InteractName);
+                    }
+                }
             }
             commonNight.Update(gameTime);
         }
@@ -71,6 +80,8 @@ namespace ZombieChezLeComte
         public override void Draw(GameTime gameTime)
         {
             commonNight.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.Begin();
+            Game.SpriteBatch.End();
         }
     }
 }

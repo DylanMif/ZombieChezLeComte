@@ -33,10 +33,10 @@ namespace ZombieChezLeComte
             {
                 litInteraction[i]= new InteractObject();
             }
-            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1");
-            litInteraction[1].Initialize(new Vector2(4098, 5900), 37, 73, "lit2");
-            litInteraction[2].Initialize(new Vector2(4098, 6088), 37, 73, "lit3");
-            litInteraction[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4");
+            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "lit 1");
+            litInteraction[1].Initialize(new Vector2(4098, 5900), 37, 73, "lit2", "lit 2");
+            litInteraction[2].Initialize(new Vector2(4098, 6088), 37, 73, "lit3", "lit 3");
+            litInteraction[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "lit 4");
             base.Initialize();
         }
         public override void LoadContent()

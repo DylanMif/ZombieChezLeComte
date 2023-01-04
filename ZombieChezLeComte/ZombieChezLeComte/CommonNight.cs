@@ -24,6 +24,7 @@ namespace ZombieChezLeComte
         private OrthographicCamera _camera;
         private Vector2 _cameraPosition;
         private TiledMapTileLayer mapLayer;
+        
 
 
         public TiledMap TiledMap
@@ -99,8 +100,6 @@ namespace ZombieChezLeComte
             }
         }
 
-
-
         public void Initialize(GameWindow gameWindow, GraphicsDevice graphics)
         {
             this.Player.Initialize(new Vector2(360, 360), Constantes.VITESSE_JOUEUR);
@@ -131,11 +130,13 @@ namespace ZombieChezLeComte
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
             }
-            Console.WriteLine(-Camera.Position);
+            //Console.WriteLine(-Camera.Position);
             this.Player.Update(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
 
         }
+
+        
         public void Draw(SpriteBatch _spriteBatch)
         {
             this.TiledMapRenderer.Draw(this.Camera.GetInverseViewMatrix());

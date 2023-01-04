@@ -17,32 +17,31 @@ namespace ZombieChezLeComte
         private new Game1 Game => (Game1)base.Game;
         public Introduction(Game1 game) : base(game) { }
 
-        private TextInfo introText = new TextInfo();
+        private string[] introSentance = new string[]
+        {
+            "Ce matin tu as été élu domestique du compte Bérenger, c'est plutôt une bonne nouvelle",
+            "car tu cherchais justement du travail. Cependant tu l'as toujours trouvé bizarre, étrange"
+        };
+        //private TextInfo[] allTextInfo = new TextInfo[introSentance.Length];
 
         public override void Initialize()
         {
-            introText.Initialize("Salut C'est moi",
-                Color.White, new Vector2(10, 10));
+            
             base.Initialize();
         }
 
         public override void LoadContent()
         {
-            introText.LoadContent(Game.Content.Load<SpriteFont>("police"));
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            introText.Update(gameTime);
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-                introText.ActiveText(5);
         }
 
         public override void Draw(GameTime gameTime)
         {
             Game.SpriteBatch.Begin();
-            introText.Draw(Game.SpriteBatch);
             Game.SpriteBatch.End();
         }
     }

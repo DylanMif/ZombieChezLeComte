@@ -19,6 +19,7 @@ namespace ZombieChezLeComte
         private bool writingText;
         private float textDuration;
         private float currentTextLifeTime;
+        private bool isFinished;
 
         public string Text
         {
@@ -124,6 +125,19 @@ namespace ZombieChezLeComte
             }
         }
 
+        public bool IsFinished
+        {
+            get
+            {
+                return this.isFinished;
+            }
+
+            set
+            {
+                this.isFinished = value;
+            }
+        }
+
         public void Initialize(string _text, Color _textColor, Vector2 textPosition)
         {
             this.Text = _text;
@@ -132,6 +146,7 @@ namespace ZombieChezLeComte
             this.writeText = "";
             this.writingText = false;
             this.CurrentTextLifeTime = 0;
+            this.IsFinished = false;
         }
 
         public void LoadContent(SpriteFont _font)
@@ -151,11 +166,13 @@ namespace ZombieChezLeComte
                     this.WriteText += this.Text[this.WriteText.Length];
                 }
             }
-            if(this.CurrentTextLifeTime <= 0)
+            if(this.CurrentTextLifeTime < 0)
             {
                 this.WritingText = false;
                 this.WriteText = "";
+                this.IsFinished = true;
             }
+            Console.WriteLine(this.IsFinished);
         }
 
         public void Draw(SpriteBatch _sb)

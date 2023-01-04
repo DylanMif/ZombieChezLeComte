@@ -23,6 +23,7 @@ namespace ZombieChezLeComte
         private Charactere _player = new Charactere();
         private OrthographicCamera _camera;
         private Vector2 _cameraPosition;
+        private TiledMapTileLayer mapLayer;
 
 
         public TiledMap TiledMap
@@ -85,6 +86,19 @@ namespace ZombieChezLeComte
                 this._cameraPosition = value;
             }
         }
+        public TiledMapTileLayer MapLayer
+        {
+            get
+            {
+                return this.mapLayer;
+            }
+
+            set
+            {
+                this.mapLayer = value;
+            }
+        }
+
 
 
         public void Initialize(GameWindow gameWindow, GraphicsDevice graphics)
@@ -99,6 +113,7 @@ namespace ZombieChezLeComte
             this.Player.LoadContent(_spriteSheet);
             this.TiledMap = _tilMap;
             this.TiledMapRenderer = new TiledMapRenderer(_graphicsDevice, this.TiledMap);
+            this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Collision");
         }
         public void Update(GameTime _gameTime)
         {
@@ -108,7 +123,7 @@ namespace ZombieChezLeComte
                 (float)_gameTime.ElapsedGameTime.TotalSeconds, true, true);
             this.MoveCamera(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
-            Console.WriteLine(CameraPosition);
+            
         }
         public void Draw(SpriteBatch _spriteBatch)
         {
@@ -116,13 +131,28 @@ namespace ZombieChezLeComte
             this.Player.Draw(_spriteBatch);
             
         }
+        private bool IsCollision(ushort x, ushort y)
+        {
+            // définition de tile qui peut être null (?)
+            TiledMapTile? tile;
+            if (mapLayer.TryGetTile(x, y, out tile) == false)
+                return false;
+            if (!tile.Value.IsBlank)
+                return true;
+            return false;
+        }
         private Vector2 GetMovementDirection()
         {
             var movementDirection = Vector2.Zero;
             var state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Z))
             {
-                movementDirection += Vector2.UnitY;
+                ushort tx = (ushort)(this.Player.Position.X / this.TiledMap.TileWidth);
+                ushort ty = (ushort)(this.Player.Position.Y / this.TiledMap.TileHeight - 1);
+                if(!IsCollision(tx, ty))
+                {
+                    movementDirection += Vector2.UnitY;
+                } 
             }
             if (state.IsKeyDown(Keys.S))
             {

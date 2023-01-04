@@ -36,12 +36,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return text;
+                return this.text;
             }
 
             set
             {
-                text = value;
+                this.text = value;
             }
         }
 
@@ -49,12 +49,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return bgColor;
+                return this.bgColor;
             }
 
             set
             {
-                bgColor = value;
+                this.bgColor = value;
             }
         }
 
@@ -62,12 +62,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return position;
+                return this.position;
             }
 
             set
             {
-                position = value;
+                this.position = value;
             }
         }
 
@@ -75,12 +75,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return width;
+                return this.width;
             }
 
             set
             {
-                width = value;
+                this.width = value;
             }
         }
 
@@ -88,12 +88,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return height;
+                return this.height;
             }
 
             set
             {
-                height = value;
+                this.height = value;
             }
         }
 
@@ -101,12 +101,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return hoverText;
+                return this.hoverText;
             }
 
             set
             {
-                hoverText = value;
+                this.hoverText = value;
             }
         }
 
@@ -114,12 +114,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return currentColor;
+                return this.currentColor;
             }
 
             set
             {
-                currentColor = value;
+                this.currentColor = value;
             }
         }
 
@@ -127,12 +127,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return clickBgColor;
+                return this.clickBgColor;
             }
 
             set
             {
-                clickBgColor = value;
+                this.clickBgColor = value;
             }
         }
 
@@ -148,12 +148,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return writeText;
+                return this.writeText;
             }
 
             set
             {
-                writeText = value;
+                this.writeText = value;
             }
         }
 
@@ -161,12 +161,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return font;
+                return this.font;
             }
 
             set
             {
-                font = value;
+                this.font = value;
             }
         }
 
@@ -174,12 +174,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return paddindTop;
+                return this.paddindTop;
             }
 
             set
             {
-                paddindTop = value;
+                this.paddindTop = value;
             }
         }
 
@@ -187,12 +187,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return paddingLeft;
+                return this.paddingLeft;
             }
 
             set
             {
-                paddingLeft = value;
+                this.paddingLeft = value;
             }
         }
 
@@ -200,12 +200,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return rectTex;
+                return this.rectTex;
             }
 
             set
             {
-                rectTex = value;
+                this.rectTex = value;
             }
         }
 
@@ -213,12 +213,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return textColor;
+                return this.textColor;
             }
 
             set
             {
-                textColor = value;
+                this.textColor = value;
             }
         }
 
@@ -226,12 +226,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return hoverTextColor;
+                return this.hoverTextColor;
             }
 
             set
             {
-                hoverTextColor = value;
+                this.hoverTextColor = value;
             }
         }
 
@@ -239,12 +239,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return clickTextColor;
+                return this.clickTextColor;
             }
 
             set
             {
-                clickTextColor = value;
+                this.clickTextColor = value;
             }
         }
 
@@ -252,12 +252,12 @@ namespace ZombieChezLeComte
         {
             get
             {
-                return currentTextColor;
+                return this.currentTextColor;
             }
 
             set
             {
-                currentTextColor = value;
+                this.currentTextColor = value;
             }
         }
 

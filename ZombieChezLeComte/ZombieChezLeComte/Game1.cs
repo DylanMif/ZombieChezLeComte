@@ -57,7 +57,8 @@ namespace ZombieChezLeComte
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            if (Keyboard.GetState().IsKeyDown(Keys.I))
+                LoadIntro();
             if ( Keyboard.GetState().IsKeyDown(Keys.P))
                 LoadNight1();
             // TODO: Add your update logic here
@@ -77,6 +78,10 @@ namespace ZombieChezLeComte
         private void LoadMainMenu()
         {
             _screenManager.LoadScreen(new MainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+        private void LoadIntro()
+        {
+            _screenManager.LoadScreen(new Introduction(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
         private void LoadNight1()
         {

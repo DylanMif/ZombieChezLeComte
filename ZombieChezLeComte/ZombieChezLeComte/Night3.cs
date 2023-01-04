@@ -25,12 +25,23 @@ namespace ZombieChezLeComte
         private CommonNight commonNight = new CommonNight();
 
         private InteractObject bookshelfInteract = new InteractObject();
+        private InteractObject[] kitchenPapers = new InteractObject[6];
 
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
 
             bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio");
+            for(int i = 0; i < 6; i++)
+            {
+                kitchenPapers[i] = new InteractObject();
+            }
+            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1");
+            kitchenPapers[0].Initialize(new Vector2(3925, 6572), 31, 38, "papier2");
+            kitchenPapers[0].Initialize(new Vector2(3955, 6632), 42, 35, "papier3");
+            kitchenPapers[0].Initialize(new Vector2(4021, 6572), 30, 27, "papier4");
+            kitchenPapers[0].Initialize(new Vector2(4086, 6571), 36, 27, "papier5");
+            kitchenPapers[0].Initialize(new Vector2(4120, 6605), 36, 27, "papier6");
 
             base.Initialize();
         }
@@ -51,6 +62,7 @@ namespace ZombieChezLeComte
                 if(bookshelfInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     Console.WriteLine("Biblio");
+                    bookshelfInteract.Destroy();
                 }
             }
             commonNight.Update(gameTime);

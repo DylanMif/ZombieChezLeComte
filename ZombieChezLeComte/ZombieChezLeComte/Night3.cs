@@ -24,9 +24,13 @@ namespace ZombieChezLeComte
 
         private CommonNight commonNight = new CommonNight();
 
+        private InteractObject bookshelfInteract = new InteractObject();
+
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
+
+            bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio");
 
             base.Initialize();
         }
@@ -34,9 +38,27 @@ namespace ZombieChezLeComte
         public override void LoadContent()
         {
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
-                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader())));
+                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
 
             base.LoadContent();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            // Check interaction
+            if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                if(bookshelfInteract.InteractWith(-commonNight.Camera.Position))
+                {
+                    Console.WriteLine("Biblio");
+                }
+            }
+            commonNight.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            commonNight.Draw(Game.SpriteBatch);
         }
     }
 }

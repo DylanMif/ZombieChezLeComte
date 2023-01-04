@@ -14,6 +14,8 @@ using MonoGame.Extended.Content;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Serialization;
+using MonoGame.Extended.Sprites;
+using MonoGame.Extended;
 
 namespace ZombieChezLeComte
 {
@@ -26,7 +28,9 @@ namespace ZombieChezLeComte
 
         private InteractObject bookshelfInteract = new InteractObject();
         private InteractObject[] kitchenPapers = new InteractObject[6];
-        private SpriteFont pixelFont;
+
+        private Charactere ghost = new Charactere();
+
 
         public override void Initialize()
         {
@@ -44,6 +48,8 @@ namespace ZombieChezLeComte
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "tache 5");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "tache 6");
 
+            ghost.Initialize(new Vector2(100, 100), Constantes.VITESSE_JOUEUR);
+
             base.Initialize();
         }
 
@@ -51,7 +57,8 @@ namespace ZombieChezLeComte
         {
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
-            pixelFont = Game.Content.Load<SpriteFont>("police");
+
+            ghost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
 
             base.LoadContent();
         }
@@ -75,13 +82,16 @@ namespace ZombieChezLeComte
                 }
             }
             commonNight.Update(gameTime);
+
+            ghost.Movement(-Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
+                (float)gameTime.ElapsedGameTime.TotalSeconds, false);
+            ghost.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
             commonNight.Draw(Game.SpriteBatch);
-            Game.SpriteBatch.Begin();
-            Game.SpriteBatch.End();
+            ghost.Draw(Game.SpriteBatch);
         }
     }
 }

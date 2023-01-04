@@ -24,6 +24,7 @@ namespace ZombieChezLeComte
         private OrthographicCamera _camera;
         private Vector2 _cameraPosition;
         private TiledMapTileLayer mapLayer;
+
         
 
 
@@ -106,6 +107,7 @@ namespace ZombieChezLeComte
             var viewportadapter = new BoxingViewportAdapter(gameWindow, graphics, 1080, 720);
             this.Camera = new OrthographicCamera(viewportadapter);
             this.CameraPosition = Constantes.POSITION_JOUEUR;
+
         }
         public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet)
         {
@@ -130,7 +132,7 @@ namespace ZombieChezLeComte
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
             }
-            //Console.WriteLine(-Camera.Position);
+            Console.WriteLine(-Camera.Position);
             this.Player.Update(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
 

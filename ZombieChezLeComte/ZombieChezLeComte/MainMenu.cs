@@ -56,7 +56,7 @@ namespace ZombieChezLeComte
                 Color.Transparent, 0, 0, Color.Gray, Color.White, Color.Red, "Quitter <<");
 
             titlePosition = new Vector2(0, 0);
-            mainMenuImagePosition = new Vector2(500, 350);
+            mainMenuImagePosition = new Vector2(600, 250);
             base.Initialize();
         }
 

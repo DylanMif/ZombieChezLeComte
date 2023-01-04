@@ -24,12 +24,19 @@ namespace ZombieChezLeComte
         public Night1(Game1 game) : base(game) { }
         private CommonNight _nuit1 = new CommonNight();
 
-        private InteractObject testInteraction = new InteractObject();
+        private InteractObject[] litInteraction = new InteractObject[4];
 
         public override void Initialize()
         {
             _nuit1.Initialize(Game.Window, Game.GraphicsDevice);
-            testInteraction.Initialize(new Vector2(4546, 6551), 1000, 1000, "test");
+            for(int i = 0; i < litInteraction.Length; i++)
+            {
+                litInteraction[i]= new InteractObject();
+            }
+            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1");
+            litInteraction[1].Initialize(new Vector2(4098, 5900), 37, 73, "lit2");
+            litInteraction[2].Initialize(new Vector2(4098, 6088), 37, 73, "lit3");
+            litInteraction[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4");
             base.Initialize();
         }
         public override void LoadContent()
@@ -46,13 +53,16 @@ namespace ZombieChezLeComte
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                if (testInteraction.InteractWith(-_nuit1.Camera.Position))
+                for(int i = 0; i < litInteraction.Length; i++)
                 {
-                    Console.WriteLine("Interaction");
-                }
-                else
-                {
-                    Console.WriteLine("Non");
+                    if (litInteraction[i].InteractWith(-_nuit1.Camera.Position))
+                    {
+                        Console.WriteLine("Interaction");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Non");
+                    }
                 }
             }
         }

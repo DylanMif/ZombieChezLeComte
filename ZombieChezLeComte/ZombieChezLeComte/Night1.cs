@@ -94,7 +94,7 @@ namespace ZombieChezLeComte
                         if (armoireInteraction[i].HasAlreadyInteractable == false)
                         {
                             armoireInteraction[i].HasAlreadyInteractable = true;
-                            nombreLitFait += 1;
+                            nombreArmoireFait += 1;
                         }
                         Console.WriteLine("Interaction");
                     }

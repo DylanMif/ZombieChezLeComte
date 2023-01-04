@@ -25,6 +25,7 @@ namespace ZombieChezLeComte
         private CommonNight _nuit1 = new CommonNight();
 
         private InteractObject[] litInteraction = new InteractObject[4];
+        private int nombreLitFait = 0;
 
         public override void Initialize()
         {
@@ -57,6 +58,7 @@ namespace ZombieChezLeComte
                 {
                     if (litInteraction[i].InteractWith(-_nuit1.Camera.Position))
                     {
+
                         Console.WriteLine("Interaction");
                     }
                     else

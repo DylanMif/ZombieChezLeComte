@@ -59,7 +59,7 @@ namespace ZombieChezLeComte
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.I))
                 LoadIntro();
-            if ( Keyboard.GetState().IsKeyDown(Keys.P))
+            if ( Keyboard.GetState().IsKeyDown(Keys.NumPad1))
                 LoadNight1();
             if (Keyboard.GetState().IsKeyDown(Keys.NumPad3))
                 LoadNight3();

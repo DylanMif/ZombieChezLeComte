@@ -31,10 +31,12 @@ namespace ZombieChezLeComte
         private InteractObject solNettoyage = new InteractObject();
         private InteractObject porteCave = new InteractObject();
         private InteractObject tableCuisine = new InteractObject();
+        private TextInfo textInfo =  new TextInfo();
 
         public override void Initialize()
         {
             _nuit1.Initialize(Game.Window, Game.GraphicsDevice);
+            textInfo.Initialize(" ",Color.White,new Vector2(0,0));
             for(int i = 0; i < armoireInteraction.Length; i++)
             {
                 armoireInteraction[i] = new InteractObject();
@@ -51,16 +53,17 @@ namespace ZombieChezLeComte
             {
                 litInteraction[i]= new InteractObject();
             }
-            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "lit defait");
+            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "Une bonne chose de faites");
             litInteraction[1].Initialize(new Vector2(4098, 5900), 37, 73, "lit2", "c'est degeulasse");
-            litInteraction[2].Initialize(new Vector2(4098, 6088), 37, 73, "lit3", "lit defait");
-            litInteraction[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "lit defait");
+            litInteraction[2].Initialize(new Vector2(4098, 6088), 37, 73, "lit3", "Sympa les draps");
+            litInteraction[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "Je me prendrai du cafe une fois mes taches finis");
             base.Initialize();
         }
         public override void LoadContent()
         {
             _nuit1.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"), 
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+            textInfo.LoadContent(Game.Content.Load<SpriteFont>("police"));
             
             base.LoadContent();
         }
@@ -77,9 +80,12 @@ namespace ZombieChezLeComte
                     {
                         if(litInteraction[i].HasAlreadyInteractable == false)
                         {
+                            textInfo.Text = litInteraction[i].InteractText;
                             litInteraction[i].HasAlreadyInteractable=true;
                             nombreLitFait += 1;
+                            litInteraction[i].InteractText = "Ce lit est fait";
                         }
+                        textInfo.Text = litInteraction[i].InteractText;
                         Console.WriteLine("Interaction");
                     }
                     else
@@ -93,9 +99,12 @@ namespace ZombieChezLeComte
                     {
                         if (armoireInteraction[i].HasAlreadyInteractable == false)
                         {
+                            textInfo.Text = armoireInteraction[i].InteractText;
                             armoireInteraction[i].HasAlreadyInteractable = true;
                             nombreArmoireFait += 1;
+                            armoireInteraction[i].InteractText = "Cette bibliotheque est rangee";
                         }
+                        textInfo.Text = armoireInteraction[i].InteractText;
                         Console.WriteLine("Interaction");
                     }
                     else
@@ -106,6 +115,7 @@ namespace ZombieChezLeComte
                 if (porteCave.InteractWith(-_nuit1.Camera.Position))
                 {
                     porteCave.HasAlreadyInteractable = true;
+                    textInfo.Text = porteCave.InteractText;
                     Console.WriteLine("Interaction");
                 }
                 else
@@ -114,7 +124,9 @@ namespace ZombieChezLeComte
                 }
                 if (tableCuisine.InteractWith(-_nuit1.Camera.Position))
                 {
+                    textInfo.Text = tableCuisine.InteractText;
                     tableCuisine.HasAlreadyInteractable = true;
+                    tableCuisine.InteractText = "La table est nettoyee";
                     Console.WriteLine("Interaction");
                 }
                 else
@@ -123,7 +135,9 @@ namespace ZombieChezLeComte
                 }
                 if (solNettoyage.InteractWith(-_nuit1.Camera.Position))
                 {
+                    textInfo.Text = solNettoyage.InteractText;
                     solNettoyage.HasAlreadyInteractable = true;
+                    solNettoyage.InteractText = "Le sol est prope";
                     Console.WriteLine("Interaction");
                 }
                 else
@@ -137,6 +151,9 @@ namespace ZombieChezLeComte
         {
             Game.GraphicsDevice.Clear(Color.White);
             _nuit1.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.Begin();
+            textInfo.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.End();
         }
     }
 }

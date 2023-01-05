@@ -25,9 +25,12 @@ namespace ZombieChezLeComte
         public Nuit4(Game1 game) : base(game) { }
         private CommonNight commonNight = new CommonNight();
 
+        private Zombie zombie = new Zombie();
+
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
+            zombie.Initialiaze(new Vector2(100, 100), Constantes.ZOMBIE_SPEED);
             base.Initialize();
         }
 
@@ -35,17 +38,21 @@ namespace ZombieChezLeComte
         {
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+
+            zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
+            zombie.Update(gameTime, commonNight);
             commonNight.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
             commonNight.Draw(Game.SpriteBatch);
+            zombie.Draw(Game.SpriteBatch);
         }
     }
 }

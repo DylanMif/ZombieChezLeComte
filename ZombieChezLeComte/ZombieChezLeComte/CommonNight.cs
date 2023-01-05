@@ -160,7 +160,7 @@ namespace ZombieChezLeComte
                 
             }
 
-            Console.WriteLine(-Camera.Position);
+            //Console.WriteLine(-Camera.Position);
             this.Player.Update(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
 
@@ -173,7 +173,7 @@ namespace ZombieChezLeComte
             this.Player.Draw(_spriteBatch);
             
         }
-        private bool IsCollision(ushort x, ushort y)
+        public bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;

@@ -147,7 +147,7 @@ namespace ZombieChezLeComte
             Player.CurrentAnimation = "idle";
             Vector2 newPlayerPos = Additions.Normalize(Additions.GetAxis(Keyboard.GetState())) * 
                 Constantes.VITESSE_JOUEUR * (float)_gameTime.ElapsedGameTime.TotalSeconds;
-            float nextX = (-this.CameraPosition.X + 1080 - 180 + newPlayerPos.X * 7f) / TiledMap.TileWidth;
+            float nextX = (-this.CameraPosition.X + 1080 - 180 + newPlayerPos.X * 2f) / TiledMap.TileWidth;
             float nextY = (-this.CameraPosition.Y + 720 + newPlayerPos.Y) / TiledMap.TileHeight + 0.4f;
 
             this.TiledMapRenderer.Update(_gameTime);

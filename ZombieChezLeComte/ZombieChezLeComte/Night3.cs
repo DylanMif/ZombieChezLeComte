@@ -28,6 +28,9 @@ namespace ZombieChezLeComte
 
         private InteractObject bookshelfInteract = new InteractObject();
         private InteractObject[] kitchenPapers = new InteractObject[6];
+        private InteractObject kitchenInteract = new InteractObject();
+        private InteractObject hallInteract = new InteractObject();
+        private InteractObject[] litInteraction = new InteractObject[4];
 
         private Charactere ghost = new Charactere();
 
@@ -37,17 +40,28 @@ namespace ZombieChezLeComte
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
 
-            bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio", "Vous avez range la bibliotheque");
-            for(int i = 0; i < 6; i++)
+            bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio", "Vous rangez la bibliotheque");
+            kitchenInteract.Initialize(new Vector2(3979, 6573), 33, 27, "rangerCuisine", "Vous rangez la cuisine");
+            hallInteract.Initialize(new Vector2(4595, 6442), 115, 138, "rangerHall", "Vous rangez la hall");
+            for(int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
             }
-            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "tache 1");
-            kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "tache 2");
-            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "tache 3");
-            kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "tache 4");
-            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "tache 5");
-            kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "tache 6");
+            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ranger la bibliotheque");
+            kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Ranger la cuisine");
+            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Ranger le hall");
+            kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
+            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "");
+            kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "");
+            for (int i = 0; i < litInteraction.Length; i++)
+            {
+                litInteraction[i] = new InteractObject();
+            }
+            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "Ce lit est nickel");
+            litInteraction[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Parfaitement range");
+            litInteraction[2].Initialize(new Vector2(4098, 6078), 47, 103, "lit3", "Bizarre... lit range");
+            litInteraction[3].Initialize(new Vector2(4452, 6111), 37, 83, "lit4", "Personne est venu aujourd'hui ?");
+            base.Initialize();
 
             ghost.Initialize(new Vector2(100, 100), 1);
 
@@ -75,17 +89,36 @@ namespace ZombieChezLeComte
             {
                 if(bookshelfInteract.InteractWith(-commonNight.Camera.Position))
                 {
-                    Console.WriteLine("Biblio");
                     textInfo.Text = bookshelfInteract.InteractText;
                     textInfo.ActiveText(2);
-                    bookshelfInteract.InteractText = "tache faite";
-                    //bookshelfInteract.Destroy();
+                    bookshelfInteract.InteractText = "Cette bibliotheque est rangee";
+                }
+                if(kitchenInteract.InteractWith(-commonNight.Camera.Position))
+                {
+                    textInfo.Text = kitchenInteract.InteractText;
+                    textInfo.ActiveText(2);
+                    kitchenInteract.InteractText = "Cette cuisine est nickel";
+                }
+                if(hallInteract.InteractWith(-commonNight.Camera.Position))
+                {
+                    textInfo.Text = hallInteract.InteractText;
+                    textInfo.ActiveText(2);
+                    hallInteract.InteractText = "Ce hall est presque propre";
                 }
                 foreach(InteractObject paperInteract in kitchenPapers)
                 {
                     if(paperInteract.InteractWith(-commonNight.Camera.Position))
                     {
-                        Console.WriteLine(paperInteract.InteractName);
+                        textInfo.Text = paperInteract.InteractText;
+                        textInfo.ActiveText(2);
+                    }
+                }
+                foreach(InteractObject bedInteract in litInteraction)
+                {
+                    if(bedInteract.InteractWith(-commonNight.Camera.Position))
+                    {
+                        textInfo.Text = bedInteract.InteractText;
+                        textInfo.ActiveText(2);
                     }
                 }
             }

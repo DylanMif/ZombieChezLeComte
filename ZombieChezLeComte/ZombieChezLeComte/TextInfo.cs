@@ -30,7 +30,8 @@ namespace ZombieChezLeComte
 
             set
             {
-                this.text = value;
+                if(!this.WritingText)
+                    this.text = value;
             }
         }
 

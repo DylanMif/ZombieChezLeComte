@@ -78,6 +78,7 @@ namespace ZombieChezLeComte
                     Console.WriteLine("Biblio");
                     textInfo.Text = bookshelfInteract.InteractText;
                     textInfo.ActiveText(2);
+                    bookshelfInteract.InteractText = "tache faite";
                     //bookshelfInteract.Destroy();
                 }
                 foreach(InteractObject paperInteract in kitchenPapers)

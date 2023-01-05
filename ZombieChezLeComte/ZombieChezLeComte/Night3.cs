@@ -184,7 +184,7 @@ namespace ZombieChezLeComte
                 if(endRunGhostSpawn)
                     endRunGhosts[i].Update(gameTime, commonNight, Game);
             }
-            //runGhost.Update(gameTime, commonNight, Game);
+           runGhost.Update(gameTime, commonNight, Game);
         }
 
         public override void Draw(GameTime gameTime)

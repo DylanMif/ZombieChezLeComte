@@ -25,6 +25,9 @@ namespace ZombieChezLeComte
         private Vector2 _cameraPosition;
         private TiledMapTileLayer mapLayer;
 
+        private Vector2 cameraMove;
+        private float deltaTime;
+
         
 
 
@@ -101,6 +104,29 @@ namespace ZombieChezLeComte
             }
         }
 
+        public Vector2 CameraMove {
+            get
+            {
+                return this.cameraMove;
+            }
+
+            set
+            {
+                this.cameraMove = value;
+            }
+        }
+        public float DeltaTime {
+            get
+            {
+                return this.deltaTime;
+            }
+
+            set
+            {
+                this.deltaTime = value;
+            }
+        }
+
         public void Initialize(GameWindow gameWindow, GraphicsDevice graphics)
         {
             this.Player.Initialize(new Vector2(360, 360), Constantes.VITESSE_JOUEUR);
@@ -125,14 +151,16 @@ namespace ZombieChezLeComte
             float nextY = (-this.CameraPosition.Y + 720 + newPlayerPos.Y) / TiledMap.TileHeight + 0.4f;
 
             this.TiledMapRenderer.Update(_gameTime);
-            
+            this.CameraMove = Vector2.Zero;
             if (!IsCollision((ushort)nextX, (ushort)nextY))
             {
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
+                
             }
-            Console.WriteLine(-Camera.Position);
+
+            //Console.WriteLine(-Camera.Position);
             this.Player.Update(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
 
@@ -161,6 +189,8 @@ namespace ZombieChezLeComte
             var speed = 200;
             var seconds = gameTime.GetElapsedSeconds();
             var movementDirection = _dir;
+            this.CameraMove = speed * movementDirection;
+            this.DeltaTime = seconds;
             this.CameraPosition += speed * movementDirection * seconds;
         }
     }

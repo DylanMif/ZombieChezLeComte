@@ -48,7 +48,7 @@ namespace ZombieChezLeComte
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "tache 5");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "tache 6");
 
-            ghost.Initialize(new Vector2(100, 100), Constantes.VITESSE_JOUEUR);
+            ghost.Initialize(new Vector2(100, 100), 1);
 
             base.Initialize();
         }
@@ -83,8 +83,9 @@ namespace ZombieChezLeComte
             }
             commonNight.Update(gameTime);
 
-            ghost.Movement(-Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
-                (float)gameTime.ElapsedGameTime.TotalSeconds, false);
+
+            Console.WriteLine(ghost.Position);
+            ghost.Movement(commonNight.CameraMove + Additions.Normalize(commonNight.Player.Position - ghost.Position) * 75, commonNight.DeltaTime, false);
             ghost.Update(gameTime);
         }
 

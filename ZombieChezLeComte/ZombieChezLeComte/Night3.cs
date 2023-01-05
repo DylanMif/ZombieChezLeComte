@@ -31,6 +31,7 @@ namespace ZombieChezLeComte
 
         private Charactere ghost = new Charactere();
 
+        private TextInfo textInfo = new TextInfo();
 
         public override void Initialize()
         {
@@ -50,6 +51,8 @@ namespace ZombieChezLeComte
 
             ghost.Initialize(new Vector2(100, 100), 1);
 
+            textInfo.Initialize(" ", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
+
             base.Initialize();
         }
 
@@ -59,6 +62,8 @@ namespace ZombieChezLeComte
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
 
             ghost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
+
+            textInfo.LoadContent(Game.Content.Load<SpriteFont>("police"));
 
             base.LoadContent();
         }
@@ -71,7 +76,9 @@ namespace ZombieChezLeComte
                 if(bookshelfInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     Console.WriteLine("Biblio");
-                    bookshelfInteract.Destroy();
+                    textInfo.Text = bookshelfInteract.InteractText;
+                    textInfo.ActiveText(2);
+                    //bookshelfInteract.Destroy();
                 }
                 foreach(InteractObject paperInteract in kitchenPapers)
                 {
@@ -83,8 +90,9 @@ namespace ZombieChezLeComte
             }
             commonNight.Update(gameTime);
 
+            textInfo.Update(gameTime);
 
-            Console.WriteLine(ghost.Position);
+            
             ghost.Movement(commonNight.CameraMove + Additions.Normalize(commonNight.Player.Position - ghost.Position) * 75, commonNight.DeltaTime, false);
             ghost.Update(gameTime);
         }
@@ -93,6 +101,9 @@ namespace ZombieChezLeComte
         {
             commonNight.Draw(Game.SpriteBatch);
             ghost.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.Begin();
+            textInfo.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.End();
         }
     }
 }

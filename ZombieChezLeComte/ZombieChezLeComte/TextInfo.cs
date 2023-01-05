@@ -181,10 +181,13 @@ namespace ZombieChezLeComte
 
         public void ActiveText(float textDuration)
         {
-            this.TextDuration = textDuration;
-            this.CurrentTextLifeTime = textDuration;
-            this.WriteText = "";
-            this.WritingText = true;
+            if(!writingText)
+            {
+                this.TextDuration = textDuration;
+                this.CurrentTextLifeTime = textDuration;
+                this.WriteText = "";
+                this.WritingText = true;
+            }
         }
     }
 }

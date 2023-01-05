@@ -30,7 +30,7 @@ namespace ZombieChezLeComte
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
-            zombie.Initialiaze(new Vector2(100, 100), Constantes.ZOMBIE_SPEED);
+            zombie.Initialiaze(new Vector2(360, 360), Constantes.ZOMBIE_SPEED);
             base.Initialize();
         }
 
@@ -47,6 +47,7 @@ namespace ZombieChezLeComte
         {
             zombie.Update(gameTime, commonNight);
             commonNight.Update(gameTime);
+           
         }
 
         public override void Draw(GameTime gameTime)

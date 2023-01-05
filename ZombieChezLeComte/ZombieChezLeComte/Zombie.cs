@@ -72,13 +72,15 @@ namespace ZombieChezLeComte
             this.ZombieChar.Update(_gameTime);
             this.ZombieChar.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
             Vector2 dir = Additions.Normalize(_commonNight.Player.Position - this.ZombieChar.Position);
-            float nextX = (this.ZombieChar.Position + dir * this.Speed * _commonNight.DeltaTime).X / _commonNight.TiledMap.TileWidth;
-            float nextY = (this.ZombieChar.Position + dir * this.Speed * _commonNight.DeltaTime).Y / _commonNight.TiledMap.TileHeight;
-            if(!_commonNight.IsCollision((ushort)nextX, (ushort)nextY))
+            float nextX = this.GetMapPos(_commonNight.Camera).X / _commonNight.TiledMap.TileWidth;
+            float nextY = this.GetMapPos(_commonNight.Camera).Y/ _commonNight.TiledMap.TileHeight;
+            if(this.IsCollision((ushort)nextX, (ushort)nextY, _commonNight.MapLayer))
             {
-                this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
+                
             }
-            Console.WriteLine(this.GetMapPos(_commonNight.Camera));
+            this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
+
+            Console.WriteLine(nextX + ", " + nextY);
         }
 
         public void Draw(SpriteBatch _sb)
@@ -90,6 +92,8 @@ namespace ZombieChezLeComte
         {
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
+            mapLayer.TryGetTile(x, y, out tile);
+            //Console.WriteLine(tile);
             if (mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)

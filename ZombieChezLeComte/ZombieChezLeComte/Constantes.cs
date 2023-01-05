@@ -31,5 +31,7 @@ namespace ZombieChezLeComte
         public const int END_NIGHT3_GHOST_SPEED = 70;
 
         public const int ZOMBIE_SPEED = 50;
+
+        public const int HUNT_GHOST_SPEED = 100;
     }
 }

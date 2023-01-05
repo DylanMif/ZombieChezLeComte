@@ -110,7 +110,7 @@ namespace ZombieChezLeComte
 
         public void Draw(SpriteBatch _sb)
         {
-            if(this.Enable)
+            if (this.Enable)
                 this.Ghost.Draw(_sb);
         }
 

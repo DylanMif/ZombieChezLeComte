@@ -19,11 +19,16 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace ZombieChezLeComte
 {
-    public class HuntGhost
+    public class DoorGhost
     {
         private Charactere ghost;
         private int speed;
         private Vector2 direction;
+
+        public static Vector2[] position = new Vector2[]
+        {
+            new Vector2(100, 100)
+        };
 
         public Charactere Ghost
         {
@@ -80,19 +85,15 @@ namespace ZombieChezLeComte
         {
             this.Ghost.Update(_gameTime);
             this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
-            this.Ghost.Movement(Additions.Normalize(_commonNight.Player.Position - this.Ghost.Position) * this.Speed,
-                _commonNight.DeltaTime, false);
-            /*if(this.Ghost.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
+            if(this.Ghost.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
             {
                 _game.LoadMainMenu();
-            }*/
+            }
         }
 
-        public void Draw(SpriteBatch _sb, CommonNight _commonNight)
+        public void Draw(SpriteBatch _sb)
         {
-            if(Vector2.Distance(this.Ghost.Position, _commonNight.Player.Position) > 150 ||
-                Vector2.Distance(this.Ghost.Position, _commonNight.Player.Position) < 10)
-                this.Ghost.Draw(_sb);
+            this.Ghost.Draw(_sb);
         }
     }
 }

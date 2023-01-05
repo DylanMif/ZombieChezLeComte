@@ -67,6 +67,8 @@ namespace ZombieChezLeComte
                 LoadNight3();
             if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
                 LoadNight4();
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad5))
+                LoadNight5();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -106,6 +108,11 @@ namespace ZombieChezLeComte
         public void LoadNight4()
         {
             _screenManager.LoadScreen(new Nuit4(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+
+        public void LoadNight5()
+        {
+            _screenManager.LoadScreen(new Nuit5(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
     }
 }

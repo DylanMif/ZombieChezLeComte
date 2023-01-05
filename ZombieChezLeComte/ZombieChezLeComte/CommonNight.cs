@@ -152,7 +152,7 @@ namespace ZombieChezLeComte
             //Console.WriteLine(nextX + ", " + nextY);
             this.TiledMapRenderer.Update(_gameTime);
             this.CameraMove = Vector2.Zero;
-            if (!IsCollision((ushort)nextX, (ushort)nextY) || true)
+            if (!IsCollision((ushort)nextX, (ushort)nextY))
             {
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);

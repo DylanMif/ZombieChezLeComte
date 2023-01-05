@@ -52,5 +52,12 @@ namespace ZombieChezLeComte
             }
             return Vector2.Normalize(vec);
         }
+        public static void InteractionObjet(InteractObject objetInteraction,TextInfo textInfo ,String newString)
+        {
+            objetInteraction.HasAlreadyInteractable = true;
+            textInfo.Text = objetInteraction.InteractText;
+            textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+            objetInteraction.InteractText = newString;
+        }
     }
 }

@@ -52,9 +52,9 @@ namespace ZombieChezLeComte
             }
             kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ranger la bibliotheque");
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Ranger la table de la cuisine");
-            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Balayer le hall");
+            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Balayer le couloir de la cave");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
-            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "");
+            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Aller dormir une fois les taches finis");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "");
 
             solNettoyage.Initialize(new Vector2(4765,6637), 103, 26, "sol", "Ca merite un coups de balais");
@@ -91,24 +91,14 @@ namespace ZombieChezLeComte
                     {
                         if(litInteraction[i].HasAlreadyInteractable == false)
                         {
-                            textInfo.Text = litInteraction[i].InteractText;
-                            textInfo.ActiveText(2);
-                            litInteraction[i].HasAlreadyInteractable=true;
+                            Additions.InteractionObjet(litInteraction[i], textInfo, "Ce lit est fait");
                             nombreLitFait += 1;
-                            litInteraction[i].InteractText = "Ce lit est fait";
                         } 
                         else
                         {
-                            textInfo.Text = litInteraction[i].InteractText;
-                            textInfo.ActiveText(2);
+                            Additions.InteractionObjet(litInteraction[i], textInfo, litInteraction[i].InteractText);
                         }
-                        
-                        Console.WriteLine("Interaction");
                     }
-                    else
-                    {
-                        Console.WriteLine("Non");
-                    } 
                 }
                 for (int i = 0; i < armoireInteraction.Length; i++)
                 {
@@ -116,66 +106,33 @@ namespace ZombieChezLeComte
                     {
                         if (armoireInteraction[i].HasAlreadyInteractable == false)
                         {
-                            textInfo.Text = armoireInteraction[i].InteractText;
-                            textInfo.ActiveText(2);
-                            armoireInteraction[i].HasAlreadyInteractable = true;
+                            Additions.InteractionObjet(armoireInteraction[i], textInfo, "Cette bibliotheque est rangee");
                             nombreArmoireFait += 1;
-                            armoireInteraction[i].InteractText = "Cette bibliotheque est rangee";
                         }
                         else
                         {
-                            textInfo.Text = armoireInteraction[i].InteractText;
-                            textInfo.ActiveText(2);
+                            Additions.InteractionObjet(armoireInteraction[i], textInfo, armoireInteraction[i].InteractText);
                         }
-                        Console.WriteLine("Interaction");
                     }
-                    else
+                }
+                for (int i = 0; i < kitchenPapers.Length; i++)
+                {
+                    if (kitchenPapers[i].InteractWith(-_nuit1.Camera.Position))
                     {
-                        Console.WriteLine("Non");
+                        Additions.InteractionObjet(kitchenPapers[i], textInfo, kitchenPapers[i].InteractText);
                     }
                 }
                 if (porteCave.InteractWith(-_nuit1.Camera.Position))
                 {
-                    porteCave.HasAlreadyInteractable = true;
-                    textInfo.Text = porteCave.InteractText;
-                    textInfo.ActiveText(2);
-                    Console.WriteLine("Interaction");
-                }
-                else
-                {
-                    Console.WriteLine("non");
+                    Additions.InteractionObjet(porteCave, textInfo, porteCave.InteractText);     
                 }
                 if (tableCuisine.InteractWith(-_nuit1.Camera.Position))
                 {
-                    textInfo.Text = tableCuisine.InteractText;
-                    tableCuisine.HasAlreadyInteractable = true;
-                    textInfo.ActiveText(2);
-                    tableCuisine.InteractText = "La table est nettoyee";
-                    Console.WriteLine("Interaction");
-                }
-                else
-                {
-                    Console.WriteLine("non");
+                    Additions.InteractionObjet(tableCuisine, textInfo, "La table est nettoyee");
                 }
                 if (solNettoyage.InteractWith(-_nuit1.Camera.Position))
                 {
-                    textInfo.Text = solNettoyage.InteractText;
-                    solNettoyage.HasAlreadyInteractable = true;
-                    textInfo.ActiveText(2);
-                    solNettoyage.InteractText = "Le sol est propre";
-                    Console.WriteLine("Interaction");
-                }
-                else
-                {
-                    Console.WriteLine("non");
-                }
-                for(int i = 0; i < kitchenPapers.Length; i++)
-                {
-                    if(kitchenPapers[i].InteractWith(-_nuit1.Camera.Position))
-                    {
-                        textInfo.Text = kitchenPapers[i].InteractText;
-                        textInfo.ActiveText(2);
-                    }
+                    Additions.InteractionObjet(solNettoyage,textInfo, "Le sol est propre");
                 }
                 if (nombreArmoireFait == armoireInteraction.Length && nombreLitFait == litInteraction.Length
                             && solNettoyage.HasAlreadyInteractable == true && tableCuisine.HasAlreadyInteractable == true)

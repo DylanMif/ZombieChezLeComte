@@ -83,6 +83,19 @@ namespace ZombieChezLeComte
             }
         }
 
+        public Rectangle SpriteRect
+        {
+            get
+            {
+                return new Rectangle(
+                    (int)this.Position.X,
+                    (int)this.Position.Y,
+                    Constantes.CHARACTER_SPRITE_SIZE,
+                    Constantes.CHARACTER_SPRITE_SIZE
+                    );
+            }
+        }
+
         public void Initialize( Vector2 _position, int _vitesse)
         {
             this.Position = _position;
@@ -132,6 +145,11 @@ namespace ZombieChezLeComte
                 this.CurrentAnimation = "northWalk";
             }
             if(!isPlayer)
+                this.Position += _vector2 * this.Vitesse * _delattime;
+        }
+        public void MovementWithoutAnim(Vector2 _vector2, float _delattime, bool isPlayer)
+        {
+            if (!isPlayer)
                 this.Position += _vector2 * this.Vitesse * _delattime;
         }
     }

@@ -70,6 +70,13 @@
 /processor:TiledMapProcessor
 /build:map.tmx
 
+#begin MeanFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:MeanFont.spritefont
+
 #begin personnage.png
 /importer:TextureImporter
 /processor:TextureProcessor

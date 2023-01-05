@@ -52,5 +52,26 @@ namespace ZombieChezLeComte
             }
             return Vector2.Normalize(vec);
         }
+
+        public static bool OutOfScreen(Vector2 vec)
+        {
+            if(vec.X < 0)
+            {
+                return true;
+            }
+            if(vec.X > Constantes.WINDOW_WIDTH)
+            {
+                return true;
+            }
+            if(vec.Y < 0)
+            {
+                return true;
+            }
+            if(vec.Y > Constantes.WINDOW_HEIGHT)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

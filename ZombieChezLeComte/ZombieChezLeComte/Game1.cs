@@ -77,7 +77,7 @@ namespace ZombieChezLeComte
             base.Draw(gameTime);
         }
 
-        private void LoadMainMenu()
+        public void LoadMainMenu()
         {
             _screenManager.LoadScreen(new MainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
         }

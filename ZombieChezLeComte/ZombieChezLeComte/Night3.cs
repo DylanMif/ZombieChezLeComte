@@ -31,8 +31,11 @@ namespace ZombieChezLeComte
         private InteractObject kitchenInteract = new InteractObject();
         private InteractObject hallInteract = new InteractObject();
         private InteractObject[] litInteraction = new InteractObject[4];
+        private InteractObject deadZombieInteract = new InteractObject();
 
-        private Charactere ghost = new Charactere();
+        private Charactere deadZombie = new Charactere();
+
+        private RunGhost runGhost = new RunGhost();
 
         private TextInfo textInfo = new TextInfo();
 
@@ -51,7 +54,7 @@ namespace ZombieChezLeComte
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Ranger la cuisine");
             kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Ranger le hall");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
-            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "");
+            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Ne pas aller dans le stockage");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "");
             for (int i = 0; i < litInteraction.Length; i++)
             {
@@ -61,11 +64,13 @@ namespace ZombieChezLeComte
             litInteraction[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Parfaitement range");
             litInteraction[2].Initialize(new Vector2(4098, 6078), 47, 103, "lit3", "Bizarre... lit range");
             litInteraction[3].Initialize(new Vector2(4452, 6111), 37, 83, "lit4", "Personne est venu aujourd'hui ?");
+            deadZombieInteract.Initialize(new Vector2(3901, 6382), 21, 28, "deadZombie", "C'est un mort, au moins il ne bougera plus...");
             base.Initialize();
 
-            ghost.Initialize(new Vector2(100, 100), 1);
+            deadZombie.Initialize(new Vector2(-348, 0), 1);
 
             textInfo.Initialize(" ", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
+            runGhost.Initialize(new Vector2(10, 10), Constantes.RUNGHOST_SPEED);
 
             base.Initialize();
         }
@@ -75,9 +80,10 @@ namespace ZombieChezLeComte
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
 
-            ghost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
+            deadZombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
+            runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
 
-            textInfo.LoadContent(Game.Content.Load<SpriteFont>("police"));
+            textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
 
             base.LoadContent();
         }
@@ -105,6 +111,11 @@ namespace ZombieChezLeComte
                     textInfo.ActiveText(2);
                     hallInteract.InteractText = "Ce hall est presque propre";
                 }
+                if(deadZombieInteract.InteractWith(-commonNight.Camera.Position))
+                {
+                    textInfo.Text = deadZombieInteract.InteractText;
+                    textInfo.ActiveText(2);
+                }
                 foreach(InteractObject paperInteract in kitchenPapers)
                 {
                     if(paperInteract.InteractWith(-commonNight.Camera.Position))
@@ -127,17 +138,20 @@ namespace ZombieChezLeComte
             textInfo.Update(gameTime);
 
             
-            ghost.Movement(commonNight.CameraMove + Additions.Normalize(commonNight.Player.Position - ghost.Position) * 75, commonNight.DeltaTime, false);
-            ghost.Update(gameTime);
+            deadZombie.MovementWithoutAnim(commonNight.CameraMove , commonNight.DeltaTime, false);
+            deadZombie.Update(gameTime);
+            runGhost.Update(gameTime, commonNight, Game);
         }
 
         public override void Draw(GameTime gameTime)
         {
             commonNight.Draw(Game.SpriteBatch);
-            ghost.Draw(Game.SpriteBatch);
+            deadZombie.Draw(Game.SpriteBatch);
             Game.SpriteBatch.Begin();
             textInfo.Draw(Game.SpriteBatch);
             Game.SpriteBatch.End();
+            commonNight.Player.Draw(Game.SpriteBatch);
+            runGhost.Draw(Game.SpriteBatch);
         }
     }
 }

@@ -40,6 +40,9 @@ namespace ZombieChezLeComte
 
         private TextInfo textInfo = new TextInfo();
 
+        private RunGhost[] endRunGhosts = new RunGhost[Constantes.END_NIGHT3_NB_GHOST];
+        private bool endRunGhostSpawn;
+
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
@@ -75,6 +78,13 @@ namespace ZombieChezLeComte
             textInfo.Initialize(" ", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
             runGhost.Initialize(new Vector2(10, 10), Constantes.RUNGHOST_SPEED);
 
+            for (int i = 0; i < endRunGhosts.Length; i++)
+            {
+                endRunGhosts[i] = new RunGhost();
+                endRunGhosts[i].Initialize(new Vector2(0, 0), Constantes.END_NIGHT3_GHOST_SPEED);
+            }
+            endRunGhostSpawn = false;
+
             base.Initialize();
         }
 
@@ -87,7 +97,10 @@ namespace ZombieChezLeComte
             runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
 
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
-            
+            for (int i = 0; i < endRunGhosts.Length; i++)
+            {
+                endRunGhosts[i].LoadContent((Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader())));
+            }
 
             base.LoadContent();
         }
@@ -126,10 +139,9 @@ namespace ZombieChezLeComte
                 }
                 if(enterDoor.InteractWith(-commonNight.Camera.Position))
                 {
-                    if(bookshelfInteract.HasAlreadyInteractable && kitchenInteract.HasAlreadyInteractable &&
-                        hallInteract.HasAlreadyInteractable && deadZombieInteract.HasAlreadyInteractable)
+                    if(endRunGhostSpawn)
                     {
-
+                        Game.LoadNight4();
                     }
                 }
                 foreach(InteractObject paperInteract in kitchenPapers)
@@ -156,6 +168,22 @@ namespace ZombieChezLeComte
             
             deadZombie.MovementWithoutAnim(commonNight.CameraMove , commonNight.DeltaTime, false);
             deadZombie.Update(gameTime);
+
+            if (bookshelfInteract.HasAlreadyInteractable && kitchenInteract.HasAlreadyInteractable &&
+                        hallInteract.HasAlreadyInteractable && deadZombieInteract.HasAlreadyInteractable && !endRunGhostSpawn)
+            {
+                endRunGhostSpawn = true;
+                for (int i = 0; i < endRunGhosts.Length; i++)
+                {
+                    endRunGhosts[i].Spawn(commonNight);
+                }
+            }
+
+            for (int i = 0; i < endRunGhosts.Length; i++)
+            {
+                if(endRunGhostSpawn)
+                    endRunGhosts[i].Update(gameTime, commonNight, Game);
+            }
             //runGhost.Update(gameTime, commonNight, Game);
         }
 
@@ -168,6 +196,11 @@ namespace ZombieChezLeComte
             Game.SpriteBatch.End();
             commonNight.Player.Draw(Game.SpriteBatch);
             runGhost.Draw(Game.SpriteBatch);
+            for (int i = 0; i < endRunGhosts.Length; i++)
+            {
+                if (endRunGhostSpawn)
+                    endRunGhosts[i].Draw(Game.SpriteBatch);
+            }
         }
     }
 }

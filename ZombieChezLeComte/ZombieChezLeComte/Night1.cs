@@ -76,8 +76,6 @@ namespace ZombieChezLeComte
             _nuit1.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"), 
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
-            
-            textInfo.LoadContent(Game.Content.Load<SpriteFont>("police"));
             base.LoadContent();
         }
 

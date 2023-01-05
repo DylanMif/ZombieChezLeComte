@@ -23,7 +23,8 @@ namespace ZombieChezLeComte
         public Night2(Game1 game) : base(game) { }
         private CommonNight _nuit2 = new CommonNight();
 
-        
+        private TextInfo textInfo = new TextInfo();
+
 
         public override void Initialize()
         {

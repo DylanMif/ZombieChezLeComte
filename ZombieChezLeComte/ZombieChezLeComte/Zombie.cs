@@ -71,16 +71,17 @@ namespace ZombieChezLeComte
         {
             this.ZombieChar.Update(_gameTime);
             this.ZombieChar.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
-            Vector2 dir = Additions.Normalize(_commonNight.Player.Position - this.ZombieChar.Position);
-            float nextX = this.GetMapPos(_commonNight.Camera).X / _commonNight.TiledMap.TileWidth;
-            float nextY = this.GetMapPos(_commonNight.Camera).Y/ _commonNight.TiledMap.TileHeight;
-            if(this.IsCollision((ushort)nextX, (ushort)nextY, _commonNight.MapLayer))
+            Vector2 dir = Additions.Normalize(_commonNight.Player.Position - this.ZombieChar.Position) * this.Speed * _commonNight.DeltaTime;
+            float nextX = (this.GetMapPos(_commonNight.Camera).X + dir.X)/ _commonNight.TiledMap.TileWidth;
+            float nextY = (this.GetMapPos(_commonNight.Camera).Y + dir.Y)/ _commonNight.TiledMap.TileHeight;
+            //this.IsCollision((ushort)nextX, (ushort)nextY, _commonNight.MapLayer);
+            if(!this.IsCollision((ushort)nextX, (ushort)nextY, _commonNight.MapLayer))
             {
-                
-            }
             this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
-
-            Console.WriteLine(nextX + ", " + nextY);
+            }
+            //Console.WriteLine(dir);
+            //Console.WriteLine(nextX + ", " + nextY);
+            
         }
 
         public void Draw(SpriteBatch _sb)
@@ -93,7 +94,7 @@ namespace ZombieChezLeComte
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
             mapLayer.TryGetTile(x, y, out tile);
-            //Console.WriteLine(tile);
+            Console.WriteLine(tile);
             if (mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
@@ -104,8 +105,8 @@ namespace ZombieChezLeComte
         public Vector2 GetMapPos(OrthographicCamera cam)
         {
             Vector2 res = cam.ScreenToWorld(this.ZombieChar.Position);
-            res.X = -res.X + 360;
-            res.Y = -res.Y + 360;
+            res.X = -res.X + 720;
+            res.Y = -res.Y + 728;
             return res;
         }
     }

@@ -149,10 +149,10 @@ namespace ZombieChezLeComte
                 Constantes.VITESSE_JOUEUR * (float)_gameTime.ElapsedGameTime.TotalSeconds;
             float nextX = (-this.CameraPosition.X + 1080 - 180 + newPlayerPos.X * 2f) / TiledMap.TileWidth;
             float nextY = (-this.CameraPosition.Y + 720 + newPlayerPos.Y) / TiledMap.TileHeight + 0.4f;
-            Console.WriteLine(nextX + ", " + nextY);
+            //Console.WriteLine(nextX + ", " + nextY);
             this.TiledMapRenderer.Update(_gameTime);
             this.CameraMove = Vector2.Zero;
-            if (!IsCollision((ushort)nextX, (ushort)nextY))
+            if (!IsCollision((ushort)nextX, (ushort)nextY) || true)
             {
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);

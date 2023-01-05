@@ -25,7 +25,8 @@ namespace ZombieChezLeComte
         public const Keys leftKeys = Keys.Q;
         public const Keys rightKeys = Keys.D;
 
-        public const int NIGHT3_RUNGHOST_CHANCE = 120;
+        public const int NIGHT3_RUNGHOST_CHANCE = 360;
         public const int RUNGHOST_SPEED = 500;
+        public const int END_NIGHT3_NB_GHOST = 5;
     }
 }

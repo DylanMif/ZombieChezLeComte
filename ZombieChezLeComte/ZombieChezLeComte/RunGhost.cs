@@ -93,10 +93,7 @@ namespace ZombieChezLeComte
             Random random = new Random();
             if(random.Next(0, Constantes.NIGHT3_RUNGHOST_CHANCE) == 1)
             {
-                Console.WriteLine("spawn");
-                this.Ghost.Position = this.ChooseRandom();
-                this.Enable = true;
-                this.Direction = Additions.Normalize(_commonNight.Player.Position - this.Ghost.Position);
+                this.Spawn(_commonNight);
             }
             if(this.Enable)
             {
@@ -115,6 +112,13 @@ namespace ZombieChezLeComte
         {
             if(this.Enable)
                 this.Ghost.Draw(_sb);
+        }
+
+        public void Spawn(CommonNight _commonNight)
+        {
+            this.Ghost.Position = this.ChooseRandom();
+            this.Enable = true;
+            this.Direction = Additions.Normalize(_commonNight.Player.Position - this.Ghost.Position);
         }
 
         public Vector2 ChooseRandom()

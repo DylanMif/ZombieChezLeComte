@@ -32,6 +32,7 @@ namespace ZombieChezLeComte
         private InteractObject hallInteract = new InteractObject();
         private InteractObject[] litInteraction = new InteractObject[4];
         private InteractObject deadZombieInteract = new InteractObject();
+        private InteractObject enterDoor = new InteractObject();
 
         private Charactere deadZombie = new Charactere();
 
@@ -67,6 +68,8 @@ namespace ZombieChezLeComte
             deadZombieInteract.Initialize(new Vector2(3901, 6382), 21, 28, "deadZombie", "C'est un mort, au moins il ne bougera plus...");
             base.Initialize();
 
+            enterDoor.Initialize(new Vector2(4572, 6678), 52, 86, "enterDoor", "");
+
             deadZombie.Initialize(new Vector2(-348, 0), 1);
 
             textInfo.Initialize(" ", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
@@ -84,6 +87,7 @@ namespace ZombieChezLeComte
             runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
 
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
+            
 
             base.LoadContent();
         }
@@ -98,23 +102,35 @@ namespace ZombieChezLeComte
                     textInfo.Text = bookshelfInteract.InteractText;
                     textInfo.ActiveText(2);
                     bookshelfInteract.InteractText = "Cette bibliotheque est rangee";
+                    bookshelfInteract.HasAlreadyInteractable = true;
                 }
                 if(kitchenInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     textInfo.Text = kitchenInteract.InteractText;
                     textInfo.ActiveText(2);
                     kitchenInteract.InteractText = "Cette cuisine est nickel";
+                    kitchenInteract.HasAlreadyInteractable = true;
                 }
                 if(hallInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     textInfo.Text = hallInteract.InteractText;
                     textInfo.ActiveText(2);
                     hallInteract.InteractText = "Ce hall est presque propre";
+                    hallInteract.HasAlreadyInteractable = true;
                 }
                 if(deadZombieInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     textInfo.Text = deadZombieInteract.InteractText;
                     textInfo.ActiveText(2);
+                    deadZombieInteract.HasAlreadyInteractable= true;
+                }
+                if(enterDoor.InteractWith(-commonNight.Camera.Position))
+                {
+                    if(bookshelfInteract.HasAlreadyInteractable && kitchenInteract.HasAlreadyInteractable &&
+                        hallInteract.HasAlreadyInteractable && deadZombieInteract.HasAlreadyInteractable)
+                    {
+
+                    }
                 }
                 foreach(InteractObject paperInteract in kitchenPapers)
                 {
@@ -140,7 +156,7 @@ namespace ZombieChezLeComte
             
             deadZombie.MovementWithoutAnim(commonNight.CameraMove , commonNight.DeltaTime, false);
             deadZombie.Update(gameTime);
-            runGhost.Update(gameTime, commonNight, Game);
+            //runGhost.Update(gameTime, commonNight, Game);
         }
 
         public override void Draw(GameTime gameTime)

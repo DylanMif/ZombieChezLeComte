@@ -85,12 +85,16 @@ namespace ZombieChezLeComte
         {
             _screenManager.LoadScreen(new Introduction(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
-        private void LoadNight1()
+        public void LoadNight1()
         {
             _screenManager.LoadScreen(new Night1(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
+        public void LoadNight2()
+        {
+            _screenManager.LoadScreen(new Night2(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
 
-        private void LoadNight3()
+        public void LoadNight3()
         {
             _screenManager.LoadScreen(new Night3(this), new FadeTransition(GraphicsDevice, Color.Black));
         }

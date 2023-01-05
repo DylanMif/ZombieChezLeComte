@@ -16,6 +16,7 @@ namespace ZombieChezLeComte
         public const int WINDOW_HEIGHT = 720;
         public const int VITESSE_JOUEUR = 300;
         public const int VITESSE_ZOMBIE = 120;
+        public const float TEMPS_TEXTE = 2;
         public static readonly Vector2 POSITION_JOUEUR = new Vector2(-4080,-6392);
         public const int CHARACTER_SPRITE_SIZE = 32;
 

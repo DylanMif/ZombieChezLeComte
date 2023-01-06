@@ -160,7 +160,6 @@ namespace ZombieChezLeComte
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
             mapLayer.TryGetTile(x, y, out tile);
-            //Console.WriteLine(tile);
             if (mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
@@ -170,7 +169,6 @@ namespace ZombieChezLeComte
 
         public Vector2 GetMapPos(OrthographicCamera cam)
         {
-            //Console.WriteLine(cam.ScreenToWorld(this.VirtualPos));
             Vector2 res = this.VirtualPos;
             res.X = res.X + 4260 + 360;
             res.Y = res.Y + 6392 + 360;

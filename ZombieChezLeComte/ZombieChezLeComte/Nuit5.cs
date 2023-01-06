@@ -27,12 +27,17 @@ namespace ZombieChezLeComte
 
         private HuntGhost huntGhost = new HuntGhost();
         private DoorGhost doorGhost = new DoorGhost();
+        private RunGhost runGhost = new RunGhost();
+        private Zombie zombie = new Zombie();
 
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
             huntGhost.Initialize(new Vector2(0, 0), Constantes.HUNT_GHOST_SPEED);
             doorGhost.Initialize(new Vector2(0, 0), 0);
+            runGhost.Initialize(new Vector2(10, 10), Constantes.RUNGHOST_SPEED);
+            zombie.Initialiaze(new Vector2(40, -210), Constantes.ZOMBIE_SPEED);
+
             base.Initialize();
         }
 
@@ -43,6 +48,8 @@ namespace ZombieChezLeComte
 
             huntGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeHunt.sf", new JsonContentLoader()));
             doorGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomePorte.sf", new JsonContentLoader()));
+            runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
+            zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
             base.LoadContent();
         }
 
@@ -51,6 +58,8 @@ namespace ZombieChezLeComte
             commonNight.Update(gameTime);
             huntGhost.Update(gameTime, commonNight, Game);
             doorGhost.Update(gameTime, commonNight, Game);
+            runGhost.Update(gameTime, commonNight, Game);
+            zombie.Update(gameTime, commonNight);
         }
 
         public override void Draw(GameTime gameTime)
@@ -58,6 +67,8 @@ namespace ZombieChezLeComte
             commonNight.Draw(Game.SpriteBatch);
             huntGhost.Draw(Game.SpriteBatch, commonNight);
             doorGhost.Draw(Game.SpriteBatch);
+            runGhost.Draw(Game.SpriteBatch);
+            zombie.Draw(Game.SpriteBatch);
         }
     }
 }

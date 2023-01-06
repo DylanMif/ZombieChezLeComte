@@ -28,12 +28,9 @@ namespace ZombieChezLeComte
         private TextInfo textInfo = new TextInfo();
 
         private Zombie zombie = new Zombie();
-        private InteractObject deadZombieInteract = new InteractObject();
-
 
         private bool estRecuperer = false;
         private bool uneTache = false;
-        private bool yaZombie = false;
 
         private int nombreLitFait = 0;
         private int nombreLivre = 0;
@@ -79,9 +76,9 @@ namespace ZombieChezLeComte
             laverLivres[2].Initialize(new Vector2(4184, 6384), 50, 50, "armoire3", "Decidemment, ca devient de plus en plus bizzare...");
             recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "viande", "Toujours la meme viande ragoutante...");
             debutArme.Initialize(new Vector2(0, 0), 32, 26, "arme", "J'ai une epee. Vite l'eau benite de la buandrie !");
-            deadZombieInteract.Initialize(new Vector2(3901, 6382), 21, 28, "deadZombie", "C'est un mort, au moins il ne bougera plus...");
-            zombie.Initialiaze(new Vector2(40, -210), Constantes.ZOMBIE_SPEED);
+            zombie.Initialiaze(new Vector2(-350, 0), Constantes.ZOMBIE_SPEED);
             zombie.PeutTuer = false;
+            zombie.PeutBouger = false;
             base.Initialize();
         }
         public override void LoadContent()
@@ -99,6 +96,7 @@ namespace ZombieChezLeComte
         {
             _nuit4.Update(gameTime);
             textInfo.Update(gameTime);
+            zombie.Update(gameTime, _nuit4, Game);
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 for (int i = 0; i < kitchenPapers.Length; i++)
@@ -167,11 +165,6 @@ namespace ZombieChezLeComte
                         }
                     }
                 }
-                if ((nombreLitFait == litInteractions.Length && nombreLivre == laverLivres.Length && couteuxFour.HasAlreadyInteractable == true && nombreMorceauxArme == 0) || Keyboard.GetState().IsKeyDown(Keys.NumPad6))
-                {
-                    debutArme.InteractRect = new Rectangle(5072, 6125, debutArme.InteractRect.Width, debutArme.InteractRect.Height);
-                    nombreMorceauxArme = 0;
-                }
                 if (debutArme.InteractWith(-_nuit4.Camera.Position))
                 {
                     if(nombreMorceauxArme == 0)
@@ -192,19 +185,20 @@ namespace ZombieChezLeComte
                     }
                     nombreMorceauxArme += 1;
                 }
-                if (uneTache && yaZombie==false)
+                if (uneTache && zombie.PeutBouger==false)
                 {
                     zombie.PeutTuer = true;
-                    yaZombie = true;
-                }
-                if (yaZombie)
-                {
-                    zombie.Update(gameTime, _nuit4, Game);
+                    zombie.PeutBouger = true;
                 }
                 if(nombreMorceauxArme == 3)
                 {
                     zombie.PeutTuer = false;
                 }
+            }
+            if ((nombreLitFait == litInteractions.Length && nombreLivre == laverLivres.Length && couteuxFour.HasAlreadyInteractable == true && nombreMorceauxArme == 0) || Keyboard.GetState().IsKeyDown(Keys.NumPad9))
+            {
+                debutArme.InteractRect = new Rectangle(5072, 6125, debutArme.InteractRect.Width, debutArme.InteractRect.Height);
+                nombreMorceauxArme = 0;
             }
         }
 
@@ -213,6 +207,7 @@ namespace ZombieChezLeComte
             Game.GraphicsDevice.Clear(Color.White);
             _nuit4.Draw(Game.SpriteBatch);
             zombie.Draw(Game.SpriteBatch);
+            _nuit4.Player.Draw(Game.SpriteBatch);
             Game.SpriteBatch.Begin();
             textInfo.Draw(Game.SpriteBatch);
             Game.SpriteBatch.End();

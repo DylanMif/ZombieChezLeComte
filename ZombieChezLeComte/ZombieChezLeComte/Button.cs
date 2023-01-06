@@ -20,6 +20,7 @@ namespace ZombieChezLeComte
         private SpriteFont font;
         private uint paddindTop;
         private uint paddingLeft;
+        private string name;
 
         private string hoverText;
         private Color currentColor;
@@ -285,12 +286,16 @@ namespace ZombieChezLeComte
             this.RectTex = _rectText;
         }
 
-        public void Update(MouseState _ms)
+        public void Update(MouseState _ms, Game1 game)
         {
             if (_ms.LeftButton == ButtonState.Pressed && this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
             {
                 this.CurrentColor = this.ClickBgColor;
                 this.CurrentTextColor = this.ClickTextColor;
+                if (this.Text == "Nouvelle Partie")
+                {
+                    game.LoadNight1();
+                }
                 return;
             }
             else
@@ -298,11 +303,11 @@ namespace ZombieChezLeComte
                 this.CurrentColor = this.BgColor;
                 this.CurrentTextColor = this.TextColor;
             }
-
             if (this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
             {
                 this.WriteText = this.HoverText;
                 this.CurrentTextColor = this.HoverTextColor;
+                
             } else
             {
                 this.WriteText = this.Text;

@@ -81,10 +81,10 @@ namespace ZombieChezLeComte
 
         public override void Update(GameTime gameTime)
         {
-            newGameButton.Update(Mouse.GetState());
-            continueButton.Update(Mouse.GetState());
-            commandButton.Update(Mouse.GetState());
-            quitButton.Update(Mouse.GetState());
+            newGameButton.Update(Mouse.GetState(),Game);
+            continueButton.Update(Mouse.GetState(), Game);
+            commandButton.Update(Mouse.GetState(), Game);
+            quitButton.Update(Mouse.GetState(), Game);
         }
 
         public override void Draw(GameTime gameTime)

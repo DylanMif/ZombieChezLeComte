@@ -33,5 +33,8 @@ namespace ZombieChezLeComte
         public const int ZOMBIE_SPEED = 50;
 
         public const int HUNT_GHOST_SPEED = 100;
+
+        public const int DOOR_GHOST_MIN_STAY_TIME = 15;
+        public const int DOOR_GHOST_MAX_STAY_TIME = 30;
     }
 }

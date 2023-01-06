@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using System;
 
 namespace ZombieChezLeComte
 {
@@ -11,6 +12,7 @@ namespace ZombieChezLeComte
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
+
 
         public SpriteBatch SpriteBatch
         {
@@ -114,5 +116,6 @@ namespace ZombieChezLeComte
         {
             _screenManager.LoadScreen(new Nuit5(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
+
     }
 }

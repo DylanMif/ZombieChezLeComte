@@ -98,10 +98,10 @@ namespace ZombieChezLeComte
             if(this.Enable)
             {
                 this.Ghost.Movement(this.Direction * this.Speed, (float)_gameTime.ElapsedGameTime.TotalSeconds, false);
-                if(_commonNight.Player.SpriteRect.Intersects(this.Ghost.SpriteRect))
+                /*if(_commonNight.Player.SpriteRect.Intersects(this.Ghost.SpriteRect))
                 {
                     _game.LoadMainMenu();
-                }
+                }*/
             }
             this.Ghost.Update(_gameTime);
             this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);

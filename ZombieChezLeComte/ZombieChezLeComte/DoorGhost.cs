@@ -25,9 +25,14 @@ namespace ZombieChezLeComte
         private int speed;
         private Vector2 direction;
 
-        public static Vector2[] position = new Vector2[]
+       
+
+        public static Vector2[] positions = new Vector2[]
         {
-            new Vector2(100, 100)
+            new Vector2(200, 45),
+            new Vector2(40, -210),
+            new Vector2(770, -240),
+            new Vector2(770, -240),
         };
 
         public Charactere Ghost
@@ -74,6 +79,7 @@ namespace ZombieChezLeComte
             this.Ghost = new Charactere();
             this.Ghost.Initialize(_position, 1);
             this.Speed = _speed;
+            this.Ghost.Position += DoorGhost.positions[3];
         }
 
         public void LoadContent(SpriteSheet _spritesheet)
@@ -95,5 +101,7 @@ namespace ZombieChezLeComte
         {
             this.Ghost.Draw(_sb);
         }
+
+        
     }
 }

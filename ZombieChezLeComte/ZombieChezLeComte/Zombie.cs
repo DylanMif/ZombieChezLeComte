@@ -32,6 +32,7 @@ namespace ZombieChezLeComte
         private int lastContinueX;
         private int lastContinueY;
         private bool peutTuer ;
+        private bool peutBouger;
 
         public bool PeutTuer
         {
@@ -43,6 +44,18 @@ namespace ZombieChezLeComte
             set
             {
                 this.peutTuer = value;
+            }
+        }
+        public bool PeutBouger
+        {
+            get
+            {
+                return this.peutBouger;
+            }
+
+            set
+            {
+                this.peutBouger = value;
             }
         }
         public Charactere ZombieChar
@@ -127,49 +140,56 @@ namespace ZombieChezLeComte
             this.ZombieChar.Update(_gameTime);
             this.ZombieChar.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
 
-            Vector2 dir = Additions.Normalize(_commonNight.Player.Position - this.ZombieChar.Position);
-            ushort tileX = (ushort)(this.GetMapPos(_commonNight.Camera).X / _commonNight.TiledMap.TileWidth);
-            ushort tileY = (ushort)(this.GetMapPos(_commonNight.Camera).Y / _commonNight.TiledMap.TileHeight);
-            Console.WriteLine(this.GetIntDir(dir));
-            
-            if (!this.IsCollision((ushort)(tileX + this.GetIntDir(dir).X), (ushort)(tileY + this.GetIntDir(dir).Y), _commonNight.MapLayer)) 
+            if (PeutBouger)
             {
-                this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
-                this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
-                this.LastContinueX = 0;
-                this.LastContinueY = 0;
-            } else if(!this.IsCollision((ushort)(tileX + this.GetIntDir(dir).X), (ushort)(tileY), _commonNight.MapLayer))
-            {
-                this.LastContinueY = 0;
-                dir.Y = 0;
-                if (this.LastContinueX == 0)
+
+
+                Vector2 dir = Additions.Normalize(_commonNight.Player.Position - this.ZombieChar.Position);
+                ushort tileX = (ushort)(this.GetMapPos(_commonNight.Camera).X / _commonNight.TiledMap.TileWidth);
+                ushort tileY = (ushort)(this.GetMapPos(_commonNight.Camera).Y / _commonNight.TiledMap.TileHeight);
+                //Console.WriteLine(this.GetIntDir(dir));
+
+                if (!this.IsCollision((ushort)(tileX + this.GetIntDir(dir).X), (ushort)(tileY + this.GetIntDir(dir).Y), _commonNight.MapLayer))
                 {
-                    this.LastContinueX = (int)this.GetIntDir(dir).X;
+                    this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
+                    this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
+                    this.LastContinueX = 0;
+                    this.LastContinueY = 0;
                 }
-                dir.X = LastContinueX;
-                this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
-                this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
-            } else if (!this.IsCollision((ushort)(tileX), (ushort)(tileY + this.GetIntDir(dir).Y), _commonNight.MapLayer))
-            {
-                this.LastContinueX = 0;
-                dir.X = 0;
-                if(this.LastContinueY == 0)
+                else if (!this.IsCollision((ushort)(tileX + this.GetIntDir(dir).X), (ushort)(tileY), _commonNight.MapLayer))
                 {
-                    this.LastContinueY = (int)this.GetIntDir(dir).Y;
+                    this.LastContinueY = 0;
+                    dir.Y = 0;
+                    if (this.LastContinueX == 0)
+                    {
+                        this.LastContinueX = (int)this.GetIntDir(dir).X;
+                    }
+                    dir.X = LastContinueX;
+                    this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
+                    this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
                 }
-                dir.Y = LastContinueY;
-                this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
-                this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
-            }
-            if(this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
-            {
-                if(PeutTuer == true)
+                else if (!this.IsCollision((ushort)(tileX), (ushort)(tileY + this.GetIntDir(dir).Y), _commonNight.MapLayer))
                 {
-                    _game.LoadMainMenu();
+                    this.LastContinueX = 0;
+                    dir.X = 0;
+                    if (this.LastContinueY == 0)
+                    {
+                        this.LastContinueY = (int)this.GetIntDir(dir).Y;
+                    }
+                    dir.Y = LastContinueY;
+                    this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
+                    this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
                 }
-                else
+                if (this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
                 {
-                    _game.LoadNight5();
+                    if (PeutTuer == true)
+                    {
+                        _game.LoadMainMenu();
+                    }
+                    else
+                    {
+                        _game.LoadNight5();
+                    }
                 }
             }
         }

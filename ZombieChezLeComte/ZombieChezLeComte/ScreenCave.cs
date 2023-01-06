@@ -37,5 +37,15 @@ namespace ZombieChezLeComte
             player.LoadContent(Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
             base.LoadContent();
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            
+        }
     }
 }

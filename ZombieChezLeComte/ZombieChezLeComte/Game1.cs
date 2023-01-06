@@ -51,6 +51,8 @@ namespace ZombieChezLeComte
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+            DataSaver.SaveNight(4);
+            Console.WriteLine(DataSaver.LoadNight());
 
             // TODO: use this.Content to load your game content here
         }
@@ -89,7 +91,7 @@ namespace ZombieChezLeComte
         {
             _screenManager.LoadScreen(new MainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
-        private void LoadIntro()
+        public void LoadIntro()
         {
             _screenManager.LoadScreen(new Introduction(this), new FadeTransition(GraphicsDevice, Color.Black));
         }

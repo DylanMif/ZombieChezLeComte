@@ -294,7 +294,7 @@ namespace ZombieChezLeComte
                 this.CurrentTextColor = this.ClickTextColor;
                 if (this.Text == "Nouvelle Partie")
                 {
-                    game.LoadNight1();
+                    game.LoadIntro();
                 }
                 return;
             }

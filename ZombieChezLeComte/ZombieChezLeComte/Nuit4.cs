@@ -36,6 +36,7 @@ namespace ZombieChezLeComte
         private TextInfo textInfo = new TextInfo();
         private InteractObject[] kitchenPapers = new InteractObject[6];
         private bool estRecuperer = false;
+        
 
 
         public override void Initialize()
@@ -172,26 +173,7 @@ namespace ZombieChezLeComte
             Game.SpriteBatch.End();
         }
 
-        public override void LoadContent()
-        {
-            commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
-                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
 
-            zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
-            base.LoadContent();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            zombie.Update(gameTime, commonNight);
-            commonNight.Update(gameTime);
-           
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            commonNight.Draw(Game.SpriteBatch);
-            zombie.Draw(Game.SpriteBatch);
-        }
+        
     }
 }

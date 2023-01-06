@@ -20,16 +20,16 @@ namespace ZombieChezLeComte
     {
         private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        private Charactere _player = new Charactere();
-        private OrthographicCamera _camera;
-        private Vector2 _cameraPosition;
         private TiledMapTileLayer mapLayer;
 
+        private Charactere _player = new Charactere();
+
+        private OrthographicCamera _camera;
+        private Vector2 _cameraPosition;
         private Vector2 cameraMove;
         private float deltaTime;
 
         
-
 
         public TiledMap TiledMap
         {
@@ -103,7 +103,6 @@ namespace ZombieChezLeComte
                 this.mapLayer = value;
             }
         }
-
         public Vector2 CameraMove {
             get
             {
@@ -126,6 +125,7 @@ namespace ZombieChezLeComte
                 this.deltaTime = value;
             }
         }
+
 
         public void Initialize(GameWindow gameWindow, GraphicsDevice graphics)
         {

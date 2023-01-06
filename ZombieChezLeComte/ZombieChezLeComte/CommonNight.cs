@@ -160,7 +160,7 @@ namespace ZombieChezLeComte
                 
             }
 
-            //Console.WriteLine(-Camera.Position);
+            Console.WriteLine(-Camera.Position);
             this.Player.Update(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
 

@@ -77,7 +77,7 @@ namespace ZombieChezLeComte
             huntGhost.Update(gameTime, commonNight, Game);
             doorGhost.Update(gameTime, commonNight, Game);
             runGhost.Update(gameTime, commonNight, Game);
-            zombie.Update(gameTime, commonNight);
+            zombie.Update(gameTime, commonNight, Game);
 
             if(Keyboard.GetState().IsKeyDown(Keys.Space))
             {

@@ -31,7 +31,20 @@ namespace ZombieChezLeComte
         private Vector2 virtualPos;
         private int lastContinueX;
         private int lastContinueY;
+        private bool peutTuer ;
 
+        public bool PeutTuer
+        {
+            get
+            {
+                return this.peutTuer;
+            }
+
+            set
+            {
+                this.peutTuer = value;
+            }
+        }
         public Charactere ZombieChar
         {
             get
@@ -109,7 +122,7 @@ namespace ZombieChezLeComte
             this.ZombieChar.LoadContent(_spriteSheet);
         }
 
-        public void Update(GameTime _gameTime, CommonNight _commonNight)
+        public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
         {
             this.ZombieChar.Update(_gameTime);
             this.ZombieChar.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
@@ -147,6 +160,17 @@ namespace ZombieChezLeComte
                 dir.Y = LastContinueY;
                 this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
                 this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
+            }
+            if(this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
+            {
+                if(PeutTuer == true)
+                {
+                    _game.LoadMainMenu();
+                }
+                else
+                {
+                    _game.LoadNight5();
+                }
             }
         }
 

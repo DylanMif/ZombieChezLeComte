@@ -29,6 +29,21 @@
       "frames": [76,77,76,75],
       "isLooping": false,
       "frameDuration": 0.2
+    },
+    "idleNorth": {
+      "frames": [88],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleWest": {
+      "frames": [64],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleEst": {
+      "frames": [76],
+      "isLooping": false,
+      "frameDuration": 0.2
     }
   }
 }

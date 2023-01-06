@@ -124,9 +124,24 @@ namespace ZombieChezLeComte
         }
         public void Movement(Vector2 _vector2, float _delattime, bool isPlayer)
         {
-            if(_vector2.X == 0 && _vector2.Y == 0)
+            if (_vector2.X == 0 && _vector2.Y == 0)
             {
-                this.CurrentAnimation = "idle";
+                if (this.CurrentAnimation== "estWalk" || this.CurrentAnimation == "idleEst")
+                {
+                    this.CurrentAnimation = "idleEst";
+                }
+                else if (this.CurrentAnimation == "northWalk" || this.CurrentAnimation == "idleNorth")
+                {
+                    this.CurrentAnimation = "idleNorth";
+                }
+                else if (this.CurrentAnimation == "westWalk" || this.CurrentAnimation == "idleWest")
+                {
+                    this.CurrentAnimation = "idleWest";
+                }
+                else if (this.CurrentAnimation == "southWalk" || this.CurrentAnimation == "idle")
+                {
+                    this.CurrentAnimation = "idle";
+                }
             }
             if(_vector2.X > 0)
             {

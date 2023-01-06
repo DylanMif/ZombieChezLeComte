@@ -25,18 +25,19 @@ namespace ZombieChezLeComte
         public Nuit4(Game1 game) : base(game) { }
         private CommonNight _nuit4 = new CommonNight();
 
-        private InteractObject[] litInteraction = new InteractObject[3];
-        private int nombreLitFait = 0;
-        private InteractObject litDormir = new InteractObject();
-        private InteractObject lavercouteua = new InteractObject();
-        private InteractObject recupViande = new InteractObject();
-        private InteractObject cuisine = new InteractObject();
-        private InteractObject[] armures = new InteractObject[2];
-        private int nombreArm = 0;
+
         private TextInfo textInfo = new TextInfo();
         private InteractObject[] kitchenPapers = new InteractObject[6];
+
         private bool estRecuperer = false;
-        
+        private bool possedeArme = false;
+        private bool uneTache = false;
+        private InteractObject[] litInteraction = new InteractObject[4];
+        private int nombreLitFait = 0;
+        private InteractObject couteuxFour = new InteractObject();
+        private InteractObject[] laverLivre = new InteractObject[3];
+        private int nombreLivre = 0;
+        private InteractObject recupViande = new InteractObject();
 
 
         public override void Initialize()
@@ -47,29 +48,29 @@ namespace ZombieChezLeComte
             {
                 litInteraction[i] = new InteractObject();
             }
-            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "Comment le lit peut etre defait alors que personne n'est venu depuis hier?!?");
-            litInteraction[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Bizzare... Le lit est defait");
-            litInteraction[2].Initialize(new Vector2(4098, 6088), 47, 103, "lit3", "Ca doit etre les souris qui ont defait le lit");
-            litDormir.Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "Une bonne sieste bien merite!");
+            litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "Ca n'a aucun sens ce que je fais...");
+            litInteraction[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Pourquoi je dois mettre de la viande sur des lits?!?");
+            litInteraction[2].Initialize(new Vector2(4098, 6088), 47, 103, "lit3", "C'est moi qui devient fou ou cette maison tourne par rond?");
+            litInteraction[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "Je devrais demisionner... Ca devient trop dangereux");
+            couteuxFour.Initialize(new Vector2(3979, 6573), 33, 27, "couteux","Des couteux au four?? Drole de nourriture...");
             for (int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
             }
-            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Alimenter le feu en bois");
-            kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Cuisiner de la viande");
-            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Nettoyer les armures");
-            kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
-            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Aller dormir une fois les taches finis");
+            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Mettre des couteaux de cuisine au four");
+            kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Laver les livres de la biblitotheque");
+            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "");
+            kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Mettre de la viande sur les lits");
+            kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "Recuperer la viande dans le stockage");
-            for (int i = 0; i < armures.Length; i++)
+            for (int i = 0; i < laverLivre.Length; i++)
             {
-                armures[i] = new InteractObject();
+                laverLivre[i] = new InteractObject();
             }
-            armures[0].Initialize(new Vector2(4798, 6380), 102, 8, "armure1", "J'ai jamais vu autant de poussiere");
-            armures[1].Initialize(new Vector2(4225, 6540), 60, 8, "armure2", "Elles doivent valoir une fortune");
-            lavercouteua.Initialize(new Vector2(4990, 6382), 40, 3, "feu", "Ca fait du bien de se rechauffer !");
-            cuisine.Initialize(new Vector2(3979, 6573), 33, 27, "cuisine", "Ca sera plus simple de cuisiner si j'ai la viande");
-            recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "lit4", "Beurk...C'est quoi cette viande ! Peut etre du boeuf orientale...");
+            laverLivre[0].Initialize(new Vector2(4482, 6381), 50, 50, "armoire1", "Les livres sont foutu maintenant");
+            laverLivre[1].Initialize(new Vector2(4281, 6384), 50, 50, "armoire2", "Pourquoi laver les livres?");
+            laverLivre[2].Initialize(new Vector2(4184, 6384), 50, 50, "armoire3", "Decidemment, ca devient de plus en plus bizzare...");
+            recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "lit4", "Toujours la meme viande ragoutante...");
             base.Initialize();
         }
         public override void LoadContent()
@@ -77,7 +78,7 @@ namespace ZombieChezLeComte
             _nuit4.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
-            textInfo.Text = "Brrrr... Il fait un froid de canard dans cette maison";
+            textInfo.Text = "Qu'est ce qui s'est passe? Je me suis evanouis je crois...";
             textInfo.ActiveText(Constantes.TEMPS_TEXTE);
             base.LoadContent();
         }
@@ -95,24 +96,24 @@ namespace ZombieChezLeComte
                         Additions.InteractionObjet(kitchenPapers[i], textInfo, kitchenPapers[i].InteractText);
                     }
                 }
-                if (lavercouteua.InteractWith(-_nuit4.Camera.Position))
-                {
-                    Additions.InteractionObjet(lavercouteua, textInfo, "Le feu est suffisament charge en bois");
-                }
-                if (recupViande.InteractWith(-_nuit4.Camera.Position))
-                {
-                    Additions.InteractionObjet(recupViande, textInfo, "J'ai assez de viande je pense");
-                    cuisine.InteractText = "Cette viande est vraiment douteuse";
-                    estRecuperer = true;
-                }
                 for (int i = 0; i < litInteraction.Length; i++)
                 {
                     if (litInteraction[i].InteractWith(-_nuit4.Camera.Position))
                     {
                         if (litInteraction[i].HasAlreadyInteractable == false)
                         {
-                            Additions.InteractionObjet(litInteraction[i], textInfo, "Ce lit est fait");
-                            nombreLitFait += 1;
+                            if (estRecuperer == true && litInteraction[i].HasAlreadyInteractable == false)
+                            {
+                                Additions.InteractionObjet(litInteraction[i], textInfo, "J'ai fais ce lit");
+                                nombreLitFait += 1;
+                                uneTache = true;
+                                estRecuperer = false;
+                            }
+                            else if(estRecuperer == false && litInteraction[i].HasAlreadyInteractable == false)
+                            {
+                                textInfo.Text = "Il me faut de la viande avant";
+                                textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+                            }
                         }
                         else
                         {
@@ -120,44 +121,37 @@ namespace ZombieChezLeComte
                         }
                     }
                 }
-                if (cuisine.InteractWith(-_nuit4.Camera.Position))
+                if (recupViande.InteractWith(-_nuit4.Camera.Position))
                 {
-                    if (estRecuperer)
+                    if (nombreLitFait == litInteraction.Length)
                     {
-                        Additions.InteractionObjet(cuisine, textInfo, "Cette viande est vraiment douteuse");
+                        recupViande.InteractText = "J'ai deja fais tout les lits. Plus besoin de viande";
+                        Additions.InteractionObjet(recupViande, textInfo, "J'ai deja fais tout les lits. Plus besoin de viande");
                     }
                     else
                     {
-                        Additions.InteractionObjet(cuisine, textInfo, cuisine.InteractText);
+                        Additions.InteractionObjet(recupViande, textInfo, "Je vais devoir revenir chercher de la viande pour chaque lit...");
+                        estRecuperer = true;
                     }
                 }
-                for (int i = 0; i < armures.Length; i++)
+                if (couteuxFour.InteractWith(-_nuit4.Camera.Position))
                 {
-                    if (armures[i].InteractWith(-_nuit4.Camera.Position))
+                    Additions.InteractionObjet(couteuxFour, textInfo, "Les couteaux sont deja au fourneaux...");
+                    uneTache = true;
+                }
+                for (int i = 0; i < laverLivre.Length; i++)
+                {
+                    if (laverLivre[i].InteractWith(-_nuit4.Camera.Position))
                     {
-                        if (armures[i].HasAlreadyInteractable == false)
+                        if (laverLivre[i].HasAlreadyInteractable == false)
                         {
-                            Additions.InteractionObjet(armures[i], textInfo, "Toute belle toute propre");
-                            nombreArm += 1;
+                            Additions.InteractionObjet(laverLivre[i], textInfo, "Les livres sont laver ici");
+                            nombreLivre += 1;
+                            uneTache = true;
                         }
                         else
                         {
-                            Additions.InteractionObjet(armures[i], textInfo, armures[i].InteractText);
-                        }
-                    }
-                }
-                if (nombreArm == armures.Length && nombreLitFait == litInteraction.Length && lavercouteua.HasAlreadyInteractable == true &&
-                    cuisine.HasAlreadyInteractable == true && recupViande.HasAlreadyInteractable == true)
-                {
-                    if (litDormir.InteractWith(-_nuit4.Camera.Position))
-                    {
-                        if (litDormir.HasAlreadyInteractable == false)
-                            litDormir.HasAlreadyInteractable = true;
-                        else
-                        {
-                            textInfo.Text = litDormir.InteractText;
-                            textInfo.ActiveText(2);
-                            Game.LoadNight3();
+                            Additions.InteractionObjet(laverLivre[i], textInfo, laverLivre[i].InteractText);
                         }
                     }
                 }

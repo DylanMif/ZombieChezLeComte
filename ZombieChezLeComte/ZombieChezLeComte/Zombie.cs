@@ -130,7 +130,6 @@ namespace ZombieChezLeComte
             Vector2 dir = Additions.Normalize(_commonNight.Player.Position - this.ZombieChar.Position);
             ushort tileX = (ushort)(this.GetMapPos(_commonNight.Camera).X / _commonNight.TiledMap.TileWidth);
             ushort tileY = (ushort)(this.GetMapPos(_commonNight.Camera).Y / _commonNight.TiledMap.TileHeight);
-            Console.WriteLine(this.GetIntDir(dir));
             
             if (!this.IsCollision((ushort)(tileX + this.GetIntDir(dir).X), (ushort)(tileY + this.GetIntDir(dir).Y), _commonNight.MapLayer)) 
             {
@@ -161,7 +160,7 @@ namespace ZombieChezLeComte
                 this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
                 this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
             }
-            if(this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
+            /*if(this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
             {
                 if(PeutTuer == true)
                 {
@@ -171,7 +170,7 @@ namespace ZombieChezLeComte
                 {
                     _game.LoadNight5();
                 }
-            }
+            }*/
         }
 
         public void Draw(SpriteBatch _sb)

@@ -51,7 +51,7 @@ namespace ZombieChezLeComte
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Console.WriteLine(DataSaver.LoadNight());
             // TODO: use this.Content to load your game content here
         }
 
@@ -89,32 +89,42 @@ namespace ZombieChezLeComte
         {
             _screenManager.LoadScreen(new MainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
-        private void LoadIntro()
+        public void LoadIntro()
         {
             _screenManager.LoadScreen(new Introduction(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
         public void LoadNight1()
         {
             _screenManager.LoadScreen(new Night1(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(1);
         }
         public void LoadNight2()
         {
             _screenManager.LoadScreen(new Night2(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(2);
         }
 
         public void LoadNight3()
         {
             _screenManager.LoadScreen(new Night3(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(3);
         }
 
         public void LoadNight4()
         {
             _screenManager.LoadScreen(new Nuit4(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(4);
         }
 
         public void LoadNight5()
         {
             _screenManager.LoadScreen(new Nuit5(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
+        }
+        public void LoadCommand()
+        {
+            _screenManager.LoadScreen(new ScreenCommand(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
         }
 
     }

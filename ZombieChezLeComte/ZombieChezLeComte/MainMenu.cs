@@ -44,6 +44,8 @@ namespace ZombieChezLeComte
         private SpriteFont pixelTitleFont;
         private Texture2D buttonBgTex;
 
+        private int nightNumber;
+
         public override void Initialize()
         {
             newGameButton.Initialize("Nouvelle Partie", Color.Transparent, new Vector2(newGameButtonXPos, newGameButtonYPos), 600, 50,
@@ -76,6 +78,8 @@ namespace ZombieChezLeComte
 
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(mainSong);
+
+            nightNumber = DataSaver.LoadNight();
             base.LoadContent();
         }
 
@@ -93,7 +97,8 @@ namespace ZombieChezLeComte
             Game.SpriteBatch.Begin();
             Game.SpriteBatch.DrawString(pixelTitleFont, Constantes.GAME_TITLE, titlePosition, Color.White);
             newGameButton.Draw(Game.SpriteBatch);
-            continueButton.Draw(Game.SpriteBatch);
+            if(nightNumber != 0)
+                continueButton.Draw(Game.SpriteBatch);
             commandButton?.Draw(Game.SpriteBatch);
             quitButton.Draw(Game.SpriteBatch);
             Game.SpriteBatch.Draw(mainMenuTexture, mainMenuImagePosition, 

@@ -294,7 +294,37 @@ namespace ZombieChezLeComte
                 this.CurrentTextColor = this.ClickTextColor;
                 if (this.Text == "Nouvelle Partie")
                 {
-                    game.LoadNight1();
+                    game.LoadIntro();
+                } else if(this.Text == "Continuer")
+                {
+                    int nightNumber = DataSaver.LoadNight();
+                    switch(nightNumber)
+                    {
+                        case 0:
+                            game.LoadIntro();
+                            break;
+                        case 1:
+                            game.LoadNight1();
+                            break;
+                        case 2:
+                            game.LoadNight2();
+                            break;
+                        case 3:
+                            game.LoadNight3();
+                            break;
+                        case 4:
+                            game.LoadNight4();
+                            break;
+                        case 5:
+                            game.LoadNight5();
+                            break;
+                    }
+                } else if(this.Text == "Quitter")
+                {
+                    game.Exit();
+                } else if(this.Text == "Commandes")
+                {
+                    game.LoadCommand();
                 }
                 return;
             }

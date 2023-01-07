@@ -38,13 +38,12 @@ namespace ZombieChezLeComte
         private Vector2 mainMenuImagePosition;
         private Texture2D mainMenuTexture;
 
-        private Song mainSong;
-
         private SpriteFont pixelFont;
         private SpriteFont pixelTitleFont;
         private Texture2D buttonBgTex;
 
         private int nightNumber;
+        private int end;
 
         public override void Initialize()
         {
@@ -59,6 +58,11 @@ namespace ZombieChezLeComte
 
             titlePosition = new Vector2(0, 0);
             mainMenuImagePosition = new Vector2(600, 250);
+
+            nightNumber = DataSaver.LoadNight();
+            end = DataSaver.LoadEnd();
+
+            MediaPlayer.Volume = 0.3f;
             base.Initialize();
         }
 
@@ -73,13 +77,12 @@ namespace ZombieChezLeComte
             commandButton.LoadContent(pixelFont, buttonBgTex);
             quitButton.LoadContent(pixelFont, buttonBgTex);
 
-            mainSong = Content.Load<Song>("mainMusic");
+            
             mainMenuTexture = Content.Load<Texture2D>("mainMenuImage");
 
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(mainSong);
+            
 
-            nightNumber = DataSaver.LoadNight();
+            
             base.LoadContent();
         }
 
@@ -95,7 +98,7 @@ namespace ZombieChezLeComte
         {
             Game.GraphicsDevice.Clear(new Color(0, 0, 0));
             Game.SpriteBatch.Begin();
-            Game.SpriteBatch.DrawString(pixelTitleFont, Constantes.GAME_TITLE, titlePosition, Color.White);
+            Game.SpriteBatch.DrawString(pixelTitleFont, Constantes.GAME_TITLE, titlePosition, end == 1 ? Color.Red : Color.White);
             newGameButton.Draw(Game.SpriteBatch);
             if(nightNumber != 0)
                 continueButton.Draw(Game.SpriteBatch);

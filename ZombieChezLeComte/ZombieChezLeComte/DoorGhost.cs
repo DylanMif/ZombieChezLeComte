@@ -122,9 +122,10 @@ namespace ZombieChezLeComte
         {
             this.Ghost.Update(_gameTime);
             this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
-            if(this.Ghost.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
+            if(this.Ghost.SpriteRect.Intersects(_commonNight.Player.SpriteRect) && !Constantes.GOD_MOD)
             {
-                _game.LoadMainMenu();
+                _game.killBy = "doorGhost";
+                _game.LoadJumpScare();
             }
 
             this.CurrentStayTime -= (float)_gameTime.ElapsedGameTime.TotalSeconds;

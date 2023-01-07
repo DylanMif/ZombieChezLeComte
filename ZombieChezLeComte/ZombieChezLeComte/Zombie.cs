@@ -180,11 +180,12 @@ namespace ZombieChezLeComte
                     this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
                     this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
                 }
-                if (this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
+                if (this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect) && !Constantes.GOD_MOD)
                 {
                     if (PeutTuer == true)
                     {
-                        _game.LoadMainMenu();
+                        _game.killBy = "zombie";
+                        _game.LoadJumpScare();
                     }
                     else
                     {

@@ -75,7 +75,7 @@ namespace ZombieChezLeComte
         public override void LoadContent()
         {
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
-                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
 
             huntGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeHunt.sf", new JsonContentLoader()));
             doorGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomePorte.sf", new JsonContentLoader()));
@@ -126,7 +126,7 @@ namespace ZombieChezLeComte
                 {
                     if(GetNbKeyFragment(keyFragementInteract) == keyFragementInteract.Length)
                     {
-                        Game.LoadMainMenu();
+                        Game.LoadCave();
                     } else
                     {
                         textInfo.Text = caveDoorInteract.InteractText;
@@ -141,13 +141,14 @@ namespace ZombieChezLeComte
         public override void Draw(GameTime gameTime)
         {
             commonNight.Draw(Game.SpriteBatch);
-            huntGhost.Draw(Game.SpriteBatch, commonNight);
             doorGhost.Draw(Game.SpriteBatch);
             runGhost.Draw(Game.SpriteBatch);
             zombie.Draw(Game.SpriteBatch);
             Game.SpriteBatch.Begin();
+            commonNight.DrawVision(Game.SpriteBatch);
             textInfo.Draw(Game.SpriteBatch);
             Game.SpriteBatch.End();
+            huntGhost.Draw(Game.SpriteBatch, commonNight);
         }
 
         private static int GetNbKeyFragment(InteractObject[] _allKeyFrag)

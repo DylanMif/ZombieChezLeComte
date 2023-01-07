@@ -84,7 +84,7 @@ namespace ZombieChezLeComte
         public override void LoadContent()
         {
             _nuit4.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
-                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
             zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
             textInfo.Text = "Qu'est ce qui s'est passe? Je me suis evanouis je crois...";
@@ -209,6 +209,7 @@ namespace ZombieChezLeComte
             zombie.Draw(Game.SpriteBatch);
             _nuit4.Player.Draw(Game.SpriteBatch);
             Game.SpriteBatch.Begin();
+            _nuit4.DrawVision(Game.SpriteBatch);
             textInfo.Draw(Game.SpriteBatch);
             Game.SpriteBatch.End();
         }

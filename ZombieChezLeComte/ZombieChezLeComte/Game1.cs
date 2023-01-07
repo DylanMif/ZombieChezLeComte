@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using System;
@@ -12,6 +13,13 @@ namespace ZombieChezLeComte
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
+
+        public string killBy;
+        public bool isInOutro;
+        public bool isInMainMenu;
+
+        private Song mainSong;
+        private Song outroMusic;
 
 
         public SpriteBatch SpriteBatch
@@ -45,6 +53,10 @@ namespace ZombieChezLeComte
             _graphics.ApplyChanges();
             base.Initialize();
 
+            killBy = "zombie";
+            isInOutro = false;
+            isInMainMenu = false;
+
             LoadMainMenu();
         }
 
@@ -52,6 +64,11 @@ namespace ZombieChezLeComte
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             Console.WriteLine(DataSaver.LoadNight());
+            Console.WriteLine(DataSaver.LoadEnd());
+            mainSong = Content.Load<Song>("mainMusic");
+            outroMusic = Content.Load<Song>("outroMusic");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(mainSong);
             // TODO: use this.Content to load your game content here
         }
 
@@ -71,7 +88,25 @@ namespace ZombieChezLeComte
                 LoadNight4();
             if (Keyboard.GetState().IsKeyDown(Keys.NumPad5))
                 LoadNight5();
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
+                LoadCave();
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad7))
+                LoadOutro();
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))
+                LoadJumpScare();
             // TODO: Add your update logic here
+            if(isInOutro)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(outroMusic);
+                isInOutro = false;
+            }
+            if (isInMainMenu)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(mainSong);
+                isInMainMenu = false;
+            }
 
             base.Update(gameTime);
         }
@@ -87,6 +122,7 @@ namespace ZombieChezLeComte
 
         public void LoadMainMenu()
         {
+            isInMainMenu = true;
             _screenManager.LoadScreen(new MainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
         public void LoadIntro()
@@ -125,6 +161,19 @@ namespace ZombieChezLeComte
         {
             _screenManager.LoadScreen(new ScreenCommand(this), new FadeTransition(GraphicsDevice, Color.Black));
             DataSaver.SaveNight(5);
+        }
+        public void LoadCave()
+        {
+            _screenManager.LoadScreen(new ScreenCave(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+        public void LoadOutro()
+        {
+            isInOutro = true;
+            _screenManager.LoadScreen(new ScreenOutro(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+        public void LoadJumpScare()
+        {
+            _screenManager.LoadScreen(new ScreenJumpScare(this));
         }
 
     }

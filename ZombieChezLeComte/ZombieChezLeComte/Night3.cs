@@ -59,7 +59,7 @@ namespace ZombieChezLeComte
             kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Ranger le hall");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Ne pas aller dans le stockage");
-            kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "");
+            kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "En cas de probleme partez");
             for (int i = 0; i < litInteraction.Length; i++)
             {
                 litInteraction[i] = new InteractObject();
@@ -91,7 +91,7 @@ namespace ZombieChezLeComte
         public override void LoadContent()
         {
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
-                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
 
             deadZombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
             runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
@@ -156,6 +156,7 @@ namespace ZombieChezLeComte
                 {
                     if(bedInteract.InteractWith(-commonNight.Camera.Position))
                     {
+                        bedInteract.HasAlreadyInteractable = true;
                         textInfo.Text = bedInteract.InteractText;
                         textInfo.ActiveText(2);
                     }
@@ -170,7 +171,8 @@ namespace ZombieChezLeComte
             deadZombie.Update(gameTime);
 
             if (bookshelfInteract.HasAlreadyInteractable && kitchenInteract.HasAlreadyInteractable &&
-                        hallInteract.HasAlreadyInteractable && deadZombieInteract.HasAlreadyInteractable && !endRunGhostSpawn)
+                        hallInteract.HasAlreadyInteractable && deadZombieInteract.HasAlreadyInteractable && !endRunGhostSpawn &&
+                        this.nbGoodBed() == litInteraction.Length)
             {
                 endRunGhostSpawn = true;
                 for (int i = 0; i < endRunGhosts.Length; i++)
@@ -191,16 +193,32 @@ namespace ZombieChezLeComte
         {
             commonNight.Draw(Game.SpriteBatch);
             deadZombie.Draw(Game.SpriteBatch);
-            Game.SpriteBatch.Begin();
-            textInfo.Draw(Game.SpriteBatch);
-            Game.SpriteBatch.End();
-            commonNight.Player.Draw(Game.SpriteBatch);
             runGhost.Draw(Game.SpriteBatch);
             for (int i = 0; i < endRunGhosts.Length; i++)
             {
                 if (endRunGhostSpawn)
                     endRunGhosts[i].Draw(Game.SpriteBatch);
             }
+            Game.SpriteBatch.Begin();
+            commonNight.DrawVision(Game.SpriteBatch);
+            textInfo.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.End();
+            commonNight.Player.Draw(Game.SpriteBatch);
+            
+            
+        }
+
+        public int nbGoodBed()
+        {
+            int res = 0;
+            foreach (InteractObject bedInteract in litInteraction)
+            {
+                if(bedInteract.HasAlreadyInteractable)
+                {
+                    res++;
+                }
+            }
+            return res;
         }
     }
 }

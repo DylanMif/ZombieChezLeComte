@@ -74,6 +74,7 @@ namespace ZombieChezLeComte
         public void LoadContent(SpriteSheet _spritesheet)
         {
             this.Ghost.LoadContent(_spritesheet);
+            this.Ghost.Perso.Alpha = 0.2f;
         }
 
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
@@ -82,10 +83,11 @@ namespace ZombieChezLeComte
             this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
             this.Ghost.Movement(Additions.Normalize(_commonNight.Player.Position - this.Ghost.Position) * this.Speed,
                 _commonNight.DeltaTime, false);
-            /*if(this.Ghost.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
+            if (_commonNight.Player.SpriteRect.Intersects(this.Ghost.SpriteRect) && !Constantes.GOD_MOD)
             {
-                _game.LoadMainMenu();
-            }*/
+                _game.killBy = "huntGhost";
+                _game.LoadJumpScare();
+            }
         }
 
         public void Draw(SpriteBatch _sb, CommonNight _commonNight)

@@ -14,6 +14,7 @@ using MonoGame.Extended.Content;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Serialization;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -35,6 +36,11 @@ namespace ZombieChezLeComte
         private InteractObject[] kitchenPapers = new InteractObject[6];
         private bool estRecuperer = false;
 
+        private bool isInJumpScare;
+        private Texture2D jumpScareImage;
+        private SoundEffect jumpScareSound;
+        private Vector2 jumpScareDrawPos;
+        private float currentTime;
 
         public override void Initialize()
         {
@@ -64,18 +70,30 @@ namespace ZombieChezLeComte
             }
             armures[0].Initialize(new Vector2(4798, 6380), 102, 8, "armure1", "J'ai jamais vu autant de poussiere");
             armures[1].Initialize(new Vector2(4225, 6540), 60, 8, "armure2", "Elles doivent valoir une fortune");
-            feu.Initialize(new Vector2(4990, 6382), 40, 3, "feu", "Ca fait du bien de se rechauffer !");
+            feu.Initialize(new Vector2(4990, 6382), 40, 20, "feu", "Ca fait du bien de se rechauffer !");
             cuisine.Initialize(new Vector2(3979, 6573), 33, 27, "cuisine", "Ca sera plus simple de cuisiner si j'ai la viande");
             recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "lit4", "Beurk...C'est quoi cette viande ! Peut etre du boeuf orientale...");
+
+
             base.Initialize();
         }
         public override void LoadContent()
         {
             _nuit2.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
-                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
             textInfo.Text = "Brrrr... Il fait un froid de canard dans cette maison";
             textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+
+            jumpScareImage = Game.Content.Load<Texture2D>("endGhostJumpScareImage");
+            jumpScareSound = Game.Content.Load<SoundEffect>("endGhostJumpScareSound");
+
+            currentTime = (float)jumpScareSound.Duration.TotalSeconds;
+
+            jumpScareDrawPos = new Vector2(
+                (Constantes.WINDOW_WIDTH - jumpScareImage.Width) / 2,
+                (Constantes.WINDOW_HEIGHT - jumpScareImage.Height) / 2
+                );
             base.LoadContent();
         }
 
@@ -83,6 +101,16 @@ namespace ZombieChezLeComte
         {
             _nuit2.Update(gameTime);
             textInfo.Update(gameTime);
+
+            if(isInJumpScare)
+            {
+                currentTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if(currentTime <= 0)
+                {
+                    isInJumpScare = false;
+                }
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 for (int i = 0; i < kitchenPapers.Length; i++)
@@ -136,6 +164,11 @@ namespace ZombieChezLeComte
                         {
                             Additions.InteractionObjet(armures[i], textInfo, "Toute belle toute propre");
                             nombreArm += 1;
+                            if(i == 1)
+                            {
+                                isInJumpScare = true;
+                                jumpScareSound.Play();
+                            }
                         }
                         else
                         {
@@ -157,17 +190,30 @@ namespace ZombieChezLeComte
                             Game.LoadNight3();
                         }
                     }
+                } else if (litDormir.InteractWith(-_nuit2.Camera.Position))
+                {
+                    textInfo.Text = "Vous dormirez apres avoir tout fait";
+                    textInfo.ActiveText(2);
                 }
             }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            Game.GraphicsDevice.Clear(Color.White);
-            _nuit2.Draw(Game.SpriteBatch);
-            Game.SpriteBatch.Begin();
-            textInfo.Draw(Game.SpriteBatch);
-            Game.SpriteBatch.End();
+            Game.GraphicsDevice.Clear(Color.Black);
+            if(isInJumpScare)
+            {
+                Game.SpriteBatch.Begin();
+                Game.SpriteBatch.Draw(jumpScareImage, jumpScareDrawPos, Color.White);
+                Game.SpriteBatch.End();
+            } else
+            {
+                _nuit2.Draw(Game.SpriteBatch);
+                Game.SpriteBatch.Begin();
+                _nuit2.DrawVision(Game.SpriteBatch);
+                textInfo.Draw(Game.SpriteBatch);
+                Game.SpriteBatch.End();
+            }
         }
     }
 }

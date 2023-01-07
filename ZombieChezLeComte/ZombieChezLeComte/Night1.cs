@@ -50,7 +50,7 @@ namespace ZombieChezLeComte
             {
                 kitchenPapers[i] = new InteractObject();
             }
-            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ranger la bibliotheque");
+            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ranger les bibliotheque");
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Ranger la table de la cuisine");
             kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Balayer le couloir de la cave");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
@@ -74,7 +74,7 @@ namespace ZombieChezLeComte
         public override void LoadContent()
         {
             _nuit1.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"), 
-                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()));
+                Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
             base.LoadContent();
         }
@@ -148,6 +148,10 @@ namespace ZombieChezLeComte
                             Game.LoadNight2();
                         }
                     }
+                } else if(litDormir.InteractWith(-_nuit1.Camera.Position))
+                {
+                    textInfo.Text = "Vous dormirez apres avoir tout fait";
+                    textInfo.ActiveText(2);
                 }
 
 
@@ -159,6 +163,7 @@ namespace ZombieChezLeComte
             Game.GraphicsDevice.Clear(Color.White);
             _nuit1.Draw(Game.SpriteBatch);
             Game.SpriteBatch.Begin();
+            _nuit1.DrawVision(Game.SpriteBatch);
             textInfo.Draw(Game.SpriteBatch);
             Game.SpriteBatch.End();
         }

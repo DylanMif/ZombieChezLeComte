@@ -11,11 +11,19 @@ namespace ZombieChezLeComte
     {
         public static void SaveNight(int nightNumber)
         {
+            string a = DataSaver.LoadEnd().ToString();
             StreamWriter sw = new StreamWriter("data.txt");
-            sw.WriteLine(nightNumber.ToString());
+            sw.WriteLine(nightNumber.ToString() + "," + a);
             sw.Close();
         }
 
+        public static void SaveEnd(int end)
+        {
+            string a = DataSaver.LoadNight().ToString();
+            StreamWriter sw = new StreamWriter("data.txt");
+            sw.WriteLine(a + "," + end.ToString());
+            sw.Close();
+        }
         public static int LoadNight()
         {
             StreamReader sr = new StreamReader("data.txt");
@@ -25,7 +33,19 @@ namespace ZombieChezLeComte
             {
                 return 0;
             }
-            return int.Parse(text);
+            return int.Parse(text.Split(",")[0]);
+        }
+
+        public static int LoadEnd()
+        {
+            StreamReader sr = new StreamReader("data.txt");
+            String text = sr.ReadLine();
+            sr.Close();
+            if (text is null)
+            {
+                return 0;
+            }
+            return int.Parse(text.Split(",")[1]);
         }
     }
 }

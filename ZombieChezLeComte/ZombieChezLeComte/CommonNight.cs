@@ -29,7 +29,9 @@ namespace ZombieChezLeComte
         private Vector2 cameraMove;
         private float deltaTime;
 
-        
+        private Texture2D visionBlock;
+
+        private int currentStamina;
 
         public TiledMap TiledMap
         {
@@ -126,6 +128,18 @@ namespace ZombieChezLeComte
             }
         }
 
+        public Texture2D VisionBlock
+        {
+            get
+            {
+                return visionBlock;
+            }
+
+            set
+            {
+                visionBlock = value;
+            }
+        }
 
         public void Initialize(GameWindow gameWindow, GraphicsDevice graphics)
         {
@@ -133,14 +147,15 @@ namespace ZombieChezLeComte
             var viewportadapter = new BoxingViewportAdapter(gameWindow, graphics, 1080, 720);
             this.Camera = new OrthographicCamera(viewportadapter);
             this.CameraPosition = Constantes.POSITION_JOUEUR;
-
+            currentStamina = Constantes.JOUEUR_STAMINA;
         }
-        public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet)
+        public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet, Game1 _game)
         {
             this.Player.LoadContent(_spriteSheet);
             this.TiledMap = _tilMap;
             this.TiledMapRenderer = new TiledMapRenderer(_graphicsDevice, this.TiledMap);
             this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Collision");
+            this.VisionBlock = _game.Content.Load<Texture2D>("vision");
         }
         public void Update(GameTime _gameTime)
         {
@@ -159,6 +174,19 @@ namespace ZombieChezLeComte
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
                 
             }
+            if(Keyboard.GetState().IsKeyDown(Constantes.runKeys) && currentStamina > Constantes.STAMINA_DECREASE)
+            {
+                this.Player.Vitesse = Constantes.VITESSE_JOUEUR_RUN;
+                currentStamina -= Constantes.STAMINA_DECREASE;
+            } else
+            {
+                this.Player.Vitesse = Constantes.VITESSE_JOUEUR;
+                currentStamina += Constantes.STAMINA_INCREASE;
+                if(currentStamina > Constantes.JOUEUR_STAMINA)
+                {
+                    currentStamina = Constantes.JOUEUR_STAMINA;
+                }
+            }
 
             //Console.WriteLine(-Camera.Position);
             this.Player.Update(_gameTime);
@@ -173,6 +201,11 @@ namespace ZombieChezLeComte
             this.Player.Draw(_spriteBatch);
             
         }
+
+        public void DrawVision(SpriteBatch _sb)
+        {
+            _sb.Draw(this.VisionBlock, new Rectangle(0, 0, Constantes.WINDOW_WIDTH, Constantes.WINDOW_HEIGHT), Color.White);
+        }
         public bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)
@@ -186,7 +219,7 @@ namespace ZombieChezLeComte
 
         private void MoveCamera(GameTime gameTime, Vector2 _dir)
         {
-            var speed = 200;
+            var speed = this.Player.Vitesse;
             var seconds = gameTime.GetElapsedSeconds();
             var movementDirection = _dir;
             this.CameraMove = speed * movementDirection;

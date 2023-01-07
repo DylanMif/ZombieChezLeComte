@@ -2,7 +2,7 @@
   "profiles": {
     "Profil 1": {
       "commandName": "Executable",
-      "executablePath": "P:\\ZombieChezLeComte\\ZombieChezLeComte\\ZombieChezLeComte\\bin\\Debug\\net6.0\\ZombieChezLeComte.exe"
+      "executablePath": "D:\\Bureau\\ZombieChezLeComte\\ZombieChezLeComte\\ZombieChezLeComte\\bin\\Debug\\net6.0\\ZombieChezLeComte.exe"
     },
     "WSL": {
       "commandName": "WSL2",

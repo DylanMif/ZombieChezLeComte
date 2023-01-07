@@ -23,30 +23,6 @@
 /processor:TiledMapTilesetProcessor
 /build:Addon.tsx
 
-#begin Armure.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Armure.wav
-
-#begin Balais.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Balais.wav
-
-#begin Cooking.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Cooking.wav
-
-#begin DoorClosed.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:DoorClosed.wav
-
 #begin fantome.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -58,36 +34,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:fantome.png
-
-#begin GhostDoor.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:GhostDoor.wav
-
-#begin GhostHunt.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:GhostHunt.wav
-
-#begin GhostRun.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:GhostRun.wav
-
-#begin GlassBreaking.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:GlassBreaking.wav
-
-#begin Knife.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Knife.wav
 
 #begin LittleFont.spritefont
 /importer:FontDescriptionImporter
@@ -131,12 +77,6 @@
 /processorParam:TextureFormat=Compressed
 /build:MeanFont.spritefont
 
-#begin Meat.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Meat.wav
-
 #begin personnage.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -168,30 +108,12 @@
 /processorParam:TextureFormat=Color
 /build:rectangle.png
 
-#begin Screamer.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Screamer.wav
-
 #begin TitleFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:TitleFont.spritefont
-
-#begin Walk.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Walk.wav
-
-#begin Washing.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Washing.wav
 
 #begin zombie.png
 /importer:TextureImporter
@@ -204,22 +126,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:zombie.png
-
-#begin Zombie1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Zombie1.wav
-
-#begin Zombie2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Zombie2.wav
-
-#begin Zombie3.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Zombie3.wav
 

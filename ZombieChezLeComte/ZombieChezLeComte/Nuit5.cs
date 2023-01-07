@@ -16,6 +16,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -34,6 +35,9 @@ namespace ZombieChezLeComte
         private InteractObject[] keyFragementInteract = new InteractObject[5];
         private InteractObject caveDoorInteract = new InteractObject();
         private TextInfo textInfo = new TextInfo();
+
+        private SoundEffect armorSound;
+        private SoundEffect doorSound;
 
         public override void Initialize()
         {
@@ -83,6 +87,8 @@ namespace ZombieChezLeComte
             zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
 
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
+            armorSound = Game.Content.Load<SoundEffect>("Armure");
+            doorSound = Game.Content.Load<SoundEffect>("DoorClosed");
             base.LoadContent();
         }
 
@@ -108,6 +114,8 @@ namespace ZombieChezLeComte
                 {
                     if (keyFragInteract.InteractWith(-commonNight.Camera.Position))
                     {
+                        if(!textInfo.WritingText)
+                            armorSound.Play();
                         keyFragInteract.HasAlreadyInteractable = true;
                         if(GetNbKeyFragment(keyFragementInteract) == 1)
                         {
@@ -129,6 +137,10 @@ namespace ZombieChezLeComte
                         Game.LoadCave();
                     } else
                     {
+                        if(!textInfo.WritingText)
+                        {
+                            doorSound.Play();
+                        }
                         textInfo.Text = caveDoorInteract.InteractText;
                         textInfo.ActiveText(2);
                     }

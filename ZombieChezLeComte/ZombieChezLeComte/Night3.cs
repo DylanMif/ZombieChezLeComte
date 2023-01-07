@@ -16,6 +16,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -42,6 +43,7 @@ namespace ZombieChezLeComte
 
         private RunGhost[] endRunGhosts = new RunGhost[Constantes.END_NIGHT3_NB_GHOST];
         private bool endRunGhostSpawn;
+        private SoundEffect balaisSound;
 
         public override void Initialize()
         {
@@ -97,11 +99,13 @@ namespace ZombieChezLeComte
             runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
 
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
+
             for (int i = 0; i < endRunGhosts.Length; i++)
             {
                 endRunGhosts[i].LoadContent((Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader())));
             }
 
+            balaisSound = Game.Content.Load<SoundEffect>("Balais");
             base.LoadContent();
         }
 
@@ -112,6 +116,8 @@ namespace ZombieChezLeComte
             {
                 if(bookshelfInteract.InteractWith(-commonNight.Camera.Position))
                 {
+                    if(!textInfo.WritingText)
+                        balaisSound.Play();
                     textInfo.Text = bookshelfInteract.InteractText;
                     textInfo.ActiveText(2);
                     bookshelfInteract.InteractText = "Cette bibliotheque est rangee";
@@ -126,6 +132,8 @@ namespace ZombieChezLeComte
                 }
                 if(hallInteract.InteractWith(-commonNight.Camera.Position))
                 {
+                    if (!textInfo.WritingText)
+                        balaisSound.Play();
                     textInfo.Text = hallInteract.InteractText;
                     textInfo.ActiveText(2);
                     hallInteract.InteractText = "Ce hall est presque propre";

@@ -14,6 +14,7 @@ using MonoGame.Extended.Content;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Serialization;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -34,6 +35,8 @@ namespace ZombieChezLeComte
         private InteractObject litDormir = new InteractObject();
         private InteractObject[] kitchenPapers = new InteractObject[6];
         private TextInfo textInfo =  new TextInfo();
+        private SoundEffect balaisSound;
+        private SoundEffect doorSound;
 
         public override void Initialize()
         {
@@ -76,6 +79,8 @@ namespace ZombieChezLeComte
             _nuit1.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"), 
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
+            balaisSound = Game.Content.Load<SoundEffect>("Balais");
+            doorSound = Game.Content.Load<SoundEffect>("DoorClosed");
             base.LoadContent();
         }
 
@@ -124,6 +129,10 @@ namespace ZombieChezLeComte
                 }
                 if (porteCave.InteractWith(-_nuit1.Camera.Position))
                 {
+                    if(!textInfo.WritingText)
+                    {
+                        doorSound.Play();
+                    }
                     Additions.InteractionObjet(porteCave, textInfo, porteCave.InteractText);     
                 }
                 if (tableCuisine.InteractWith(-_nuit1.Camera.Position))
@@ -132,6 +141,8 @@ namespace ZombieChezLeComte
                 }
                 if (solNettoyage.InteractWith(-_nuit1.Camera.Position))
                 {
+                    if (!textInfo.WritingText)
+                        balaisSound.Play();
                     Additions.InteractionObjet(solNettoyage,textInfo, "Le sol est propre");
                 }
                 if (nombreArmoireFait == armoireInteraction.Length && nombreLitFait == litInteraction.Length

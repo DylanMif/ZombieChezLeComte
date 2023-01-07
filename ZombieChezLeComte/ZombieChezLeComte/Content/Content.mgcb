@@ -23,6 +23,24 @@
 /processor:TiledMapTilesetProcessor
 /build:Addon.tsx
 
+#begin Armure.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Armure.wav
+
+#begin Balais.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Balais.wav
+
+#begin Cooking.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Cooking.wav
+
 #begin dead.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -34,6 +52,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:dead.png
+
+#begin DoorClosed.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:DoorClosed.wav
 
 #begin doorGhostJumpScareImage.jfif
 /importer:TextureImporter

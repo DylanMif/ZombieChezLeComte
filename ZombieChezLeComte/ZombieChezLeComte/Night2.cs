@@ -40,6 +40,8 @@ namespace ZombieChezLeComte
         private Texture2D jumpScareImage;
         private SoundEffect jumpScareSound;
         private Vector2 jumpScareDrawPos;
+        private SoundEffect armorSound;
+        private SoundEffect cookingSound;
         private float currentTime;
 
         public override void Initialize()
@@ -94,6 +96,9 @@ namespace ZombieChezLeComte
                 (Constantes.WINDOW_WIDTH - jumpScareImage.Width) / 2,
                 (Constantes.WINDOW_HEIGHT - jumpScareImage.Height) / 2
                 );
+
+            armorSound = Game.Content.Load<SoundEffect>("Armure");
+            cookingSound = Game.Content.Load<SoundEffect>("Cooking");
             base.LoadContent();
         }
 
@@ -149,6 +154,10 @@ namespace ZombieChezLeComte
                 {
                     if (estRecuperer)
                     {
+                        if (!textInfo.WritingText)
+                        {
+                            cookingSound.Play();
+                        }
                         Additions.InteractionObjet(cuisine, textInfo, "Cette viande est vraiment douteuse");
                     }
                     else
@@ -160,6 +169,8 @@ namespace ZombieChezLeComte
                 {
                     if (armures[i].InteractWith(-_nuit2.Camera.Position))
                     {
+                        if(!textInfo.WritingText)
+                            armorSound.Play();
                         if (armures[i].HasAlreadyInteractable == false)
                         {
                             Additions.InteractionObjet(armures[i], textInfo, "Toute belle toute propre");

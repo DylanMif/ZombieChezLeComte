@@ -128,6 +128,7 @@ namespace ZombieChezLeComte
             this.VirtualPos = new Vector2(this.ZombieChar.Position.X, this.ZombieChar.Position.Y);
             this.LastContinueX = 0;
             this.LastContinueY = 0;
+
         }
 
         public void LoadContent(SpriteSheet _spriteSheet)
@@ -144,55 +145,92 @@ namespace ZombieChezLeComte
             {
 
 
-                Vector2 dir = Additions.Normalize(_commonNight.Player.Position - this.ZombieChar.Position);
+                Vector2 dir = Vector2.Zero;
                 ushort tileX = (ushort)(this.GetMapPos(_commonNight.Camera).X / _commonNight.TiledMap.TileWidth);
                 ushort tileY = (ushort)(this.GetMapPos(_commonNight.Camera).Y / _commonNight.TiledMap.TileHeight);
-                //Console.WriteLine(this.GetIntDir(dir));
 
-                if (!this.IsCollision((ushort)(tileX + this.GetIntDir(dir).X), (ushort)(tileY + this.GetIntDir(dir).Y), _commonNight.MapLayer))
+
+                NodeCase nextCase = this.GetNextCase(new NodeCase(tileX, tileY), _commonNight.GetPlayerCase(), _commonNight.MapLayer);
+
+
+                if(!(nextCase is null))
                 {
-                    this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
-                    this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
-                    this.LastContinueX = 0;
-                    this.LastContinueY = 0;
+                    dir = new Vector2(nextCase.X - tileX, nextCase.Y - tileY);
                 }
-                else if (!this.IsCollision((ushort)(tileX + this.GetIntDir(dir).X), (ushort)(tileY), _commonNight.MapLayer))
+;
+
+                this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
+                this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
+
+                if (this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
                 {
-                    this.LastContinueY = 0;
-                    dir.Y = 0;
-                    if (this.LastContinueX == 0)
-                    {
-                        this.LastContinueX = (int)this.GetIntDir(dir).X;
-                    }
-                    dir.X = LastContinueX;
-                    this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
-                    this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
-                }
-                else if (!this.IsCollision((ushort)(tileX), (ushort)(tileY + this.GetIntDir(dir).Y), _commonNight.MapLayer))
-                {
-                    this.LastContinueX = 0;
-                    dir.X = 0;
-                    if (this.LastContinueY == 0)
-                    {
-                        this.LastContinueY = (int)this.GetIntDir(dir).Y;
-                    }
-                    dir.Y = LastContinueY;
-                    this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
-                    this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
-                }
-                if (this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect) && !Constantes.GOD_MOD)
-                {
-                    if (PeutTuer == true)
+                    if (this.PeutTuer == true && !Constantes.GOD_MOD)
                     {
                         _game.killBy = "zombie";
                         _game.LoadJumpScare();
                     }
-                    else
+                    else if(this.PeutTuer == false)
                     {
                         _game.LoadNight5();
                     }
                 }
             }
+        }
+
+        public NodeCase GetNextCase(NodeCase zombieCase, NodeCase playerCase, TiledMapTileLayer layer)
+        {
+            if(zombieCase == playerCase)
+            {
+                return null;
+            }
+
+            zombieCase.SetHeuristique(playerCase);
+            PriorityQueue priorityQueue = new PriorityQueue();
+            Dictionary<NodeCase, NodeCase> predecesseur = new Dictionary<NodeCase, NodeCase>();
+            Dictionary<NodeCase, int> accesCost = new Dictionary<NodeCase, int>();
+
+            priorityQueue.Add(zombieCase, 0);
+            predecesseur.Add(zombieCase, null);
+            accesCost.Add(zombieCase, 0);
+
+
+            while(!priorityQueue.IsEmpty())
+            {
+                NodeCase c = priorityQueue.Pop();
+                if(c == playerCase)
+                {
+                    return this.BackTracing(predecesseur, zombieCase, playerCase);
+                } else
+                {
+                    foreach(NodeCase v in c.GetNeighbors(layer))
+                    {
+                        if(!accesCost.ContainsKey(v))
+                        {
+                            predecesseur.Add(v, c);
+                            accesCost.Add(v, accesCost[c] + 1);
+                            v.SetHeuristique(playerCase);
+                            priorityQueue.Add(v, accesCost[v] + v.Heuristique);
+                        } else if(accesCost[v] > accesCost[c] + 1)
+                        {
+                            predecesseur[v] = c;
+                            accesCost[v] = accesCost[c] + 1;
+                            v.SetHeuristique(playerCase);
+                            priorityQueue.Queue[v] = accesCost[v] + v.Heuristique;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public NodeCase BackTracing(Dictionary<NodeCase, NodeCase> predecesseur, NodeCase start, NodeCase finish)
+        {
+            NodeCase tempCase = finish;
+            while (predecesseur[tempCase] != start)
+            {
+                tempCase = predecesseur[tempCase];
+            }
+            return tempCase;
         }
 
         public void Draw(SpriteBatch _sb)

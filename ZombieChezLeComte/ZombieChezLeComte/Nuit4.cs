@@ -175,13 +175,13 @@ namespace ZombieChezLeComte
                     if (nombreMorceauxArme == 1)
                     {
                         Additions.InteractionObjet(debutArme, textInfo, "Deus Vult ! Je vais t'envoyer en enfer vile creature !");
-                        debutArme.InteractRect = new Rectangle(4990, 6382, 40, 3);
+                        debutArme.InteractRect = new Rectangle(4963, 6381, 50, 40);
                     }
                     if (nombreMorceauxArme == 2)
                     {
                         textInfo.Text = "Deus Vult ! Je vais t'envoyer en enfer vile creature !";
                         textInfo.ActiveText(Constantes.TEMPS_TEXTE);
-                        debutArme.InteractRect = new Rectangle(0, 0, 20, 23);
+                        debutArme.InteractRect = new Rectangle(4963, 6381, 50, 40);
                     }
                     nombreMorceauxArme += 1;
                 }

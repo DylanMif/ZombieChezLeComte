@@ -46,6 +46,8 @@ namespace ZombieChezLeComte
             doorGhost.Initialize(new Vector2(0, 0), 0);
             runGhost.Initialize(new Vector2(10, 10), Constantes.RUNGHOST_SPEED);
             zombie.Initialiaze(new Vector2(40, -210), Constantes.ZOMBIE_SPEED);
+            zombie.PeutTuer = true;
+            zombie.PeutBouger = true;
 
             for (int i = 0; i < kitchenPapers.Length; i++)
             {

@@ -226,5 +226,12 @@ namespace ZombieChezLeComte
             this.DeltaTime = seconds;
             this.CameraPosition += speed * movementDirection * seconds;
         }
+
+        public NodeCase GetPlayerCase()
+        {
+            int x = (int)(-this.CameraPosition.X + 1080 - 180) / TiledMap.TileWidth;
+            int y = (int)(-this.CameraPosition.Y + 720) / TiledMap.TileHeight;
+            return new NodeCase(x, y);
+        }
     }
 }

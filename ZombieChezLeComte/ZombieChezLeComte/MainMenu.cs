@@ -42,6 +42,8 @@ namespace ZombieChezLeComte
         private SpriteFont pixelTitleFont;
         private Texture2D buttonBgTex;
 
+        private Rectangle titleRect;
+
         private int nightNumber;
         private int end;
 
@@ -63,6 +65,7 @@ namespace ZombieChezLeComte
             end = DataSaver.LoadEnd();
 
             MediaPlayer.Volume = 0.3f;
+            titleRect = new Rectangle(0, 0, 858, 41);
             base.Initialize();
         }
 
@@ -92,6 +95,14 @@ namespace ZombieChezLeComte
             continueButton.Update(Mouse.GetState(), Game);
             commandButton.Update(Mouse.GetState(), Game);
             quitButton.Update(Mouse.GetState(), Game);
+
+
+            if(Mouse.GetState().LeftButton == ButtonState.Pressed && 
+                titleRect.Intersects(new Rectangle(Mouse.GetState().Position.X, Mouse.GetState().Position.Y, 1, 1)) && 
+                DataSaver.LoadEnd() == 1)
+            {
+                Game.LoadNight6();
+            }
         }
 
         public override void Draw(GameTime gameTime)

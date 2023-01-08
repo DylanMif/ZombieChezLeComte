@@ -94,8 +94,10 @@ namespace ZombieChezLeComte
                 LoadOutro();
             if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))
                 LoadJumpScare();
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad9))
+                LoadNight6();
             // TODO: Add your update logic here
-            if(isInOutro)
+            if (isInOutro)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(outroMusic);
@@ -174,6 +176,12 @@ namespace ZombieChezLeComte
         public void LoadJumpScare()
         {
             _screenManager.LoadScreen(new ScreenJumpScare(this));
+        }
+
+        public void LoadNight6()
+        {
+            _screenManager.LoadScreen(new Nuit6(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
         }
 
     }

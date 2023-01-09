@@ -77,6 +77,12 @@
 /processorParam:Quality=Best
 /build:doorGhostJumpScareSound.wav
 
+#begin doorSlamming.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:doorSlamming.wav
+
 #begin endGhostJumpScareImage.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -118,6 +124,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:gameover.png
+
+#begin GhostRun.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GhostRun.wav
 
 #begin huntGhostJumpScareImage.jpg
 /importer:TextureImporter
@@ -233,6 +245,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:runGhostJumpScareSound.mp3
+
+#begin sword.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sword.wav
 
 #begin TitleFont.spritefont
 /importer:FontDescriptionImporter

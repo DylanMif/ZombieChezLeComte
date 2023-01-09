@@ -156,7 +156,7 @@ namespace ZombieChezLeComte
                         {
                             textInfo.Text = litDormir.InteractText;
                             textInfo.ActiveText(2);
-                            Game.LoadNight2();
+                            Game.LoadBetween1And2();
                         }
                     }
                 } else if(litDormir.InteractWith(-_nuit1.Camera.Position))

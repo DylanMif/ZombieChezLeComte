@@ -171,7 +171,7 @@ namespace ZombieChezLeComte
                     }
                     else if(this.PeutTuer == false)
                     {
-                        _game.LoadNight5();
+                        _game.LoadBetween4And5();
                     }
                 }
             }

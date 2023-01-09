@@ -149,7 +149,7 @@ namespace ZombieChezLeComte
                 {
                     if(endRunGhostSpawn)
                     {
-                        Game.LoadNight4();
+                        Game.LoadBetween3And4();
                     }
                 }
                 foreach(InteractObject paperInteract in kitchenPapers)

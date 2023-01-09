@@ -184,5 +184,29 @@ namespace ZombieChezLeComte
             DataSaver.SaveNight(5);
         }
 
+        public void LoadBetween1And2()
+        {
+            _screenManager.LoadScreen(new ScreenBetween1And2(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
+        }
+
+        public void LoadBetween2And3()
+        {
+            _screenManager.LoadScreen(new ScreenBetwween2And3(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
+        }
+
+        public void LoadBetween3And4()
+        {
+            _screenManager.LoadScreen(new ScreenBetween3And4(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
+        }
+
+        public void LoadBetween4And5()
+        {
+            _screenManager.LoadScreen(new ScreenBetween4And5(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
+        }
+
     }
 }

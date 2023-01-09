@@ -21,6 +21,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -33,6 +34,10 @@ namespace ZombieChezLeComte
         private int lastContinueY;
         private bool peutTuer ;
         private bool peutBouger;
+        private SoundEffect[] zombieSounds;
+        private Random aleatoire;
+        private float maxTemps;
+        private float _timer;
 
         public bool PeutTuer
         {
@@ -70,7 +75,6 @@ namespace ZombieChezLeComte
                 this.zombieChar = value;
             }
         }
-
         public int Speed
         {
             get
@@ -119,6 +123,54 @@ namespace ZombieChezLeComte
                 this.lastContinueY = value;
             }
         }
+        public SoundEffect[] ZombieSounds
+        {
+            get
+            {
+                return this.zombieSounds;
+            }
+
+            set
+            {
+                this.zombieSounds = value;
+            }
+        }
+        public Random Aleatoire
+        {
+            get
+            {
+                return this.aleatoire;
+            }
+
+            set
+            {
+                this.aleatoire = value;
+            }
+        }
+        public float MaxTemps
+        {
+            get
+            {
+                return this.maxTemps;
+            }
+
+            set
+            {
+                this.maxTemps = value;
+            }
+        }
+        public float Timer
+        {
+            get
+            {
+                return this._timer;
+            }
+
+            set
+            {
+                this._timer = value;
+            }
+        }
 
         public void Initialiaze(Vector2 _position, int _speed)
         {
@@ -128,19 +180,31 @@ namespace ZombieChezLeComte
             this.VirtualPos = new Vector2(this.ZombieChar.Position.X, this.ZombieChar.Position.Y);
             this.LastContinueX = 0;
             this.LastContinueY = 0;
-
+            this.ZombieSounds = new SoundEffect[3];
+            this.Aleatoire =  new Random();
+            this.Timer = 0;
+            this.MaxTemps = Aleatoire.Next(5, 6);
         }
 
-        public void LoadContent(SpriteSheet _spriteSheet)
+        public void LoadContent(SpriteSheet _spriteSheet, Game1 _game)
         {
             this.ZombieChar.LoadContent(_spriteSheet);
+            this.ZombieSounds[0] = _game.Content.Load<SoundEffect>("Zombie1");
+            this.ZombieSounds[1] = _game.Content.Load<SoundEffect>("Zombie2");
+            this.ZombieSounds[2] = _game.Content.Load<SoundEffect>("Zombie3");
         }
 
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
         {
             this.ZombieChar.Update(_gameTime);
             this.ZombieChar.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
-
+            _timer -= (float)_gameTime.GetElapsedSeconds();
+            if(this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.ZombieChar.Position) <= 150)
+            {
+                ZombieSounds[(int)Aleatoire.Next(0, 3)].Play();
+                MaxTemps = Aleatoire.Next(5,6);
+                Timer = MaxTemps;
+            }
             if (PeutBouger)
             {
 

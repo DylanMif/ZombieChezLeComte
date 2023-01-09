@@ -96,13 +96,13 @@ namespace ZombieChezLeComte
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
 
             deadZombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
-            runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
+            runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()),Game);
 
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
 
             for (int i = 0; i < endRunGhosts.Length; i++)
             {
-                endRunGhosts[i].LoadContent((Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader())));
+                endRunGhosts[i].LoadContent((Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader())),Game);
             }
 
             balaisSound = Game.Content.Load<SoundEffect>("Balais");
@@ -142,7 +142,7 @@ namespace ZombieChezLeComte
                 if(deadZombieInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     textInfo.Text = deadZombieInteract.InteractText;
-                    textInfo.ActiveText(2);
+                    textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                     deadZombieInteract.HasAlreadyInteractable= true;
                 }
                 if(enterDoor.InteractWith(-commonNight.Camera.Position))
@@ -157,7 +157,7 @@ namespace ZombieChezLeComte
                     if(paperInteract.InteractWith(-commonNight.Camera.Position))
                     {
                         textInfo.Text = paperInteract.InteractText;
-                        textInfo.ActiveText(2);
+                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                     }
                 }
                 foreach(InteractObject bedInteract in litInteraction)
@@ -166,7 +166,7 @@ namespace ZombieChezLeComte
                     {
                         bedInteract.HasAlreadyInteractable = true;
                         textInfo.Text = bedInteract.InteractText;
-                        textInfo.ActiveText(2);
+                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                     }
                 }
             }

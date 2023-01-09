@@ -35,6 +35,7 @@ namespace ZombieChezLeComte
         private TextInfo textInfo = new TextInfo();
         private InteractObject[] kitchenPapers = new InteractObject[6];
         private bool estRecuperer = false;
+        private bool sonJouer;
 
         private bool isInJumpScare;
         private Texture2D jumpScareImage;
@@ -42,6 +43,7 @@ namespace ZombieChezLeComte
         private Vector2 jumpScareDrawPos;
         private SoundEffect armorSound;
         private SoundEffect cookingSound;
+        private SoundEffect glassSound;
         private float currentTime;
 
         public override void Initialize()
@@ -75,7 +77,7 @@ namespace ZombieChezLeComte
             feu.Initialize(new Vector2(4990, 6382), 40, 20, "feu", "Ca fait du bien de se rechauffer !");
             cuisine.Initialize(new Vector2(3979, 6573), 33, 27, "cuisine", "Ca sera plus simple de cuisiner si j'ai la viande");
             recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "lit4", "Beurk...C'est quoi cette viande ! Peut etre du boeuf orientale...");
-
+            sonJouer = false;
 
             base.Initialize();
         }
@@ -99,6 +101,7 @@ namespace ZombieChezLeComte
 
             armorSound = Game.Content.Load<SoundEffect>("Armure");
             cookingSound = Game.Content.Load<SoundEffect>("Cooking");
+            glassSound = Game.Content.Load<SoundEffect>("GlassBreaking");
             base.LoadContent();
         }
 
@@ -190,21 +193,31 @@ namespace ZombieChezLeComte
                 if(nombreArm == armures.Length && nombreLitFait==litInteraction.Length && feu.HasAlreadyInteractable == true &&
                     cuisine.HasAlreadyInteractable == true && recupViande.HasAlreadyInteractable == true)
                 {
+                    if (sonJouer == false && !textInfo.WritingText)
+                    {
+                        textInfo.Text = "C'etait quoi ce bruit ?!?";
+                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+                        sonJouer = true;
+                        glassSound.Play();
+                    }
                     if (litDormir.InteractWith(-_nuit2.Camera.Position))
                     {
                         if (litDormir.HasAlreadyInteractable == false)
                             litDormir.HasAlreadyInteractable = true;
                         else
                         {
-                            textInfo.Text = litDormir.InteractText;
-                            textInfo.ActiveText(2);
-                            Game.LoadBetween2And3();
+                            if (!textInfo.WritingText)
+                            {
+                                textInfo.Text = litDormir.InteractText;
+                                textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+                                Game.LoadBetween2And3();
+                            }
                         }
                     }
                 } else if (litDormir.InteractWith(-_nuit2.Camera.Position))
                 {
                     textInfo.Text = "Vous dormirez apres avoir tout fait";
-                    textInfo.ActiveText(2);
+                    textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                 }
             }
         }

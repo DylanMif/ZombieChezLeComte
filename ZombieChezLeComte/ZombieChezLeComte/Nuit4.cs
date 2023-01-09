@@ -67,7 +67,7 @@ namespace ZombieChezLeComte
             }
             kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Mettre des couteaux de cuisine au four");
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Laver les livres de la biblitotheque");
-            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "");
+            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Rien a faire sur ce papier");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Mettre de la viande sur les lits");
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Tout intrus doit etre eradique");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "Recuperer la viande dans le stockage");
@@ -89,7 +89,7 @@ namespace ZombieChezLeComte
         {
             _nuit4.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
-            zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
+            zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()),Game);
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
             textInfo.Text = "Qu'est ce qui s'est passe? Je me suis evanouis je crois...";
             textInfo.ActiveText(Constantes.TEMPS_TEXTE);

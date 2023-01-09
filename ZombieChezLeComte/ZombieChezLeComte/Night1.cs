@@ -53,12 +53,12 @@ namespace ZombieChezLeComte
             {
                 kitchenPapers[i] = new InteractObject();
             }
-            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ranger les bibliotheque");
+            kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ranger les bibliotheques");
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Ranger la table de la cuisine");
             kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Balayer le couloir de la cave");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Aller dormir une fois les taches finis");
-            kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "");
+            kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "Rien a faire sur ce papier");
 
             solNettoyage.Initialize(new Vector2(4765,6637), 103, 26, "sol", "Ca merite un coups de balais");
             porteCave.Initialize(new Vector2(4917, 6637), 103, 26, "porte", "Ferme a cle! Bizzare...");
@@ -155,14 +155,14 @@ namespace ZombieChezLeComte
                         else
                         {
                             textInfo.Text = litDormir.InteractText;
-                            textInfo.ActiveText(2);
+                            textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                             Game.LoadBetween1And2();
                         }
                     }
                 } else if(litDormir.InteractWith(-_nuit1.Camera.Position))
                 {
                     textInfo.Text = "Vous dormirez apres avoir tout fait";
-                    textInfo.ActiveText(2);
+                    textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                 }
 
 

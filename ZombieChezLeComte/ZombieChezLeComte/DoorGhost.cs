@@ -16,6 +16,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -26,8 +27,11 @@ namespace ZombieChezLeComte
         private Vector2 direction;
         private float currentStayTime;
         private int currentPos;
+        private SoundEffect ghostSounds;
+        private Random aleatoire;
+        private float maxTemps;
+        private float _timer;
 
-       
 
         public static Vector2[] positions = new Vector2[]
         {
@@ -49,7 +53,6 @@ namespace ZombieChezLeComte
                 this.ghost = value;
             }
         }
-
         public int Speed
         {
             get
@@ -62,7 +65,6 @@ namespace ZombieChezLeComte
                 this.speed = value;
             }
         }
-
         public int CurrentPos
         {
             get
@@ -75,7 +77,6 @@ namespace ZombieChezLeComte
                 this.currentPos = value;
             }
         }
-
         public float CurrentStayTime
         {
             get
@@ -88,7 +89,6 @@ namespace ZombieChezLeComte
                 this.currentStayTime = value;
             }
         }
-
         public Vector2 Direction
         {
             get
@@ -101,6 +101,54 @@ namespace ZombieChezLeComte
                 this.direction = value;
             }
         }
+        public SoundEffect GhostSounds
+        {
+            get
+            {
+                return this.ghostSounds;
+            }
+
+            set
+            {
+                this.ghostSounds = value;
+            }
+        }
+        public Random Aleatoire
+        {
+            get
+            {
+                return this.aleatoire;
+            }
+
+            set
+            {
+                this.aleatoire = value;
+            }
+        }
+        public float MaxTemps
+        {
+            get
+            {
+                return this.maxTemps;
+            }
+
+            set
+            {
+                this.maxTemps = value;
+            }
+        }
+        public float Timer
+        {
+            get
+            {
+                return this._timer;
+            }
+
+            set
+            {
+                this._timer = value;
+            }
+        }
 
         public void Initialize(Vector2 _position, int _speed)
         {
@@ -111,11 +159,16 @@ namespace ZombieChezLeComte
             this.currentPos = random.Next(0, DoorGhost.positions.Length);
             this.Ghost.Position += DoorGhost.positions[this.CurrentPos];
             this.CurrentStayTime = random.Next(Constantes.DOOR_GHOST_MIN_STAY_TIME, Constantes.DOOR_GHOST_MAX_STAY_TIME);
+            this.Aleatoire = new Random();
         }
 
-        public void LoadContent(SpriteSheet _spritesheet)
+        public void LoadContent(SpriteSheet _spritesheet, Game1 _game)
         {
+            this.Aleatoire = new Random();
+            this.Timer = 0;
+            this.MaxTemps = Aleatoire.Next(5, 6);
             this.Ghost.LoadContent(_spritesheet);
+            this.GhostSounds=  _game.Content.Load<SoundEffect>("GhostDoor");
         }
 
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
@@ -127,7 +180,13 @@ namespace ZombieChezLeComte
                 _game.killBy = "doorGhost";
                 _game.LoadJumpScare();
             }
-
+            _timer -= (float)_gameTime.GetElapsedSeconds();
+            if (this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.Ghost.Position) <= 150)
+            {
+                GhostSounds.Play();
+                MaxTemps = Aleatoire.Next(5, 6);
+                Timer = MaxTemps;
+            }
             this.CurrentStayTime -= (float)_gameTime.ElapsedGameTime.TotalSeconds;
             if(this.CurrentStayTime < 0)
             {

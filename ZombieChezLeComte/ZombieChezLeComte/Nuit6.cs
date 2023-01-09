@@ -83,10 +83,10 @@ namespace ZombieChezLeComte
             commonNight.LoadContent(Game.GraphicsDevice, Game.Content.Load<TiledMap>("map"),
                 Game.Content.Load<SpriteSheet>("joueur.sf", new JsonContentLoader()), Game);
 
-            huntGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeHunt.sf", new JsonContentLoader()));
-            doorGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomePorte.sf", new JsonContentLoader()));
-            runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()));
-            zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()));
+            huntGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeHunt.sf", new JsonContentLoader()), Game);
+            doorGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomePorte.sf", new JsonContentLoader()),Game);
+            runGhost.LoadContent(Game.Content.Load<SpriteSheet>("fantomeRun.sf", new JsonContentLoader()),Game);
+            zombie.LoadContent(Game.Content.Load<SpriteSheet>("zombie.sf", new JsonContentLoader()),Game);
 
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
             armorSound = Game.Content.Load<SoundEffect>("Armure");
@@ -109,7 +109,7 @@ namespace ZombieChezLeComte
                     if (paperInteract.InteractWith(-commonNight.Camera.Position))
                     {
                         textInfo.Text = paperInteract.InteractText;
-                        textInfo.ActiveText(2);
+                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                     }
                 }
                 foreach (InteractObject keyFragInteract in keyFragementInteract)
@@ -131,7 +131,7 @@ namespace ZombieChezLeComte
                         {
                             textInfo.Text = keyFragInteract.InteractText + $" {GetNbKeyFragment(keyFragementInteract)}/{keyFragementInteract.Length}";
                         }
-                        textInfo.ActiveText(2);
+                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                     }
                 }
                 if (caveDoorInteract.InteractWith(-commonNight.Camera.Position))
@@ -147,7 +147,7 @@ namespace ZombieChezLeComte
                             doorSound.Play();
                         }
                         textInfo.Text = caveDoorInteract.InteractText;
-                        textInfo.ActiveText(2);
+                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                     }
                 }
             }

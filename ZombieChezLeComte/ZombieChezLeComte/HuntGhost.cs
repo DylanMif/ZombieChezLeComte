@@ -16,6 +16,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -24,6 +25,10 @@ namespace ZombieChezLeComte
         private Charactere ghost;
         private int speed;
         private Vector2 direction;
+        private SoundEffect ghostSounds;
+        private Random aleatoire;
+        private float maxTemps;
+        private float _timer;
 
         public Charactere Ghost
         {
@@ -63,18 +68,67 @@ namespace ZombieChezLeComte
                 this.direction = value;
             }
         }
+        public SoundEffect GhostSounds
+        {
+            get
+            {
+                return this.ghostSounds;
+            }
 
+            set
+            {
+                this.ghostSounds = value;
+            }
+        }
+        public Random Aleatoire
+        {
+            get
+            {
+                return this.aleatoire;
+            }
+
+            set
+            {
+                this.aleatoire = value;
+            }
+        }
+        public float MaxTemps
+        {
+            get
+            {
+                return this.maxTemps;
+            }
+
+            set
+            {
+                this.maxTemps = value;
+            }
+        }
+        public float Timer
+        {
+            get
+            {
+                return this._timer;
+            }
+
+            set
+            {
+                this._timer = value;
+            }
+        }
         public void Initialize(Vector2 _position, int _speed)
         {
             this.Ghost = new Charactere();
             this.Ghost.Initialize(_position, 1);
             this.Speed = _speed;
+            this.Aleatoire= new Random();
         }
 
-        public void LoadContent(SpriteSheet _spritesheet)
+        public void LoadContent(SpriteSheet _spritesheet, Game1 _game)
         {
             this.Ghost.LoadContent(_spritesheet);
             this.Ghost.Perso.Alpha = 0.2f;
+            this.GhostSounds = _game.Content.Load<SoundEffect>("GhostHunt");
         }
 
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
@@ -87,6 +141,13 @@ namespace ZombieChezLeComte
             {
                 _game.killBy = "huntGhost";
                 _game.LoadJumpScare();
+            }
+            _timer -= (float)_gameTime.GetElapsedSeconds();
+            if (this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.Ghost.Position) <= 150)
+            {
+                GhostSounds.Play();
+                MaxTemps = Aleatoire.Next(5, 6);
+                Timer = MaxTemps;
             }
         }
 

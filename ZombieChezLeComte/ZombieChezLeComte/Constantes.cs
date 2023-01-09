@@ -47,6 +47,6 @@ namespace ZombieChezLeComte
         public const int NIGHT6_HUNT_GHOST_SPEED = 70;
         public const int NIGHT6_RUN_GHOST_SPEED = 300;
 
-        public const bool GOD_MOD = true;
+        public const bool GOD_MOD = false;
     }
 }

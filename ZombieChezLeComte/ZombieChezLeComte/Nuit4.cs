@@ -204,7 +204,7 @@ namespace ZombieChezLeComte
                     zombie.PeutTuer = true;
                     zombie.PeutBouger = true;
                 }
-                if(nombreMorceauxArme == 3)
+                if(nombreMorceauxArme >= 3)
                 {
                     zombie.PeutTuer = false;
                 }

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ZombieChezLeComte.Additions" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAQAAEAAgAAEAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Additions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Button" Collapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAQAAABEAAAwQoQLAEKMAwgACEAICIBYgAiAUKAAQ=</HashCode>
+      <FileName>Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Charactere" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAACAAAAwAgBAAAAEAABABAAAAIAAgAkAAIACQ=</HashCode>
+      <FileName>Charactere.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.CommonNight" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIUCAQAAAJEgIxABAJAACBAQCAAACQAIAAgAISAIAAQ=</HashCode>
+      <FileName>CommonNight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Constantes" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABAAAACQBFAAAAAAAghCCRAAAAEASgECQBAEAAGiA=</HashCode>
+      <FileName>Constantes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.DataSaver" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAUAAAAABAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>DataSaver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.DoorGhost" Collapsed="true">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAAMwAABDAAIAQBAAAAAQQAAAAEAAAAAAQ=</HashCode>
+      <FileName>DoorGhost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Game1" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBQIAAAAIAAAAwAAAACwDRgGhAEAAAASQIIAAQBEAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.HuntGhost" Collapsed="true">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAIwAAACAAAAABAAAAAQQAAAAEAAAAAAQ=</HashCode>
+      <FileName>HuntGhost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.InteractObject" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAIAAAASAAAAAAAAEAAABACAAAAAgAAAABIAA=</HashCode>
+      <FileName>InteractObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Introduction" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAgAAAAAAAAIAAAAEAQ=</HashCode>
+      <FileName>Introduction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.MainMenu" Collapsed="true">
+    <Position X="8.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQCBAACAgGgA4AAQAABAAAQAAhAAAAAAAQAAAAECAU=</HashCode>
+      <FileName>MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Night1" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAIAwEAAwAAAABAIAoAAACAAEAAAgABAAY=</HashCode>
+      <FileName>Night1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Night2" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQADAAAAAAAJwAAAgAAIABAIAggAAmAAEAAKgAgAAQ=</HashCode>
+      <FileName>Night2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Night3" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQACAAAAAIAKwEAAgCAAAAAIAgAAAAAIAAAAYAAIAY=</HashCode>
+      <FileName>Night3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.NodeCase" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAgQAAIIAEgAAAAAAAAAAAAIAAAABgAAAAYiA=</HashCode>
+      <FileName>NodeCase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Nuit4" Collapsed="true">
+    <Position X="8.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQDCAQAIAAIwAAAgBAIAAAIAgIAIAAAEAAAgAgAAQ=</HashCode>
+      <FileName>Nuit4.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Nuit5" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkQQAAAAAAQIAwAAAgAAAAAAIAoAAAEAIAAAAgAEAAQ=</HashCode>
+      <FileName>Nuit5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Nuit6" Collapsed="true">
+    <Position X="8.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkQQAAAAAAQIAwAAAgAAAAAAIAoAAAEAIAAAAgAEAAQ=</HashCode>
+      <FileName>Nuit6.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.PriorityQueue" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAJAAAAAAAAAAAAEgABAAAAAQACAAIAAAAAAAAAAAiA=</HashCode>
+      <FileName>PriorityQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.RunGhost" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAIwAIACEACAABAAAAAQQAAAAEAAAAAAQ=</HashCode>
+      <FileName>RunGhost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenBetween1And2" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAxAAAgAAAAAAAAgIAAAAAAAAAAAAIAQ=</HashCode>
+      <FileName>ScreenBetween1And2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenBetwween2And3" Collapsed="true">
+    <Position X="10" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAEAgAAAAAAAAgIAAAAAAAAAAAAIAQ=</HashCode>
+      <FileName>ScreenBetween2And3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenBetween3And4" Collapsed="true">
+    <Position X="10" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAgAAAAAAAAgIAAAAAABAAAAAIAQ=</HashCode>
+      <FileName>ScreenBetween3And4.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenBetween4And5" Collapsed="true">
+    <Position X="10" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAgAAAAQAAAgIAAAAAAAAAAAAIAQ=</HashCode>
+      <FileName>ScreenBetween4And5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenCave" Collapsed="true">
+    <Position X="10" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAABwAAAAAAAAAAAAggAAiBAAAAIIAAAAQ=</HashCode>
+      <FileName>ScreenCave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenCommand" Collapsed="true">
+    <Position X="10" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAIAAwAAAAAAAAAAAAgAAAAAAAAAAAAAEAQ=</HashCode>
+      <FileName>ScreenCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenGameOver" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAwAAAAAAAAAAEAgAAACAAAAAAAAAAAQ=</HashCode>
+      <FileName>ScreenGameOver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenJumpScare" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAggAAiAAAAAAAAAAAQ=</HashCode>
+      <FileName>ScreenJumpScare.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.ScreenOutro" Collapsed="true">
+    <Position X="10" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAgAAAAAAAAIAAAAEAQ=</HashCode>
+      <FileName>ScreenOutro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.TextInfo" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACYBAAQAAQAAAwAIAAAACAQAAAAAgAAIBYwACAUqAAQ=</HashCode>
+      <FileName>TextInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZombieChezLeComte.Zombie" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAQAAQgAAAwiEgAAIgAAAgQBAAAEQQAAAAAAAAwAAAQ=</HashCode>
+      <FileName>Zombie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

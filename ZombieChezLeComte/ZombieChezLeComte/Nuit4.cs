@@ -16,6 +16,8 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended;
+using Microsoft.Xna.Framework.Audio;
+
 
 namespace ZombieChezLeComte
 {
@@ -43,6 +45,8 @@ namespace ZombieChezLeComte
         private InteractObject recupViande = new InteractObject();
         private InteractObject debutArme = new InteractObject();
 
+        private SoundEffect knifeSound;
+        private SoundEffect washSound;
 
         public override void Initialize()
         {
@@ -89,6 +93,8 @@ namespace ZombieChezLeComte
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
             textInfo.Text = "Qu'est ce qui s'est passe? Je me suis evanouis je crois...";
             textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+            knifeSound = Game.Content.Load<SoundEffect>("Knife");
+            washSound = Game.Content.Load<SoundEffect>("Washing");
             base.LoadContent();
         }
 
@@ -146,6 +152,10 @@ namespace ZombieChezLeComte
                 }
                 if (couteuxFour.InteractWith(-_nuit4.Camera.Position))
                 {
+                    if (!textInfo.WritingText)
+                    {
+                        knifeSound.Play();
+                    }
                     Additions.InteractionObjet(couteuxFour, textInfo, "Les couteaux sont deja au fourneaux...");
                     uneTache = true;
                 }
@@ -153,6 +163,10 @@ namespace ZombieChezLeComte
                 {
                     if (laverLivres[i].InteractWith(-_nuit4.Camera.Position))
                     {
+                        if (!textInfo.WritingText)
+                        {
+                            washSound.Play();
+                        }
                         if (laverLivres[i].HasAlreadyInteractable == false)
                         {
                             Additions.InteractionObjet(laverLivres[i], textInfo, "Les livres sont laver ici");
@@ -195,7 +209,7 @@ namespace ZombieChezLeComte
                     zombie.PeutTuer = false;
                 }
             }
-            if ((nombreLitFait == litInteractions.Length && nombreLivre == laverLivres.Length && couteuxFour.HasAlreadyInteractable == true && nombreMorceauxArme == 0) || Keyboard.GetState().IsKeyDown(Keys.NumPad9))
+            if ((nombreLitFait == litInteractions.Length && nombreLivre == laverLivres.Length && couteuxFour.HasAlreadyInteractable == true && nombreMorceauxArme == 0) || Keyboard.GetState().IsKeyDown(Keys.E))
             {
                 debutArme.InteractRect = new Rectangle(5072, 6125, debutArme.InteractRect.Width, debutArme.InteractRect.Height);
                 nombreMorceauxArme = 0;

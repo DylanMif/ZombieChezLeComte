@@ -125,6 +125,30 @@
 /processorParam:TextureFormat=Color
 /build:gameover.png
 
+#begin GhostDoor.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GhostDoor.wav
+
+#begin GhostHunt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GhostHunt.wav
+
+#begin GhostRun.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GhostRun.wav
+
+#begin GlassBreaking.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GlassBreaking.wav
+
 #begin GhostRun.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -148,6 +172,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:huntGhostJumpScareSound.mp3
+
+#begin Knife.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Knife.wav
 
 #begin LittleFont.spritefont
 /importer:FontDescriptionImporter
@@ -271,6 +301,18 @@
 /processorParam:TextureFormat=Color
 /build:vision.png
 
+#begin Walk.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Walk.wav
+
+#begin Washing.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Washing.wav
+
 #begin zombie.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -282,6 +324,24 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:zombie.png
+
+#begin Zombie1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Zombie1.wav
+
+#begin Zombie2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Zombie2.wav
+
+#begin Zombie3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Zombie3.wav
 
 #begin zombieJumpScareImage.png
 /importer:TextureImporter

@@ -96,6 +96,8 @@ namespace ZombieChezLeComte
                 LoadJumpScare();
             if (Keyboard.GetState().IsKeyDown(Keys.NumPad9))
                 LoadNight6();
+            if (Keyboard.GetState().IsKeyDown(Keys.G))
+                LoadGameOver();
             // TODO: Add your update logic here
             if (isInOutro)
             {
@@ -205,6 +207,12 @@ namespace ZombieChezLeComte
         public void LoadBetween4And5()
         {
             _screenManager.LoadScreen(new ScreenBetween4And5(this), new FadeTransition(GraphicsDevice, Color.Black));
+            DataSaver.SaveNight(5);
+        }
+
+        public void LoadGameOver()
+        {
+            _screenManager.LoadScreen(new ScreenGameOver(this), new FadeTransition(GraphicsDevice, Color.Black));
             DataSaver.SaveNight(5);
         }
 

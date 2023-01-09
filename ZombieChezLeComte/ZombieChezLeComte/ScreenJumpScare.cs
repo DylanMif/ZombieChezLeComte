@@ -67,7 +67,13 @@ namespace ZombieChezLeComte
             currentTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if(currentTime <= 0)
             {
-                Game.LoadMainMenu();
+                if(Game.killBy != "endGhost")
+                {
+                    Game.LoadGameOver();
+                } else
+                {
+                    Game.LoadMainMenu();
+                }
             }
         }
 

@@ -16,9 +16,9 @@ namespace ZombieChezLeComte
         public const int WINDOW_HEIGHT = 720;
         public const int VITESSE_JOUEUR = 150;
         public const int VITESSE_JOUEUR_RUN = 300;
-        public const int JOUEUR_STAMINA = 1000;
-        public const int STAMINA_DECREASE = 15;
-        public const int STAMINA_INCREASE = 1;
+
+        public const float MAX_STAMINA_TIME = 2;
+
         public const int VITESSE_ZOMBIE = 50;
         public const float TEMPS_TEXTE = 2;
         public static readonly Vector2 POSITION_JOUEUR = new Vector2(-4080,-6392);
@@ -47,6 +47,6 @@ namespace ZombieChezLeComte
         public const int NIGHT6_HUNT_GHOST_SPEED = 70;
         public const int NIGHT6_RUN_GHOST_SPEED = 300;
 
-        public const bool GOD_MOD = false;
+        public const bool GOD_MOD = true;
     }
 }

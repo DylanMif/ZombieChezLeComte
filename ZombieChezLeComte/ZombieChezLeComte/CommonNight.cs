@@ -33,9 +33,10 @@ namespace ZombieChezLeComte
 
         private Texture2D visionBlock;
         private SoundEffect walkSound;
-        private int currentStamina;
         private float _timer;
         private float _maxTime;
+
+        private float currentStamina;
 
         public TiledMap TiledMap
         {
@@ -151,7 +152,7 @@ namespace ZombieChezLeComte
             var viewportadapter = new BoxingViewportAdapter(gameWindow, graphics, 1080, 720);
             this.Camera = new OrthographicCamera(viewportadapter);
             this.CameraPosition = Constantes.POSITION_JOUEUR;
-            currentStamina = Constantes.JOUEUR_STAMINA;
+            currentStamina = Constantes.MAX_STAMINA_TIME;
             _timer = 0;
         }
         public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet, Game1 _game)
@@ -188,19 +189,19 @@ namespace ZombieChezLeComte
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
                 
             }
-            if(Keyboard.GetState().IsKeyDown(Constantes.runKeys) && currentStamina > Constantes.STAMINA_DECREASE)
+            if(Keyboard.GetState().IsKeyDown(Constantes.runKeys) && currentStamina > 0)
             {
                 this.Player.Vitesse = Constantes.VITESSE_JOUEUR_RUN;
-                currentStamina -= Constantes.STAMINA_DECREASE;
+                currentStamina -= deltaTime;
                 _maxTime = (float)walkSound.Duration.TotalSeconds * 1.4f;
             } else
             {
                 this.Player.Vitesse = Constantes.VITESSE_JOUEUR;
-                currentStamina += Constantes.STAMINA_INCREASE;
+                currentStamina += deltaTime / 10;
                 _maxTime = (float)walkSound.Duration.TotalSeconds * 2.4f;
-                if (currentStamina > Constantes.JOUEUR_STAMINA)
+                if (currentStamina > Constantes.MAX_STAMINA_TIME)
                 {
-                    currentStamina = Constantes.JOUEUR_STAMINA;
+                    currentStamina = Constantes.MAX_STAMINA_TIME;
                 }
             }
 

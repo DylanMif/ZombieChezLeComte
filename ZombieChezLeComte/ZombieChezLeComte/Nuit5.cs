@@ -91,6 +91,9 @@ namespace ZombieChezLeComte
             textInfo.LoadContent(Game.Content.Load<SpriteFont>("MeanFont"));
             armorSound = Game.Content.Load<SoundEffect>("Armure");
             doorSound = Game.Content.Load<SoundEffect>("DoorClosed");
+
+            textInfo.Text = "Je viens de me reveiller vers l'entree ???";
+            textInfo.ActiveText(3);
             base.LoadContent();
         }
 

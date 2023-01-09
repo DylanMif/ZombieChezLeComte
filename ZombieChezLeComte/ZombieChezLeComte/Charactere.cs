@@ -161,6 +161,7 @@ namespace ZombieChezLeComte
             }
             if(!isPlayer)
                 this.Position += _vector2 * this.Vitesse * _delattime;
+
         }
         public void MovementWithoutAnim(Vector2 _vector2, float _delattime, bool isPlayer)
         {

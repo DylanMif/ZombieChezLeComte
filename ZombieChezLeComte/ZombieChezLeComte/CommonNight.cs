@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +14,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
@@ -30,8 +32,10 @@ namespace ZombieChezLeComte
         private float deltaTime;
 
         private Texture2D visionBlock;
-
+        private SoundEffect walkSound;
         private int currentStamina;
+        private float _timer;
+        private float _maxTime;
 
         public TiledMap TiledMap
         {
@@ -148,6 +152,7 @@ namespace ZombieChezLeComte
             this.Camera = new OrthographicCamera(viewportadapter);
             this.CameraPosition = Constantes.POSITION_JOUEUR;
             currentStamina = Constantes.JOUEUR_STAMINA;
+            _timer = 0;
         }
         public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet, Game1 _game)
         {
@@ -156,6 +161,8 @@ namespace ZombieChezLeComte
             this.TiledMapRenderer = new TiledMapRenderer(_graphicsDevice, this.TiledMap);
             this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Collision");
             this.VisionBlock = _game.Content.Load<Texture2D>("vision");
+            walkSound = _game.Content.Load<SoundEffect>("Walk");
+            _maxTime =(float) walkSound.Duration.TotalSeconds *2.4f;
         }
         public void Update(GameTime _gameTime)
         {
@@ -167,8 +174,15 @@ namespace ZombieChezLeComte
             //Console.WriteLine(nextX + ", " + nextY);
             this.TiledMapRenderer.Update(_gameTime);
             this.CameraMove = Vector2.Zero;
+            _timer -= _gameTime.GetElapsedSeconds();
             if (!IsCollision((ushort)nextX, (ushort)nextY))
             {
+                
+                if (_timer<=0 && (Keyboard.GetState().IsKeyDown(Keys.Z) || Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Q)))
+                {
+                    walkSound.Play();
+                    _timer = _maxTime;
+                }
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
@@ -178,11 +192,13 @@ namespace ZombieChezLeComte
             {
                 this.Player.Vitesse = Constantes.VITESSE_JOUEUR_RUN;
                 currentStamina -= Constantes.STAMINA_DECREASE;
+                _maxTime = (float)walkSound.Duration.TotalSeconds * 1.4f;
             } else
             {
                 this.Player.Vitesse = Constantes.VITESSE_JOUEUR;
                 currentStamina += Constantes.STAMINA_INCREASE;
-                if(currentStamina > Constantes.JOUEUR_STAMINA)
+                _maxTime = (float)walkSound.Duration.TotalSeconds * 2.4f;
+                if (currentStamina > Constantes.JOUEUR_STAMINA)
                 {
                     currentStamina = Constantes.JOUEUR_STAMINA;
                 }

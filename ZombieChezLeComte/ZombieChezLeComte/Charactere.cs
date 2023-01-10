@@ -21,6 +21,7 @@ namespace ZombieChezLeComte
         private AnimatedSprite _perso;
         private SpriteSheet _spriteSheet;
         private String _currentAnimation;
+        private String _sword;
 
         public Vector2 Position
         {
@@ -82,7 +83,6 @@ namespace ZombieChezLeComte
                 this._currentAnimation = value;
             }
         }
-
         public Rectangle SpriteRect
         {
             get

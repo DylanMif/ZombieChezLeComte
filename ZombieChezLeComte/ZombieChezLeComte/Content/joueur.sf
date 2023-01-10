@@ -44,6 +44,46 @@
       "frames": [76],
       "isLooping": false,
       "frameDuration": 0.2
+    },
+    "idleSword": {
+      "frames": [55],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleEstSword": {
+      "frames": [79],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleWestSword": {
+      "frames": [67],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleNorthSword": {
+      "frames": [91],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "northWalkSword": {
+      "frames": [91,92,91,90],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "southWalkSword": {
+      "frames": [55,56,55,54],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "estWalkSword": {
+      "frames": [79,80,79,78],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "westWalkSword": {
+      "frames": [67,68,67,66],
+      "isLooping": false,
+      "frameDuration": 0.2
     }
   }
 }

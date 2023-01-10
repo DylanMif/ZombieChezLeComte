@@ -214,6 +214,10 @@ namespace ZombieChezLeComte
                 debutArme.InteractRect = new Rectangle(5072, 6125, debutArme.InteractRect.Width, debutArme.InteractRect.Height);
                 nombreMorceauxArme = 0;
             }
+            if(nombreMorceauxArme >= 1)
+            {
+                _nuit4.Sword = true;
+            }
         }
 
         public override void Draw(GameTime gameTime)

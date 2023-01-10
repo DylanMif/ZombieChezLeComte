@@ -42,6 +42,20 @@ namespace ZombieChezLeComte
 
         private float currentStamina;
 
+        private bool _sword;
+
+        public bool Sword
+        {
+            get
+            {
+                return this._sword;
+            }
+
+            set
+            {
+                this._sword = value;
+            }
+        }
         public TiledMap TiledMap
         {
             get
@@ -157,6 +171,7 @@ namespace ZombieChezLeComte
             this.Camera = new OrthographicCamera(viewportadapter);
             this.CameraPosition = Constantes.POSITION_JOUEUR;
             currentStamina = Constantes.MAX_STAMINA_TIME;
+            this.Sword = false;
             _timer = 0;
         }
         public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet, Game1 _game)
@@ -191,7 +206,7 @@ namespace ZombieChezLeComte
                 // Cette méthode ne déplace pas réellement le joueur comme le paramètre "isPlayer" est à true
                 // le but est uniquement de l'animer
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
-                    (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
+                    (float)_gameTime.ElapsedGameTime.TotalSeconds, true, Sword);
                 // Pour le déplacer réellement on déplace la camera
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
                 

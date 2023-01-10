@@ -71,7 +71,7 @@ namespace ZombieChezLeComte
             keyFragementInteract[3].Initialize(new Vector2(4799, 6365), 110, 50, "keyFrag4", "Un nouveau fragment de trouve");
             keyFragementInteract[4].Initialize(new Vector2(3868, 6595), 31, 57, "keyFrag5", "Un nouveau fragment de trouve");
 
-            caveDoorInteract.Initialize(new Vector2(4917, 6617), 103, 46, "porte", "Ferme a cle! Il faut la cle, pas casse...");
+            caveDoorInteract.Initialize(new Vector2(4917, 6617), 103, 46, "porte", "Ferme a cle! Il faut la cle, pas cassee...");
 
             textInfo.Initialize(" ", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
 
@@ -121,11 +121,11 @@ namespace ZombieChezLeComte
                         keyFragInteract.HasAlreadyInteractable = true;
                         if (GetNbKeyFragment(keyFragementInteract) == 1)
                         {
-                            textInfo.Text = "La cle semblre casse, il faudrait retrouver tout les fragments";
+                            textInfo.Text = "La cle semble cassee, il faudrait retrouver tous les fragments";
                         }
                         else if (GetNbKeyFragment(keyFragementInteract) == keyFragementInteract.Length)
                         {
-                            textInfo.Text = "Vous avez trouve tous les fragments, vous pourrez refaire la cle";
+                            textInfo.Text = "Vous avez trouve tous les fragments, vous pouvez refaire la cle";
                         }
                         else
                         {

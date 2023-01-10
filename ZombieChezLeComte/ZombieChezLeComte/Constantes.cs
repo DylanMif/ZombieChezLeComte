@@ -11,7 +11,7 @@ namespace ZombieChezLeComte
 {
     public class Constantes
     {
-        public const string GAME_TITLE = "Zombie Chez le Comte";
+        public const string GAME_TITLE = "Le Complot Du Compte";
         public const int WINDOW_WIDTH = 1080;
         public const int WINDOW_HEIGHT = 720;
         public const int VITESSE_JOUEUR = 150;

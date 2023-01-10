@@ -48,7 +48,7 @@ namespace ZombieChezLeComte
             }
             armoireInteraction[0].Initialize(new Vector2(4482, 6381), 50, 50, "armoire1", "Plein de poussiere !");
             armoireInteraction[1].Initialize(new Vector2(4281, 6384), 50, 50, "armoire2", "C'est une porcherie !");
-            armoireInteraction[2].Initialize(new Vector2(4184, 6384), 50, 50, "armoire3", "Ranger comme du n'importe quoi");
+            armoireInteraction[2].Initialize(new Vector2(4184, 6384), 50, 50, "armoire3", "Range comme du n'importe quoi");
             for (int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
@@ -60,8 +60,8 @@ namespace ZombieChezLeComte
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Aller dormir une fois les taches finis");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "Rien a faire sur ce papier");
 
-            solNettoyage.Initialize(new Vector2(4765,6637), 103, 26, "sol", "Ca merite un coups de balais");
-            porteCave.Initialize(new Vector2(4917, 6637), 103, 26, "porte", "Ferme a cle! Bizzare...");
+            solNettoyage.Initialize(new Vector2(4765,6637), 103, 26, "sol", "Ca merite un coup de balais");
+            porteCave.Initialize(new Vector2(4917, 6637), 103, 26, "porte", "Ferme a cle! Bizarre...");
             tableCuisine.Initialize(new Vector2(4306,6576), 117,40,"table","Beurk!");
 
             for (int i = 0; i < litInteraction.Length; i++)

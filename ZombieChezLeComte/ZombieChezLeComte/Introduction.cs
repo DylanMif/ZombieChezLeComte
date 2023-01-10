@@ -24,23 +24,23 @@ namespace ZombieChezLeComte
         {
             introSentance = new string[]
             {
-                "Ce matin tu as ete elu domestique du compte Berenger, c'est plutot une bonne nouvelle",
+                "Ce matin tu as ete elu domestique du comte Berenger, c'est plutot une bonne nouvelle",
                 "car tu cherchais justement du travail. Cependant tu l as toujours trouve bizarre, etrange comme",
-                "s'il jouait un double jeu. Tu en avais deja parler a ton pere mais il ne t'avais pas cru.",
-                "Apres avoir ete assigne comme domestique du compte Berenger tu lui en a reparle mais il t'a",
+                "s'il jouait un double jeu. Tu en avais deja parle a ton pere mais il ne t'avait pas cru.",
+                "Apres avoir ete assigne comme domestique du comte Berenger tu lui en as reparle mais il t'a",
                 "repondu ainsi :",
                 "-Ne te fais point d'inquietude je le connais bien, en plus tu cherchais du travail et ",
                 "celui-ci te ferais acceder a la noblesse. Ne laisse pas quelques pensees noires te gacher la ",
                 "vie.",
-                "Tu decide donc d'ecouter ton pere malgre toutes tes peurs et tu commences ta premiere ",
+                "Tu decides donc d'ecouter ton pere malgre toutes tes peurs et tu commences ta premiere ",
                 "semaine de travail.",
                 " ",
-                "Les taches que tu devras realiser seront inscrites sur des papiers laisse dans la cuisine, ",
+                "Les taches que tu devras realiser seront inscrites sur des papiers laisses dans la cuisine, ",
                 "Attention elles changeront chaque nuit",
                 " ",
                 " ",
                 " ",
-                "[Appuyer sur espace pour continuer]"
+                "[Appuyez sur espace pour continuer]"
             };
             allTextInfo = new TextInfo[introSentance.Length];
             for(int i = 0; i < allTextInfo.Length; i++)

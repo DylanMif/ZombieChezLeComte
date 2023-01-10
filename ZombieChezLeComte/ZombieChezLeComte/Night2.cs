@@ -55,7 +55,7 @@ namespace ZombieChezLeComte
                 litInteraction[i] = new InteractObject();
             }
             litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "Comment le lit peut etre defait?? Personne n'est venu depuis hier?!?");
-            litInteraction[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Bizzare... Le lit est defait");
+            litInteraction[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Bizarre... Le lit est defait");
             litInteraction[2].Initialize(new Vector2(4098, 6088), 47, 103, "lit3", "Ca doit etre les souris qui ont defait le lit");
             litDormir.Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "Une bonne sieste bien merite!");
             for (int i = 0; i < kitchenPapers.Length; i++)

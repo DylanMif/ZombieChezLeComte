@@ -32,7 +32,7 @@ namespace ZombieChezLeComte
 
         public const int NIGHT3_RUNGHOST_CHANCE = 360;
         public const int RUNGHOST_SPEED = 150;
-        public const int END_NIGHT3_NB_GHOST = 5;
+        public const int END_NIGHT3_NB_GHOST = 8;
         public const int END_NIGHT3_GHOST_SPEED = 50;
 
         public const int ZOMBIE_SPEED = 35;

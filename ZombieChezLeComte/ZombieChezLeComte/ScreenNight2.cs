@@ -18,10 +18,13 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
-    public class Night2 : GameScreen
+    /// <summary>
+    /// Screen gérant la nuit 2
+    /// </summary>
+    public class ScreenNight2 : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public Night2(Game1 game) : base(game) { }
+        public ScreenNight2(Game1 game) : base(game) { }
         private CommonNight _nuit2 = new CommonNight();
 
         private InteractObject[] litInteraction = new InteractObject[3];
@@ -50,6 +53,8 @@ namespace ZombieChezLeComte
         {
             _nuit2.Initialize(Game.Window, Game.GraphicsDevice);
             textInfo.Initialize("erer", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
+
+            // Initialisation des objets interactifs
             for (int i = 0; i < litInteraction.Length; i++)
             {
                 litInteraction[i] = new InteractObject();
@@ -110,6 +115,8 @@ namespace ZombieChezLeComte
             _nuit2.Update(gameTime);
             textInfo.Update(gameTime);
 
+            // Il y a un jumpscare surprise lors de la nuit
+            // Donc s'il est en cours on réduit son temps de vie
             if(isInJumpScare)
             {
                 currentTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -119,8 +126,10 @@ namespace ZombieChezLeComte
                 }
             }
 
+            
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
+                // On regarde l'interaction qui doit être lancé s'il y en a une
                 for (int i = 0; i < kitchenPapers.Length; i++)
                 {
                     if (kitchenPapers[i].InteractWith(-_nuit2.Camera.Position))
@@ -225,6 +234,7 @@ namespace ZombieChezLeComte
         public override void Draw(GameTime gameTime)
         {
             Game.GraphicsDevice.Clear(Color.Black);
+            // On dessine soit le jumpscare soit le jeu normalement en fonction de ce qui se passe
             if(isInJumpScare)
             {
                 Game.SpriteBatch.Begin();

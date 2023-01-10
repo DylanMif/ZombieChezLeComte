@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe pour gérer les cases du jeu. Utile dans l'algorithme A* pour le zombie
+    /// </summary>
     public class NodeCase
     {
         private int x;
@@ -58,6 +61,11 @@ namespace ZombieChezLeComte
             }
         }
 
+        /// <summary>
+        /// Deux cases sont égales si leurs coordonnées X et Y sont identiques
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             return obj is NodeCase @case &&
@@ -85,11 +93,20 @@ namespace ZombieChezLeComte
             return !(left == right);
         }
 
+        /// <summary>
+        /// Calcule et sotck l'heuristique dans la prorpiété de l'objet
+        /// </summary>
+        /// <param name="finish"></param>
         public void SetHeuristique(NodeCase finish)
         {
             this.Heuristique = Math.Abs(finish.X - this.X) + Math.Abs(finish.Y - this.Y);
         }
 
+        /// <summary>
+        /// Regarde si la case est accesible sur le mapLayer
+        /// </summary>
+        /// <param name="layer">mapLayer des collisions</param>
+        /// <returns>un bollean indiquant si cette case est accesible</returns>
         public bool IsAccessible(TiledMapTileLayer layer)
         {
             TiledMapTile? tile;
@@ -100,6 +117,11 @@ namespace ZombieChezLeComte
             return true;
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir les voisins accesibles de cette case
+        /// </summary>
+        /// <param name="layer">mapLayer des collisions</param>
+        /// <returns>Une liste de NodeCase contenant les voisins de cette case</returns>
         public List<NodeCase> GetNeighbors(TiledMapTileLayer layer)
         {
             List<NodeCase> neighbors = new List<NodeCase>();

@@ -20,10 +20,13 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
-    public class Night3 : GameScreen
+    /// <summary>
+    /// Screen gérant la nuit 3
+    /// </summary>
+    public class ScreenNight3 : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public Night3(Game1 game) : base(game) { }
+        public ScreenNight3(Game1 game) : base(game) { }
 
         private CommonNight commonNight = new CommonNight();
 
@@ -49,6 +52,7 @@ namespace ZombieChezLeComte
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
 
+            // On initialise tous les objets interactifs
             bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio", "Vous rangez la bibliotheque");
             kitchenInteract.Initialize(new Vector2(3979, 6563), 33, 37, "rangerCuisine", "Vous rangez la cuisine");
             hallInteract.Initialize(new Vector2(4595, 6442), 115, 138, "rangerHall", "Vous rangez le hall");
@@ -78,8 +82,12 @@ namespace ZombieChezLeComte
             deadZombie.Initialize(new Vector2(-348, 0), 1);
 
             textInfo.Initialize(" ", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
+
+            // On initialise le fantôme coureur
             runGhost.Initialize(new Vector2(10, 10), Constantes.RUNGHOST_SPEED);
 
+
+            // A la fin de la nuit plusieurs fantômes coureurs apparaîssent on va donc les initialiser
             for (int i = 0; i < endRunGhosts.Length; i++)
             {
                 endRunGhosts[i] = new RunGhost();
@@ -111,39 +119,28 @@ namespace ZombieChezLeComte
 
         public override void Update(GameTime gameTime)
         {
-            // Check interaction
+            // Check des interactions
             if(Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 if(bookshelfInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     if(!textInfo.WritingText)
                         balaisSound.Play();
-                    textInfo.Text = bookshelfInteract.InteractText;
-                    textInfo.ActiveText(2);
-                    bookshelfInteract.InteractText = "Cette bibliotheque est rangee";
-                    bookshelfInteract.HasAlreadyInteractable = true;
+                    Additions.InteractionObjet(bookshelfInteract, textInfo, "Cette bibliotheque est rangee");
                 }
                 if(kitchenInteract.InteractWith(-commonNight.Camera.Position))
                 {
-                    textInfo.Text = kitchenInteract.InteractText;
-                    textInfo.ActiveText(2);
-                    kitchenInteract.InteractText = "Cette cuisine est nickel";
-                    kitchenInteract.HasAlreadyInteractable = true;
+                    Additions.InteractionObjet(kitchenInteract, textInfo, "Cette cuisine est nickel");
                 }
                 if(hallInteract.InteractWith(-commonNight.Camera.Position))
                 {
                     if (!textInfo.WritingText)
                         balaisSound.Play();
-                    textInfo.Text = hallInteract.InteractText;
-                    textInfo.ActiveText(2);
-                    hallInteract.InteractText = "Ce hall est presque propre";
-                    hallInteract.HasAlreadyInteractable = true;
+                    Additions.InteractionObjet(hallInteract, textInfo, "Ce hall est presque propre");
                 }
                 if(deadZombieInteract.InteractWith(-commonNight.Camera.Position))
                 {
-                    textInfo.Text = deadZombieInteract.InteractText;
-                    textInfo.ActiveText(Constantes.TEMPS_TEXTE);
-                    deadZombieInteract.HasAlreadyInteractable= true;
+                    Additions.InteractionObjet(deadZombieInteract, textInfo, deadZombieInteract.InteractText);
                 }
                 if(enterDoor.InteractWith(-commonNight.Camera.Position))
                 {
@@ -156,28 +153,25 @@ namespace ZombieChezLeComte
                 {
                     if(paperInteract.InteractWith(-commonNight.Camera.Position))
                     {
-                        textInfo.Text = paperInteract.InteractText;
-                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+                        Additions.InteractionObjet(paperInteract, textInfo, paperInteract.InteractText);
                     }
                 }
                 foreach(InteractObject bedInteract in litInteraction)
                 {
                     if(bedInteract.InteractWith(-commonNight.Camera.Position))
                     {
-                        bedInteract.HasAlreadyInteractable = true;
-                        textInfo.Text = bedInteract.InteractText;
-                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
+                        Additions.InteractionObjet(bedInteract, textInfo, bedInteract.InteractText);
                     }
                 }
             }
+
+
             commonNight.Update(gameTime);
-
             textInfo.Update(gameTime);
-
-            
             deadZombie.MovementWithoutAnim(commonNight.CameraMove , commonNight.DeltaTime);
             deadZombie.Update(gameTime);
 
+            // On fait appparaître tout les fantômes coureurs si toutes les tâches sont finies
             if (bookshelfInteract.HasAlreadyInteractable && kitchenInteract.HasAlreadyInteractable &&
                         hallInteract.HasAlreadyInteractable && deadZombieInteract.HasAlreadyInteractable && !endRunGhostSpawn &&
                         this.nbGoodBed() == litInteraction.Length)
@@ -216,6 +210,10 @@ namespace ZombieChezLeComte
             
         }
 
+        /// <summary>
+        /// Méthode donnant le nombre de lit fait
+        /// </summary>
+        /// <returns></returns>
         public int nbGoodBed()
         {
             int res = 0;

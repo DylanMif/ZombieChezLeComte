@@ -19,13 +19,13 @@ using Microsoft.Xna.Framework.Audio;
 namespace ZombieChezLeComte
 {
     /// <summary>
-    /// 
+    /// Screen gérant la nuit 1
     /// </summary>
-    public class Night1 : GameScreen
+    public class ScreenNight1 : GameScreen
     {
         
         private new Game1 Game => (Game1)base.Game;
-        public Night1(Game1 game) : base(game) { }
+        public ScreenNight1(Game1 game) : base(game) { }
         private CommonNight _nuit1 = new CommonNight();
 
         private InteractObject[] litInteraction = new InteractObject[3];
@@ -45,6 +45,8 @@ namespace ZombieChezLeComte
         {
             _nuit1.Initialize(Game.Window, Game.GraphicsDevice);
             textInfo.Initialize("erer",Color.White,new Vector2(10,Constantes.WINDOW_HEIGHT-150));
+
+            // Initialisation de tout les objets interactifs
             for(int i = 0; i < armoireInteraction.Length; i++)
             {
                 armoireInteraction[i] = new InteractObject();
@@ -91,6 +93,9 @@ namespace ZombieChezLeComte
         {
             _nuit1.Update(gameTime);
             textInfo.Update(gameTime);
+
+            // Si le joueur appuie sur <espace> on check tous les objets interactifs pour détecter s'il y a ou non une interaction
+            // à faire
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 for(int i = 0; i < litInteraction.Length; i++)
@@ -148,12 +153,14 @@ namespace ZombieChezLeComte
                         balaisSound.Play();
                     Additions.InteractionObjet(solNettoyage,textInfo, "Le sol est propre");
                 }
+
+                // Si le joueur a fait toutes ces tâches on regardera s'il intéragit avec son lit pour dormir
                 if (nombreArmoireFait == armoireInteraction.Length && nombreLitFait == litInteraction.Length
                             && solNettoyage.HasAlreadyInteractable == true && tableCuisine.HasAlreadyInteractable == true)
                 {
                     if (litDormir.InteractWith(-_nuit1.Camera.Position))
                     {
-                        if(litDormir.HasAlreadyInteractable ==false)
+                        if(litDormir.HasAlreadyInteractable == false)
                             litDormir.HasAlreadyInteractable = true;
                         else
                         {

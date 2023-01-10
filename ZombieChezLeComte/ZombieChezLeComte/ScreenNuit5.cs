@@ -20,10 +20,10 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
-    internal class Nuit5 : GameScreen
+    public class ScreenNuit5 : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public Nuit5(Game1 game) : base(game) { }
+        public ScreenNuit5(Game1 game) : base(game) { }
         private CommonNight commonNight = new CommonNight();
 
         private HuntGhost huntGhost = new HuntGhost();
@@ -42,6 +42,8 @@ namespace ZombieChezLeComte
         public override void Initialize()
         {
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
+
+            // On initialise tous les monstres
             huntGhost.Initialize(new Vector2(0, 0), Constantes.HUNT_GHOST_SPEED);
             doorGhost.Initialize(new Vector2(0, 0), 0);
             runGhost.Initialize(new Vector2(10, 10), Constantes.RUNGHOST_SPEED);
@@ -49,11 +51,11 @@ namespace ZombieChezLeComte
             zombie.PeutTuer = true;
             zombie.PeutBouger = true;
 
+            // On initialise les objets interactifs
             for (int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
             }
-
             kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ne mourrez pas et n'allez en aucun cas a la cave");
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Le sommeil est la cle");
             kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Lire revele la cle");
@@ -105,14 +107,15 @@ namespace ZombieChezLeComte
             runGhost.Update(gameTime, commonNight, Game);
             zombie.Update(gameTime, commonNight, Game);
 
+
+            // Test des toutes les interactions
             if(Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 foreach (InteractObject paperInteract in kitchenPapers)
                 {
                     if (paperInteract.InteractWith(-commonNight.Camera.Position))
                     {
-                        textInfo.Text = paperInteract.InteractText;
-                        textInfo.ActiveText(2);
+                        Additions.InteractionObjet(paperInteract, textInfo, paperInteract.InteractText);
                     }
                 }
                 foreach (InteractObject keyFragInteract in keyFragementInteract)
@@ -122,17 +125,21 @@ namespace ZombieChezLeComte
                         if(!textInfo.WritingText)
                             armorSound.Play();
                         keyFragInteract.HasAlreadyInteractable = true;
-                        if(GetNbKeyFragment(keyFragementInteract) == 1)
+
+                        // On change le texte si 
+                        if (GetNbKeyFragment(keyFragementInteract) == 1)
                         {
                             textInfo.Text = "La cle semble cassee, il faudrait retrouver tous les fragments";
-                        } else if(GetNbKeyFragment(keyFragementInteract) == keyFragementInteract.Length)
+                        }
+                        else if (GetNbKeyFragment(keyFragementInteract) == keyFragementInteract.Length)
                         {
                             textInfo.Text = "Vous avez trouve tous les fragments, vous pouvez refaire la cle";
-                        } else
+                        }
+                        else
                         {
                             textInfo.Text = keyFragInteract.InteractText + $" {GetNbKeyFragment(keyFragementInteract)}/{keyFragementInteract.Length}";
                         }
-                        textInfo.ActiveText(2);
+                        textInfo.ActiveText(Constantes.TEMPS_TEXTE);
                     }
                 }
                 if(caveDoorInteract.InteractWith(-commonNight.Camera.Position))
@@ -146,8 +153,7 @@ namespace ZombieChezLeComte
                         {
                             doorSound.Play();
                         }
-                        textInfo.Text = caveDoorInteract.InteractText;
-                        textInfo.ActiveText(2);
+                        Additions.InteractionObjet(caveDoorInteract, textInfo, caveDoorInteract.InteractText);
                     }
                 }
             }
@@ -168,6 +174,11 @@ namespace ZombieChezLeComte
             huntGhost.Draw(Game.SpriteBatch, commonNight);
         }
 
+        /// <summary>
+        /// Méthodes donnant le nombre de fragment de clé collecté par le joueur
+        /// </summary>
+        /// <param name="_allKeyFrag">Le tableau de tous les objets interactifs concernés</param>
+        /// <returns></returns>
         private static int GetNbKeyFragment(InteractObject[] _allKeyFrag)
         {
             int res = 0;

@@ -143,18 +143,18 @@ namespace ZombieChezLeComte
         }
         public void LoadNight1()
         {
-            _screenManager.LoadScreen(new Night1(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenNight1(this), new FadeTransition(GraphicsDevice, Color.Black));
             DataSaver.SaveNight(1);
         }
         public void LoadNight2()
         {
-            _screenManager.LoadScreen(new Night2(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenNight2(this), new FadeTransition(GraphicsDevice, Color.Black));
             DataSaver.SaveNight(2);
         }
 
         public void LoadNight3()
         {
-            _screenManager.LoadScreen(new Night3(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenNight3(this), new FadeTransition(GraphicsDevice, Color.Black));
             DataSaver.SaveNight(3);
         }
 
@@ -166,7 +166,7 @@ namespace ZombieChezLeComte
 
         public void LoadNight5()
         {
-            _screenManager.LoadScreen(new Nuit5(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenNuit5(this), new FadeTransition(GraphicsDevice, Color.Black));
             DataSaver.SaveNight(5);
         }
         public void LoadCommand()

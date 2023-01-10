@@ -35,7 +35,7 @@ namespace ZombieChezLeComte
         public const int END_NIGHT3_NB_GHOST = 5;
         public const int END_NIGHT3_GHOST_SPEED = 50;
 
-        public const int ZOMBIE_SPEED = 50;
+        public const int ZOMBIE_SPEED = 35;
 
         public const int HUNT_GHOST_SPEED = 35;
 
@@ -47,6 +47,6 @@ namespace ZombieChezLeComte
         public const int NIGHT6_HUNT_GHOST_SPEED = 70;
         public const int NIGHT6_RUN_GHOST_SPEED = 300;
 
-        public const bool GOD_MOD = false;
+        public const bool GOD_MOD = true;
     }
 }

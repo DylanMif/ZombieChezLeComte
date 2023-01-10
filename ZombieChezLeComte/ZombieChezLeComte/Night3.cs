@@ -50,7 +50,7 @@ namespace ZombieChezLeComte
             commonNight.Initialize(Game.Window, Game.GraphicsDevice);
 
             bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio", "Vous rangez la bibliotheque");
-            kitchenInteract.Initialize(new Vector2(3979, 6573), 33, 27, "rangerCuisine", "Vous rangez la cuisine");
+            kitchenInteract.Initialize(new Vector2(3979, 6563), 33, 37, "rangerCuisine", "Vous rangez la cuisine");
             hallInteract.Initialize(new Vector2(4595, 6442), 115, 138, "rangerHall", "Vous rangez la hall");
             for(int i = 0; i < kitchenPapers.Length; i++)
             {

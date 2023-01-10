@@ -60,7 +60,7 @@ namespace ZombieChezLeComte
             litInteractions[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Pourquoi je dois mettre de la viande sur des lits?!?");
             litInteractions[2].Initialize(new Vector2(4098, 6088), 47, 103, "lit3", "C'est moi qui devient fou ou cette maison tourne par rond?");
             litInteractions[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "Je devrais demisionner... Ca devient trop dangereux");
-            couteuxFour.Initialize(new Vector2(3979, 6573), 33, 27, "couteux","Des couteux au four?? Drole de nourriture...");
+            couteuxFour.Initialize(new Vector2(3979, 6563), 33, 37, "couteux","Des couteux au four ?? Drole de nourriture...");
             for (int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
@@ -156,7 +156,7 @@ namespace ZombieChezLeComte
                     {
                         knifeSound.Play();
                     }
-                    Additions.InteractionObjet(couteuxFour, textInfo, "Les couteaux sont deja au fourneaux...");
+                    Additions.InteractionObjet(couteuxFour, textInfo, "Les couteaux sont deja au fourneau...");
                     uneTache = true;
                 }
                 for (int i = 0; i < laverLivres.Length; i++)

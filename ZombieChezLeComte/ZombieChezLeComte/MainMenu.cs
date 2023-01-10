@@ -64,7 +64,6 @@ namespace ZombieChezLeComte
             nightNumber = DataSaver.LoadNight();
             end = DataSaver.LoadEnd();
 
-            MediaPlayer.Volume = 0.3f;
             titleRect = new Rectangle(0, 0, 858, 41);
             base.Initialize();
         }

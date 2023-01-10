@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe permettant de gérer des boutons. Ils supportes des effets de survolement et de clique
+    /// </summary>
     public class Button
     {
         private string text;
@@ -20,7 +23,6 @@ namespace ZombieChezLeComte
         private SpriteFont font;
         private uint paddindTop;
         private uint paddingLeft;
-        private string name;
 
         private string hoverText;
         private Color currentColor;
@@ -288,10 +290,13 @@ namespace ZombieChezLeComte
 
         public void Update(MouseState _ms, Game1 game)
         {
+            // Si la souris clique sur le bouton
             if (_ms.LeftButton == ButtonState.Pressed && this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
             {
+                // Effet de clique
                 this.CurrentColor = this.ClickBgColor;
                 this.CurrentTextColor = this.ClickTextColor;
+                // Action des boutons
                 if (this.Text == "Nouvelle Partie")
                 {
                     game.LoadIntro();
@@ -328,13 +333,10 @@ namespace ZombieChezLeComte
                 }
                 return;
             }
-            else
+            // Si la souris survole le bouton
+            else if (this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
             {
-                this.CurrentColor = this.BgColor;
-                this.CurrentTextColor = this.TextColor;
-            }
-            if (this.ButtonRect.Intersects(new Rectangle(_ms.Position, new Point(1, 1))))
-            {
+                // effet de survole
                 this.WriteText = this.HoverText;
                 this.CurrentTextColor = this.HoverTextColor;
                 

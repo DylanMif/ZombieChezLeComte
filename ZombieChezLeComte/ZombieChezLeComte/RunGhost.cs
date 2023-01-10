@@ -164,7 +164,7 @@ namespace ZombieChezLeComte
                 }
             }
             this.Ghost.Update(_gameTime);
-            this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
+            this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime);
             _timer -= (float)_gameTime.GetElapsedSeconds();
             if (this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.Ghost.Position) <= 150)
             {

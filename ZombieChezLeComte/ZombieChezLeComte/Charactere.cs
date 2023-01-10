@@ -14,6 +14,9 @@ using MonoGame.Extended.Content;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe permettant de gérer tout les caractère animés du jeu
+    /// </summary>
     public class Charactere
     {
         private Vector2 _position;
@@ -122,10 +125,18 @@ namespace ZombieChezLeComte
             _spriteBatch.Draw(this.Perso, this.Position);
             _spriteBatch.End();
         }
+
+        /// <summary>
+        /// Déplace le Charactere en jouant sa bonne animation
+        /// </summary>
+        /// <param name="_vector2">Direction de déplacement uniquement</param>
+        /// <param name="_delattime"></param>
+        /// <param name="isPlayer"></param>
         public void Movement(Vector2 _vector2, float _delattime, bool isPlayer)
         {
             if (_vector2.X == 0 && _vector2.Y == 0)
             {
+                // On regarde la dernière animation pour savoir dans quelle sens joué l'idle
                 if (this.CurrentAnimation== "estWalk" || this.CurrentAnimation == "idleEst")
                 {
                     this.CurrentAnimation = "idleEst";
@@ -143,6 +154,7 @@ namespace ZombieChezLeComte
                     this.CurrentAnimation = "idle";
                 }
             }
+            // On anime le personnage en fonction de la direction du personnage
             if(_vector2.X > 0)
             {
                 this.CurrentAnimation = "estWalk";
@@ -159,14 +171,22 @@ namespace ZombieChezLeComte
             {
                 this.CurrentAnimation = "northWalk";
             }
+            // Le joueur à un déplacement particulier avec la caméra qui est gérer d'une autre manière
+            // donc si c'est le joueur on le déplace pas ici
             if(!isPlayer)
                 this.Position += _vector2 * this.Vitesse * _delattime;
 
         }
-        public void MovementWithoutAnim(Vector2 _vector2, float _delattime, bool isPlayer)
+
+        /// <summary>
+        /// Les fantômes/zombies doivent se déplacer à l'inverse de la camera pour rester fixe sur la map
+        /// Lors de ce movement ils ne doivent pas être animé d'où cette méthode
+        /// </summary>
+        /// <param name="_vector2">Direction de déplacement uniquement</param>
+        /// <param name="_delattime"></param>
+        public void MovementWithoutAnim(Vector2 _vector2, float _delattime)
         {
-            if (!isPlayer)
-                this.Position += _vector2 * this.Vitesse * _delattime;
+            this.Position += _vector2 * this.Vitesse * _delattime;
         }
     }
 }

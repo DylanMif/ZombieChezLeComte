@@ -175,7 +175,7 @@ namespace ZombieChezLeComte
             textInfo.Update(gameTime);
 
             
-            deadZombie.MovementWithoutAnim(commonNight.CameraMove , commonNight.DeltaTime, false);
+            deadZombie.MovementWithoutAnim(commonNight.CameraMove , commonNight.DeltaTime);
             deadZombie.Update(gameTime);
 
             if (bookshelfInteract.HasAlreadyInteractable && kitchenInteract.HasAlreadyInteractable &&

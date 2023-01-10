@@ -14,6 +14,9 @@ namespace ZombieChezLeComte
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
 
+        /// <summary>
+        /// Variable utile pour savoir qui a tué le joueur lorsqu'on charge la scène du jumpscare
+        /// </summary>
         public string killBy;
         public bool isInOutro;
         public bool isInMainMenu;
@@ -76,6 +79,8 @@ namespace ZombieChezLeComte
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            // Ensemble des "code de triche"
             if (Keyboard.GetState().IsKeyDown(Keys.NumPad0))
                 LoadIntro();
             if ( Keyboard.GetState().IsKeyDown(Keys.NumPad1))
@@ -99,12 +104,15 @@ namespace ZombieChezLeComte
             if (Keyboard.GetState().IsKeyDown(Keys.G))
                 LoadGameOver();
             // TODO: Add your update logic here
+
+            // On joue la musique de fin si on est sur la scène de fin
             if (isInOutro)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(outroMusic);
                 isInOutro = false;
             }
+            // Sinon on joue la musique principale
             if (isInMainMenu)
             {
                 MediaPlayer.Stop();
@@ -127,11 +135,11 @@ namespace ZombieChezLeComte
         public void LoadMainMenu()
         {
             isInMainMenu = true;
-            _screenManager.LoadScreen(new MainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenMainMenu(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
         public void LoadIntro()
         {
-            _screenManager.LoadScreen(new Introduction(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenIntroduction(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
         public void LoadNight1()
         {
@@ -164,7 +172,6 @@ namespace ZombieChezLeComte
         public void LoadCommand()
         {
             _screenManager.LoadScreen(new ScreenCommand(this), new FadeTransition(GraphicsDevice, Color.Black));
-            DataSaver.SaveNight(5);
         }
         public void LoadCave()
         {
@@ -183,37 +190,31 @@ namespace ZombieChezLeComte
         public void LoadNight6()
         {
             _screenManager.LoadScreen(new Nuit6(this), new FadeTransition(GraphicsDevice, Color.Black));
-            DataSaver.SaveNight(5);
         }
 
         public void LoadBetween1And2()
         {
             _screenManager.LoadScreen(new ScreenBetween1And2(this), new FadeTransition(GraphicsDevice, Color.Black));
-            DataSaver.SaveNight(5);
         }
 
         public void LoadBetween2And3()
         {
             _screenManager.LoadScreen(new ScreenBetwween2And3(this), new FadeTransition(GraphicsDevice, Color.Black));
-            DataSaver.SaveNight(5);
         }
 
         public void LoadBetween3And4()
         {
             _screenManager.LoadScreen(new ScreenBetween3And4(this), new FadeTransition(GraphicsDevice, Color.Black));
-            DataSaver.SaveNight(5);
         }
 
         public void LoadBetween4And5()
         {
             _screenManager.LoadScreen(new ScreenBetween4And5(this), new FadeTransition(GraphicsDevice, Color.Black));
-            DataSaver.SaveNight(5);
         }
 
         public void LoadGameOver()
         {
             _screenManager.LoadScreen(new ScreenGameOver(this), new FadeTransition(GraphicsDevice, Color.Black));
-            DataSaver.SaveNight(5);
         }
 
     }

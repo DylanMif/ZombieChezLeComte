@@ -18,6 +18,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe servant à regrouper le code commun à toutes les nuits
+    /// </summary>
     public class CommonNight
     {
         private TiledMap _tiledMap;
@@ -32,6 +35,7 @@ namespace ZombieChezLeComte
         private float deltaTime;
 
         private Texture2D visionBlock;
+
         private SoundEffect walkSound;
         private float _timer;
         private float _maxTime;
@@ -167,28 +171,32 @@ namespace ZombieChezLeComte
         }
         public void Update(GameTime _gameTime)
         {
-            //Player.CurrentAnimation = "idle";
             Vector2 newPlayerPos = Additions.Normalize(Additions.GetAxis(Keyboard.GetState())) * 
                 Constantes.VITESSE_JOUEUR * (float)_gameTime.ElapsedGameTime.TotalSeconds;
+            // Prochaine case sur laquelle se déplacera le joueur
             float nextX = (-this.CameraPosition.X + 1080 - 180 + newPlayerPos.X * 2f) / TiledMap.TileWidth;
             float nextY = (-this.CameraPosition.Y + 720 + newPlayerPos.Y) / TiledMap.TileHeight + 0.4f;
-            //Console.WriteLine(nextX + ", " + nextY);
-            this.TiledMapRenderer.Update(_gameTime);
+
             this.CameraMove = Vector2.Zero;
-            _timer -= _gameTime.GetElapsedSeconds();
+            
+            // Le joueur se déplace uniquement s'il n'y a pas de collision
             if (!IsCollision((ushort)nextX, (ushort)nextY))
             {
-                
-                if (_timer<=0 && (Keyboard.GetState().IsKeyDown(Keys.Z) || Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Q)))
+                // On joue le son de bruit de pas uniquement si le joueur se déplace réellement
+                if (_timer <= 0 && Additions.GetAxis(Keyboard.GetState()) != Vector2.Zero)
                 {
                     walkSound.Play();
                     _timer = _maxTime;
                 }
+                // Cette méthode ne déplace pas réellement le joueur comme le paramètre "isPlayer" est à true
+                // le but est uniquement de l'animer
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
+                // Pour le déplacer réellement on déplace la camera
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
                 
             }
+            // Conditions concernant la fonction de course du joueur
             if(Keyboard.GetState().IsKeyDown(Constantes.runKeys) && currentStamina > 0)
             {
                 this.Player.Vitesse = Constantes.VITESSE_JOUEUR_RUN;
@@ -204,11 +212,10 @@ namespace ZombieChezLeComte
                     currentStamina = Constantes.MAX_STAMINA_TIME;
                 }
             }
-
-            //Console.WriteLine(-Camera.Position);
+            _timer -= _gameTime.GetElapsedSeconds();
             this.Player.Update(_gameTime);
             this.Camera.LookAt(this.CameraPosition);
-
+            this.TiledMapRenderer.Update(_gameTime);
         }
 
         
@@ -219,6 +226,12 @@ namespace ZombieChezLeComte
             
         }
 
+
+        /// <summary>
+        /// Méthode dessinant le cadre noir autour du joueur
+        /// Elle est séparé de la méthode draw car ce cadre doit être dessiner au dessus de tout le reste
+        /// </summary>
+        /// <param name="_sb">Le SpriteBatch</param>
         public void DrawVision(SpriteBatch _sb)
         {
             _sb.Draw(this.VisionBlock, new Rectangle(0, 0, Constantes.WINDOW_WIDTH, Constantes.WINDOW_HEIGHT), Color.White);
@@ -244,6 +257,10 @@ namespace ZombieChezLeComte
             this.CameraPosition += speed * movementDirection * seconds;
         }
 
+        /// <summary>
+        /// Récupère la tuile de la map sur la quelle se trouve le joueur
+        /// </summary>
+        /// <returns>une instance de NodeCase donnant les informations sur la tuile du joueur</returns>
         public NodeCase GetPlayerCase()
         {
             int x = (int)(-this.CameraPosition.X + 1080 - 180) / TiledMap.TileWidth;

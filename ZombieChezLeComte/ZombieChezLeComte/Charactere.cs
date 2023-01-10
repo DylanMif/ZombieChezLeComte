@@ -85,7 +85,6 @@ namespace ZombieChezLeComte
                 this._currentAnimation = value;
             }
         }
-
         public Rectangle SpriteRect
         {
             get
@@ -137,19 +136,23 @@ namespace ZombieChezLeComte
             if (_vector2.X == 0 && _vector2.Y == 0)
             {
                 // On regarde la dernière animation pour savoir dans quelle sens joué l'idle
-                if (this.CurrentAnimation== "estWalk" || this.CurrentAnimation == "idleEst")
+                if (this.CurrentAnimation== "estWalk" || this.CurrentAnimation == "idleEst" 
+                    || this.CurrentAnimation == "estWalkSword" || this.CurrentAnimation == "idleEstSword")
                 {
                     this.CurrentAnimation = "idleEst";
                 }
-                else if (this.CurrentAnimation == "northWalk" || this.CurrentAnimation == "idleNorth")
+                else if (this.CurrentAnimation == "northWalk" || this.CurrentAnimation == "idleNorth" 
+                    || this.CurrentAnimation == "northWalkSword" || this.CurrentAnimation == "idleNorthSword")
                 {
                     this.CurrentAnimation = "idleNorth";
                 }
-                else if (this.CurrentAnimation == "westWalk" || this.CurrentAnimation == "idleWest")
+                else if (this.CurrentAnimation == "westWalk" || this.CurrentAnimation == "idleWest"
+                    || this.CurrentAnimation == "westWalkSword" || this.CurrentAnimation == "idleWestSword")
                 {
                     this.CurrentAnimation = "idleWest";
                 }
-                else if (this.CurrentAnimation == "southWalk" || this.CurrentAnimation == "idle")
+                else if (this.CurrentAnimation == "southWalk" || this.CurrentAnimation == "idle"
+                    || this.CurrentAnimation == "southWalkSword" || this.CurrentAnimation == "idleSword")
                 {
                     this.CurrentAnimation = "idle";
                 }
@@ -176,6 +179,21 @@ namespace ZombieChezLeComte
             if(!isPlayer)
                 this.Position += _vector2 * this.Vitesse * _delattime;
 
+        }
+        /// <summary>
+        /// Gere l'animation du joueur quand il a une épée
+        /// </summary>
+        /// <param name="_vector2"> le vecteur de direction</param>
+        /// <param name="_delattime"></param>
+        /// <param name="isPlayer"></param>
+        /// <param name="hasSword"></param>
+        public void Movement(Vector2 _vector2, float _delattime, bool isPlayer, bool hasSword)
+        {
+            this.Movement(_vector2, _delattime, isPlayer);
+            if (hasSword)
+            {
+                this.CurrentAnimation += "Sword";
+            }
         }
 
         /// <summary>

@@ -174,7 +174,7 @@ namespace ZombieChezLeComte
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
         {
             this.Ghost.Update(_gameTime);
-            this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
+            this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime);
             if(this.Ghost.SpriteRect.Intersects(_commonNight.Player.SpriteRect) && !Constantes.GOD_MOD)
             {
                 _game.killBy = "doorGhost";

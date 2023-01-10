@@ -197,7 +197,7 @@ namespace ZombieChezLeComte
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
         {
             this.ZombieChar.Update(_gameTime);
-            this.ZombieChar.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
+            this.ZombieChar.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime);
             _timer -= (float)_gameTime.GetElapsedSeconds();
             if(this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.ZombieChar.Position) <= 150)
             {

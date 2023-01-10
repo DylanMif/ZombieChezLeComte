@@ -134,7 +134,7 @@ namespace ZombieChezLeComte
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
         {
             this.Ghost.Update(_gameTime);
-            this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime, false);
+            this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime);
             this.Ghost.Movement(Additions.Normalize(_commonNight.Player.Position - this.Ghost.Position) * this.Speed,
                 _commonNight.DeltaTime, false);
             if (_commonNight.Player.SpriteRect.Intersects(this.Ghost.SpriteRect) && !Constantes.GOD_MOD)

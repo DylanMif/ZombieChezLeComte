@@ -21,7 +21,9 @@ using Microsoft.Xna.Framework.Audio;
 namespace ZombieChezLeComte
 {
     /// <summary>
-    /// Classe permettant de gérer le fantôme portes
+    /// Classe permettant de gérer le fantôme porte
+    /// Ce fantôme ne bouge pas mais il bouche un chemin, ce qui nous empèche de passer car si on le touche on meurt.
+    /// il change de position après un certain temps
     /// </summary>
     public class DoorGhost
     {

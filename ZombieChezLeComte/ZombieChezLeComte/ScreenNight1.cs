@@ -60,13 +60,13 @@ namespace ZombieChezLeComte
             }
             kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ranger les bibliotheques");
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Ranger la table de la cuisine");
-            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Balayer le couloir de la cave");
+            kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Balayer le couloir devant la cave");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Faire les lits");
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Aller dormir une fois les taches finis");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "Rien a faire sur ce papier");
 
             solNettoyage.Initialize(new Vector2(4765,6637), 103, 26, "sol", "Ca merite un coup de balais");
-            porteCave.Initialize(new Vector2(4917, 6637), 103, 26, "porte", "Ferme a cle! Bizarre...");
+            porteCave.Initialize(new Vector2(4917, 6627), 103, 36, "porte", "Ferme a cle! Bizarre...");
             tableCuisine.Initialize(new Vector2(4306,6576), 117,40,"table","Beurk!");
 
             for (int i = 0; i < litInteraction.Length; i++)

@@ -22,6 +22,9 @@ namespace ZombieChezLeComte
 {
     /// <summary>
     /// Classe permettant de gérer le fantôme chasseur
+    /// Ce fantôme se dirige lentement vers le joueur en tranversant les murs, s'il attrape le joueur c'est perdu
+    /// Le joueur peut le voir s'il se trouve hors du champs de vision éclairé du joueur, mais s'il se trouve 
+    /// dans le cercle de lumière du joueur il devient invisible, mais il avance toujours vers le joueur
     /// </summary>
     public class HuntGhost
     {

@@ -19,6 +19,9 @@ using MonoGame.Extended.Serialization;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Screen gérant la phase final du jeu
+    /// </summary>
     public class ScreenOutro : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
@@ -36,6 +39,7 @@ namespace ZombieChezLeComte
                 "La mort aurait peut-etre pu etre eviter...",
                 "[Appuyez sur espace pour retourner au menu principale]",
             };
+            // On utilise plusieurs textInfo pour afficher les phrase une par une
             allTextInfo = new TextInfo[introSentance.Length];
             for (int i = 0; i < allTextInfo.Length; i++)
             {

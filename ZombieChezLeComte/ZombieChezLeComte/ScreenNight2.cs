@@ -77,9 +77,9 @@ namespace ZombieChezLeComte
             {
                 armures[i] = new InteractObject();
             }
-            armures[0].Initialize(new Vector2(4798, 6380), 102, 18, "armure1", "J'ai jamais vu autant de poussiere");
-            armures[1].Initialize(new Vector2(4225, 6540), 60, 18, "armure2", "Elles doivent valoir une fortune");
-            feu.Initialize(new Vector2(4990, 6382), 40, 20, "feu", "Ca fait du bien de se rechauffer !");
+            armures[0].Initialize(new Vector2(4788, 6370), 122, 28, "armure1", "J'ai jamais vu autant de poussiere");
+            armures[1].Initialize(new Vector2(4215, 6530), 70, 28, "armure2", "Elles doivent valoir une fortune");
+            feu.Initialize(new Vector2(4990, 6372), 40, 30, "feu", "Ca fait du bien de se rechauffer !");
             cuisine.Initialize(new Vector2(3979, 6563), 33, 37, "cuisine", "Ca sera plus simple de cuisiner si j'ai la viande");
             recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "lit4", "Beurk...C'est quoi cette viande ! Peut etre du boeuf orientale...");
             sonJouer = false;

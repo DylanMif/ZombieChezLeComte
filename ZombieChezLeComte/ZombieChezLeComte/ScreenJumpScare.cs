@@ -20,6 +20,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Screen gérant les jumpscares
+    /// </summary>
     public class ScreenJumpScare : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
@@ -38,6 +41,8 @@ namespace ZombieChezLeComte
 
         public override void LoadContent()
         {
+            // On initialise un petit dictionnaire pour jouer le bon son et affichez la bonne image en fonction de quelle
+            // monstre nous a tué
             jumpScareImage.Add("runGhost", Game.Content.Load<Texture2D>("runGhostJumpScare"));
             jumpScareSound.Add("runGhost", Game.Content.Load<SoundEffect>("runGhostJumpScareSound"));
 
@@ -67,6 +72,8 @@ namespace ZombieChezLeComte
             currentTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if(currentTime <= 0)
             {
+                // Le fantôme final "endGhost" nous tue forcément c'est prévu dans l'histoire.
+                // C'est pour cela qu'il y a pas le même comportement
                 if(Game.killBy != "endGhost")
                 {
                     Game.LoadGameOver();

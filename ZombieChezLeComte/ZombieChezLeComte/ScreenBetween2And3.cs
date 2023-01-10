@@ -18,6 +18,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Screen de transition entre la nuit 2 et 3
+    /// </summary>
     public class ScreenBetwween2And3 : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;

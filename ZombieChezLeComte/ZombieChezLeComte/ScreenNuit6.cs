@@ -20,10 +20,14 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
-    internal class Nuit6 : GameScreen
+    /// <summary>
+    /// Screen gérant la nuit 6
+    /// </summary>
+    public class ScreenNuit6 : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public Nuit6(Game1 game) : base(game) { }
+        public ScreenNuit6(Game1 game) : base(game) { }
+
         private CommonNight commonNight = new CommonNight();
 
         private HuntGhost huntGhost = new HuntGhost();
@@ -49,18 +53,17 @@ namespace ZombieChezLeComte
             zombie.PeutTuer = true;
             zombie.PeutBouger = true;
 
+            // On initialise tous les objets interactifs
             for (int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
             }
-
             kitchenPapers[0].Initialize(new Vector2(3843, 6591), 23, 16, "papier1", "Ne mourrez pas et n'allez en aucun cas a la cave");
             kitchenPapers[1].Initialize(new Vector2(3925, 6572), 31, 38, "papier2", "Le sommeil est la cle");
             kitchenPapers[2].Initialize(new Vector2(3955, 6632), 42, 35, "papier3", "Lire revele la cle");
             kitchenPapers[3].Initialize(new Vector2(4021, 6572), 30, 27, "papier4", "Ranger pour mieux retrouver vos affaires comme une cle...");
             kitchenPapers[4].Initialize(new Vector2(4086, 6571), 36, 27, "papier5", "Se renforcer est la cle");
             kitchenPapers[5].Initialize(new Vector2(4120, 6605), 36, 27, "papier6", "L'eau est la cle de la vie");
-
             for (int i = 0; i < keyFragementInteract.Length; i++)
             {
                 keyFragementInteract[i] = new InteractObject();
@@ -102,6 +105,7 @@ namespace ZombieChezLeComte
             runGhost.Update(gameTime, commonNight, Game);
             zombie.Update(gameTime, commonNight, Game);
 
+            // Check de toutes les interactions
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 foreach (InteractObject paperInteract in kitchenPapers)
@@ -168,6 +172,11 @@ namespace ZombieChezLeComte
             huntGhost.Draw(Game.SpriteBatch, commonNight);
         }
 
+        /// <summary>
+        /// Méthodes donnant le nombre de fragment de clé collecté par le joueur
+        /// </summary>
+        /// <param name="_allKeyFrag">Le tableau de tous les objets interactifs concernés</param>
+        /// <returns></returns>
         private static int GetNbKeyFragment(InteractObject[] _allKeyFrag)
         {
             int res = 0;

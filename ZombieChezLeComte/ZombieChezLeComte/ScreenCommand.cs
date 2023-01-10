@@ -12,6 +12,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Screen pour la page des commandes
+    /// </summary>
     public class ScreenCommand : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
@@ -38,12 +41,13 @@ namespace ZombieChezLeComte
                 "",
                 "",
                 "",
-                "",
+                "", // Ceci permet de laisser plus d'espace entre les lignes de "vrai" texte
                 "",
                 "",
                 "",
                 "[Espace] Retourner au menu principale"
             };
+            // Plusieurs textes infos pour afficher les lignes petits à petits
             allTextInfo = new TextInfo[commands.Length];
             for (int i = 0; i < allTextInfo.Length; i++)
             {

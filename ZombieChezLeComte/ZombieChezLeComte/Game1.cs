@@ -160,7 +160,7 @@ namespace ZombieChezLeComte
 
         public void LoadNight4()
         {
-            _screenManager.LoadScreen(new Nuit4(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenNuit4(this), new FadeTransition(GraphicsDevice, Color.Black));
             DataSaver.SaveNight(4);
         }
 
@@ -189,7 +189,7 @@ namespace ZombieChezLeComte
 
         public void LoadNight6()
         {
-            _screenManager.LoadScreen(new Nuit6(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new ScreenNuit6(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
 
         public void LoadBetween1And2()

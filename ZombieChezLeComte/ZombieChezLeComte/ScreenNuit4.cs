@@ -21,10 +21,13 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
-    internal class Nuit4 : GameScreen
+    /// <summary>
+    /// Screen gérant la nuit 4
+    /// </summary>
+    public class ScreenNuit4 : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public Nuit4(Game1 game) : base(game) { }
+        public ScreenNuit4(Game1 game) : base(game) { }
         private CommonNight _nuit4 = new CommonNight();
 
         private TextInfo textInfo = new TextInfo();
@@ -52,6 +55,8 @@ namespace ZombieChezLeComte
         {
             _nuit4.Initialize(Game.Window, Game.GraphicsDevice);
             textInfo.Initialize("erer", Color.White, new Vector2(10, Constantes.WINDOW_HEIGHT - 150));
+
+            // Initialisation des objets intéractifs
             for (int i = 0; i < litInteractions.Length; i++)
             {
                 litInteractions[i] = new InteractObject();
@@ -80,9 +85,11 @@ namespace ZombieChezLeComte
             laverLivres[2].Initialize(new Vector2(4184, 6384), 50, 50, "armoire3", "Decidemment, ca devient de plus en plus bizarre...");
             recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "viande", "Toujours la meme viande ragoutante...");
             debutArme.Initialize(new Vector2(0, 0), 32, 26, "arme", "J'ai une epee. Vite l'eau benite de la buandrie !");
+
             zombie.Initialiaze(new Vector2(-350, 0), Constantes.ZOMBIE_SPEED);
             zombie.PeutTuer = false;
             zombie.PeutBouger = false;
+
             base.Initialize();
         }
         public override void LoadContent()
@@ -103,6 +110,8 @@ namespace ZombieChezLeComte
             _nuit4.Update(gameTime);
             textInfo.Update(gameTime);
             zombie.Update(gameTime, _nuit4, Game);
+
+            // Test de toutes les interactions
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 for (int i = 0; i < kitchenPapers.Length; i++)
@@ -199,6 +208,8 @@ namespace ZombieChezLeComte
                     }
                     nombreMorceauxArme += 1;
                 }
+
+                // Mise à jour si besoin des états du zombie
                 if (uneTache && zombie.PeutBouger==false)
                 {
                     zombie.PeutTuer = true;
@@ -209,6 +220,8 @@ namespace ZombieChezLeComte
                     zombie.PeutTuer = false;
                 }
             }
+
+            // Gestion des étapes de la création de l'épée
             if ((nombreLitFait == litInteractions.Length && nombreLivre == laverLivres.Length && couteuxFour.HasAlreadyInteractable == true && nombreMorceauxArme == 0) || Keyboard.GetState().IsKeyDown(Keys.E))
             {
                 debutArme.InteractRect = new Rectangle(5072, 6125, debutArme.InteractRect.Width, debutArme.InteractRect.Height);

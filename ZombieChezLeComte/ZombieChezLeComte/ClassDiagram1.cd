@@ -3,14 +3,14 @@
   <Class Name="ZombieChezLeComte.Additions" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAQAAEAAgAAEAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAAAQAAEAAgAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Additions.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ZombieChezLeComte.Button" Collapsed="true">
     <Position X="0.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYAQAAABEAAAwQoQLAEKMAwgACEAICIBYgAiAUKAAQ=</HashCode>
+      <HashCode>AAYAQAAABEAAAwQoQLAEKMAwgACAAICIBYgAiAUKAAQ=</HashCode>
       <FileName>Button.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,7 +24,7 @@
   <Class Name="ZombieChezLeComte.CommonNight" Collapsed="true">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIUCAQAAAJEgIxABAJAACBAQCAAACQAIAAgAISAIAAQ=</HashCode>
+      <HashCode>AIUCAQAAAJEgIxQBAJAACBAQCAAACQAIAAgAISAIAAQ=</HashCode>
       <FileName>CommonNight.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,7 +45,7 @@
   <Class Name="ZombieChezLeComte.DoorGhost" Collapsed="true">
     <Position X="2.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAgAAMwAABDAAIAQBAAAAAQQAAAAEAAAAAAQ=</HashCode>
+      <HashCode>QAYgAEACIgAgMwAABDAAIAQBAAAAAQQAAAAEAAAEAAQ=</HashCode>
       <FileName>DoorGhost.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,50 +59,50 @@
   <Class Name="ZombieChezLeComte.HuntGhost" Collapsed="true">
     <Position X="2.5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAIwAAACAAAAABAAAAAQQAAAAEAAAAAAQ=</HashCode>
+      <HashCode>QAYgAEACIAAgIwAAACAAAAABAAAAAQQAAAAEAAAEAAQ=</HashCode>
       <FileName>HuntGhost.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ZombieChezLeComte.InteractObject" Collapsed="true">
     <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAAIAAAASAAAAAAAAEAAABACAAAAAgAAAABIAA=</HashCode>
+      <HashCode>AAEAAAAAIAAAASAAAAAAAAEAAAAACAAAAAgAAAABIAA=</HashCode>
       <FileName>InteractObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.Introduction" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenIntroduction" Collapsed="true">
     <Position X="8.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAgAAAAAAAAIAAAAEAQ=</HashCode>
-      <FileName>Introduction.cs</FileName>
+      <FileName>ScreenIntroduction.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.MainMenu" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenMainMenu" Collapsed="true">
     <Position X="8.25" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABQCBAACAgGgA4AAQAABAAAQAAhAAAAAAAQAAAAECAU=</HashCode>
-      <FileName>MainMenu.cs</FileName>
+      <FileName>ScreenMainMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.Night1" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenNight1" Collapsed="true">
     <Position X="8.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQACAAAAAAIAwEAAwAAAABAIAoAAACAAEAAAgABAAY=</HashCode>
-      <FileName>Night1.cs</FileName>
+      <FileName>ScreenNight1.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.Night2" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenNight2" Collapsed="true">
     <Position X="8.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQADAAAAAAAJwAAAgAAIABAIAggAAmAAEAAKgAgAAQ=</HashCode>
-      <FileName>Night2.cs</FileName>
+      <HashCode>AAQADAAQAAAAJwAAAgAAIABAIAggAAmAAEAAKgAgAAQ=</HashCode>
+      <FileName>ScreenNight2.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.Night3" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenNight3" Collapsed="true">
     <Position X="8.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgQACAAAAAIAKwEAAgCAAAAAIAgAAAAAIAAAAYAAIAY=</HashCode>
-      <FileName>Night3.cs</FileName>
+      <FileName>ScreenNight3.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ZombieChezLeComte.NodeCase" Collapsed="true">
@@ -112,25 +112,25 @@
       <FileName>NodeCase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.Nuit4" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenNuit4" Collapsed="true">
     <Position X="8.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQQDCAQAIAAIwAAAgBAIAAAIAgIAIAAAEAAAgAgAAQ=</HashCode>
-      <FileName>Nuit4.cs</FileName>
+      <FileName>ScreenNuit4.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.Nuit5" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenNuit5" Collapsed="true">
     <Position X="8.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AkQQAAAAAAQIAwAAAgAAAAAAIAoAAAEAIAAAAgAEAAQ=</HashCode>
-      <FileName>Nuit5.cs</FileName>
+      <FileName>ScreenNuit5.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ZombieChezLeComte.Nuit6" Collapsed="true">
+  <Class Name="ZombieChezLeComte.ScreenNuit6" Collapsed="true">
     <Position X="8.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AkQQAAAAAAQIAwAAAgAAAAAAIAoAAAEAIAAAAgAEAAQ=</HashCode>
-      <FileName>Nuit6.cs</FileName>
+      <FileName>ScreenNuit6.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ZombieChezLeComte.PriorityQueue" Collapsed="true">
@@ -143,7 +143,7 @@
   <Class Name="ZombieChezLeComte.RunGhost" Collapsed="true">
     <Position X="2.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAACAAAAAIwAIACEACAABAAAAAQQAAAAEAAAAAAQ=</HashCode>
+      <HashCode>QAYgAECCIAAgIwAIACEACAABAAAAAQQAAAAEAAAEAAQ=</HashCode>
       <FileName>RunGhost.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -220,7 +220,7 @@
   <Class Name="ZombieChezLeComte.Zombie" Collapsed="true">
     <Position X="2.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>DAQAAQgAAAwiEgAAIgAAAgQBAAAEQQAAAAAAAAwAAAQ=</HashCode>
+      <HashCode>TAcAAUgCAAwiEgAAIgAAAgQBAAAEQQAAAAAAAAwFAAQ=</HashCode>
       <FileName>Zombie.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -9,6 +9,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe gérant les textInfo, les textes qui s'affiche petit à petit à l'écran (un caractère par frame).
+    /// Après avoir été complétement écrit il reste à l'écran pendant un certain temps avant de disparaître
+    /// </summary>
     public class TextInfo
     {
         private string text;
@@ -22,20 +26,25 @@ namespace ZombieChezLeComte
         private bool isFinished;
         private bool textFullyWritten;
 
+        /// <summary>
+        /// Si le textInfo est en train d'écrire du texte, son texte ne pourra pas être changer
+        /// </summary>
         public string Text
         {
             get
             {
                 return this.text;
             }
-
+            
             set
             {
                 if(!this.WritingText)
                     this.text = value;
             }
         }
-
+        /// <summary>
+        /// Indique le texte affiché actuellement à l'écran alors que la propriété Text contient le texte qui sera écri
+        /// </summary>
         public string WriteText
         {
             get
@@ -88,6 +97,9 @@ namespace ZombieChezLeComte
             }
         }
 
+        /// <summary>
+        /// Le boolean indique si le TextInfo est entrain d'écrire du texte ou non
+        /// </summary>
         public bool WritingText
         {
             get
@@ -127,6 +139,7 @@ namespace ZombieChezLeComte
             }
         }
 
+        // boolean indiquant si le TextInfo à completement fini son travail
         public bool IsFinished
         {
             get
@@ -140,6 +153,7 @@ namespace ZombieChezLeComte
             }
         }
 
+        // boolean indiquant si le texte est completement écrit
         public bool TextFullyWritten
         {
             get
@@ -172,14 +186,18 @@ namespace ZombieChezLeComte
 
         public void Update(GameTime gameTime)
         {
+            // Si le textInfo est entrain d'écrire
             if(this.WritingText)
             {
+                // Si il a tout écrit
                 if(this.WriteText.Length == this.Text.Length)
                 {
+                    // On commande a chronométré ça duré de vie
                     this.TextFullyWritten = true;
                     this.CurrentTextLifeTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
                 } else
                 {
+                    // On ajoute un caractère supplémentaire
                     this.WriteText += this.Text[this.WriteText.Length];
                 }
             }
@@ -199,6 +217,7 @@ namespace ZombieChezLeComte
 
         public void ActiveText(float textDuration)
         {
+            // Si le textInfo n'est pas déjà occupé on le lance pour une certaine durée
             if(!writingText)
             {
                 this.TextDuration = textDuration;

@@ -25,6 +25,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe gérant le zombie.
+    /// </summary>
     public class Zombie
     {
         private Charactere zombieChar;
@@ -87,6 +90,11 @@ namespace ZombieChezLeComte
                 this.speed = value;
             }
         }
+        /// <summary>
+        /// Les positions de zombie présente dans la prorpiété ZombieChar ne sont pas correct car elles changent
+        /// pour que le zombie reste fixé sur la map.
+        /// La prorpiété VirtualPos contient donc la position du zombie sur la map
+        /// </summary>
         public Vector2 VirtualPos
         {
             get
@@ -208,15 +216,17 @@ namespace ZombieChezLeComte
             if (PeutBouger)
             {
 
-
+                // On initialise sa direction
                 Vector2 dir = Vector2.Zero;
+
+                // On récupère la tuile sous ses pieds
                 ushort tileX = (ushort)(this.GetMapPos(_commonNight.Camera).X / _commonNight.TiledMap.TileWidth);
                 ushort tileY = (ushort)(this.GetMapPos(_commonNight.Camera).Y / _commonNight.TiledMap.TileHeight);
 
-
+                // on récupère la prochiane case pour pousuivre le joueur déterminer à l'aide de l'algorithme A*
                 NodeCase nextCase = this.GetNextCase(new NodeCase(tileX, tileY), _commonNight.GetPlayerCase(), _commonNight.MapLayer);
-
-
+                // Si elle n'est pas null (cela arrive si le zombie est sur la même case que le joueur, on met à jour 
+                // sa direction de déplacement
                 if(!(nextCase is null))
                 {
                     dir = new Vector2(nextCase.X - tileX, nextCase.Y - tileY);
@@ -226,6 +236,7 @@ namespace ZombieChezLeComte
                 this.ZombieChar.Movement(dir * this.Speed, _commonNight.DeltaTime, false);
                 this.VirtualPos += dir * this.Speed * _commonNight.DeltaTime;
 
+                // Si le joueur touche le zombie, on fait des choses différentes selon les conditions
                 if (this.ZombieChar.SpriteRect.Intersects(_commonNight.Player.SpriteRect))
                 {
                     if (this.PeutTuer == true && !Constantes.GOD_MOD)
@@ -241,13 +252,24 @@ namespace ZombieChezLeComte
             }
         }
 
+        /// <summary>
+        /// Détermine la prochaine case que le zombie doit prendre pour poursuivre le joueur.
+        /// La case est déterminé avec l'algorithme A*.
+        /// </summary>
+        /// <param name="zombieCase"></param>
+        /// <param name="playerCase"></param>
+        /// <param name="layer">layer collision de la map</param>
+        /// <returns>Un NodeCase qui est la prochaine case à emprunter ou la valeur null si le joueur et le zombie
+        /// sont sur la même case</returns>
         public NodeCase GetNextCase(NodeCase zombieCase, NodeCase playerCase, TiledMapTileLayer layer)
         {
+            // Si le zombie est sur la même case que le joueur on retourne tout de suite null
             if(zombieCase == playerCase)
             {
                 return null;
             }
 
+            // Initialisation de quelques variables
             zombieCase.SetHeuristique(playerCase);
             PriorityQueue priorityQueue = new PriorityQueue();
             Dictionary<NodeCase, NodeCase> predecesseur = new Dictionary<NodeCase, NodeCase>();
@@ -257,24 +279,28 @@ namespace ZombieChezLeComte
             predecesseur.Add(zombieCase, null);
             accesCost.Add(zombieCase, 0);
 
-
+            // Tant que la file n'est pas vide
             while(!priorityQueue.IsEmpty())
             {
                 NodeCase c = priorityQueue.Pop();
+                // Si la case c est celle du joueur on passe à l'étape de BackTracing
                 if(c == playerCase)
                 {
                     return this.BackTracing(predecesseur, zombieCase, playerCase);
                 } else
                 {
+                    // Pour chaque voisin
                     foreach(NodeCase v in c.GetNeighbors(layer))
                     {
+                        // Si on a pas déjà de cout d'accês, on l'ajoute
                         if(!accesCost.ContainsKey(v))
                         {
                             predecesseur.Add(v, c);
                             accesCost.Add(v, accesCost[c] + 1);
                             v.SetHeuristique(playerCase);
                             priorityQueue.Add(v, accesCost[v] + v.Heuristique);
-                        } else if(accesCost[v] > accesCost[c] + 1)
+                        } // sinon, si le cout est plus bas que celui qu'on a déjà on le met à jour 
+                        else if(accesCost[v] > accesCost[c] + 1)
                         {
                             predecesseur[v] = c;
                             accesCost[v] = accesCost[c] + 1;
@@ -287,6 +313,14 @@ namespace ZombieChezLeComte
             return null;
         }
 
+        /// <summary>
+        /// Après avoir fait un A*, cette métode donne la case juste après la case de départ vers laquelle il faudrait se 
+        /// diriger
+        /// </summary>
+        /// <param name="predecesseur">Un dictionnaire des prédecesseurs</param>
+        /// <param name="start"></param>
+        /// <param name="finish"></param>
+        /// <returns>La case qui suit le départ</returns>
         public NodeCase BackTracing(Dictionary<NodeCase, NodeCase> predecesseur, NodeCase start, NodeCase finish)
         {
             NodeCase tempCase = finish;
@@ -302,41 +336,16 @@ namespace ZombieChezLeComte
             this.ZombieChar.Draw(_sb);
         }
 
-        public bool IsCollision(ushort x, ushort y, TiledMapTileLayer mapLayer)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            mapLayer.TryGetTile(x, y, out tile);
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
-        }
-
+        /// <summary>
+        /// Retourne un Vecteur2 contenant la position réelle sur la map du zombie
+        /// </summary>
+        /// <param name="cam"></param>
+        /// <returns></returns>
         public Vector2 GetMapPos(OrthographicCamera cam)
         {
             Vector2 res = this.VirtualPos;
             res.X = res.X + 4260 + 360;
             res.Y = res.Y + 6392 + 360;
-            return res;
-        }
-
-        public Vector2 GetIntDir(Vector2 vec)
-        {
-            Vector2 res = Vector2.Zero;
-            if (vec.X < -0.1)
-                res.X = -1;
-            else if (vec.X > 0.1)
-                res.X = 1;
-            else
-                res.X = 0;
-            if (vec.Y < -0.1)
-                res.Y = -1;
-            else if (vec.Y > 0.1)
-                res.Y = 1;
-            else
-                res.Y = 0;
             return res;
         }
     }

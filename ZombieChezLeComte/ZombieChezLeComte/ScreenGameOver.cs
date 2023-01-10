@@ -20,6 +20,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Screen pour le GameOver
+    /// </summary>
     public class ScreenGameOver : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
@@ -49,6 +52,7 @@ namespace ZombieChezLeComte
 
         public override void Update(GameTime gameTime)
         {
+            // Le temps sur cette scène est limité donc un timer réduit petit à petit
             currentTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if(currentTime <= 0)
             {

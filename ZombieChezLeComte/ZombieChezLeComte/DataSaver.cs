@@ -21,9 +21,9 @@ namespace ZombieChezLeComte
         /// <param name="nightNumber">le numéro de nuit à sauvegarder </param>
         public static void SaveNight(int nightNumber)
         {
-            if(nightNumber < 1 || nightNumber > 5)
+            if(nightNumber < 0 || nightNumber > 5)
             {
-                throw new ArgumentException("Le numéros de la nuit doit être compris entre 1 et 5");
+                throw new ArgumentException("Le numéros de la nuit doit être compris entre 0 et 5");
             }
             string a = DataSaver.LoadEnd().ToString();
             StreamWriter sw = new StreamWriter("data.txt");

@@ -17,6 +17,11 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe permettant de gérer le fantôme coureure
+    /// Ce fantôme apparait hors de l'écran et fonce assez rapidement vers le joueur.
+    /// Cependant une fois lancé il ne change plus de direction
+    /// </summary>
     public class RunGhost
     {
         private Charactere ghost;
@@ -150,6 +155,7 @@ namespace ZombieChezLeComte
         public void Update(GameTime _gameTime, CommonNight _commonNight, Game1 _game)
         {
             Random random = new Random();
+            // On utilise de l'aléatoire pour le faire réapparaître
             if(random.Next(0, Constantes.NIGHT3_RUNGHOST_CHANCE) == 1)
             {
                 this.Spawn(_commonNight);
@@ -159,6 +165,7 @@ namespace ZombieChezLeComte
                 this.Ghost.Movement(this.Direction * this.Speed, (float)_gameTime.ElapsedGameTime.TotalSeconds, false);
                 if(_commonNight.Player.SpriteRect.Intersects(this.Ghost.SpriteRect) && !Constantes.GOD_MOD)
                 {
+                    // S'il touche le joueur on tue le joueur
                     _game.killBy = "runGhost";
                     _game.LoadJumpScare();
                 }
@@ -166,6 +173,7 @@ namespace ZombieChezLeComte
             this.Ghost.Update(_gameTime);
             this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime);
             _timer -= (float)_gameTime.GetElapsedSeconds();
+            // On joue un son si le joueur est assez proche
             if (this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.Ghost.Position) <= 150)
             {
                 GhostSounds.Play();
@@ -181,6 +189,10 @@ namespace ZombieChezLeComte
                 this.Ghost.Draw(_sb);
         }
 
+        /// <summary>
+        /// Méthode faisant apparaître le fantôme quelque part et lui donnant la direction actuel vers joeur
+        /// </summary>
+        /// <param name="_commonNight"></param>
         public void Spawn(CommonNight _commonNight)
         {
             this.Ghost.Position = this.ChooseRandom();
@@ -188,6 +200,10 @@ namespace ZombieChezLeComte
             this.Direction = Additions.Normalize(_commonNight.Player.Position - this.Ghost.Position);
         }
 
+        /// <summary>
+        /// Méthode retournant des coordonnées qui sont en dehors de l'écran
+        /// </summary>
+        /// <returns></returns>
         public Vector2 ChooseRandom()
         {
             Random random = new Random();

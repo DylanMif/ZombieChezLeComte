@@ -20,6 +20,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Screen gérant la cave
+    /// </summary>
     public class ScreenCave : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;

@@ -20,6 +20,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe permettant de gérer le fantôme chasseur
+    /// </summary>
     public class HuntGhost
     {
         private Charactere ghost;
@@ -137,22 +140,27 @@ namespace ZombieChezLeComte
             this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime);
             this.Ghost.Movement(Additions.Normalize(_commonNight.Player.Position - this.Ghost.Position) * this.Speed,
                 _commonNight.DeltaTime, false);
+            // Si le joueur le touche on tue le joueur
             if (_commonNight.Player.SpriteRect.Intersects(this.Ghost.SpriteRect) && !Constantes.GOD_MOD)
             {
                 _game.killBy = "huntGhost";
                 _game.LoadJumpScare();
             }
-            _timer -= (float)_gameTime.GetElapsedSeconds();
+            // On joue le son si le joueur est proche
             if (this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.Ghost.Position) <= 150)
             {
                 GhostSounds.Play();
                 MaxTemps = Aleatoire.Next(5, 6);
                 Timer = MaxTemps;
             }
+            _timer -= (float)_gameTime.GetElapsedSeconds();
         }
 
         public void Draw(SpriteBatch _sb, CommonNight _commonNight)
         {
+            // Comme il deveint invisible s'il se rapproche trop du joueur on le dessine juste plus
+            // Si ça distance au joueur est inférieur à 10 on le redessine, car à cette distance il tuera
+            // le joueur, on le fait donc réapparaître pour que le joueur voit un minimum pourquoi il meurt
             if(Vector2.Distance(this.Ghost.Position, _commonNight.Player.Position) > 150 ||
                 Vector2.Distance(this.Ghost.Position, _commonNight.Player.Position) < 10)
                 this.Ghost.Draw(_sb);

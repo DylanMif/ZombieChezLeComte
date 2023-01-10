@@ -19,7 +19,7 @@ using Microsoft.Xna.Framework.Audio;
 namespace ZombieChezLeComte
 {
     /// <summary>
-    /// Objet servant à regrouper le code commun à toutes les nuits
+    /// Classe servant à regrouper le code commun à toutes les nuits
     /// </summary>
     public class CommonNight
     {
@@ -182,17 +182,21 @@ namespace ZombieChezLeComte
             // Le joueur se déplace uniquement s'il n'y a pas de collision
             if (!IsCollision((ushort)nextX, (ushort)nextY))
             {
-                
+                // On joue le son de bruit de pas uniquement si le joueur se déplace réellement
                 if (_timer <= 0 && Additions.GetAxis(Keyboard.GetState()) != Vector2.Zero)
                 {
                     walkSound.Play();
                     _timer = _maxTime;
                 }
+                // Cette méthode ne déplace pas réellement le joueur comme le paramètre "isPlayer" est à true
+                // le but est uniquement de l'animer
                 this.Player.Movement(Additions.Normalize(Additions.GetAxis(Keyboard.GetState())),
                     (float)_gameTime.ElapsedGameTime.TotalSeconds, true);
+                // Pour le déplacer réellement on déplace la camera
                 this.MoveCamera(_gameTime, -Additions.Normalize(Additions.GetAxis(Keyboard.GetState())));
                 
             }
+            // Conditions concernant la fonction de course du joueur
             if(Keyboard.GetState().IsKeyDown(Constantes.runKeys) && currentStamina > 0)
             {
                 this.Player.Vitesse = Constantes.VITESSE_JOUEUR_RUN;
@@ -222,6 +226,12 @@ namespace ZombieChezLeComte
             
         }
 
+
+        /// <summary>
+        /// Méthode dessinant le cadre noir autour du joueur
+        /// Elle est séparé de la méthode draw car ce cadre doit être dessiner au dessus de tout le reste
+        /// </summary>
+        /// <param name="_sb">Le SpriteBatch</param>
         public void DrawVision(SpriteBatch _sb)
         {
             _sb.Draw(this.VisionBlock, new Rectangle(0, 0, Constantes.WINDOW_WIDTH, Constantes.WINDOW_HEIGHT), Color.White);
@@ -247,6 +257,10 @@ namespace ZombieChezLeComte
             this.CameraPosition += speed * movementDirection * seconds;
         }
 
+        /// <summary>
+        /// Récupère la tuile de la map sur la quelle se trouve le joueur
+        /// </summary>
+        /// <returns>une instance de NodeCase donnant les informations sur la tuile du joueur</returns>
         public NodeCase GetPlayerCase()
         {
             int x = (int)(-this.CameraPosition.X + 1080 - 180) / TiledMap.TileWidth;

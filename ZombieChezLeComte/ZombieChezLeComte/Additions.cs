@@ -61,7 +61,7 @@ namespace ZombieChezLeComte
 
         /// <summary>
         /// Nous avons remarqué un vecteur 2 valant 0 en X et 0 en Y ne peut pas être normalisé
-        /// Nous avons donc fait une fonction qui retourne un veteur normalisé quoi qu'il arrive
+        /// Nous avons donc fait une méthode qui retourne un veteur normalisé quoi qu'il arrive
         /// </summary>
         /// <param name="vec">Vecteur à normalisé</param>
         /// <returns>Vecteur normalisé</returns>

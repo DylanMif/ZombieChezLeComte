@@ -18,7 +18,10 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
-    internal class Night1 : GameScreen
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Night1 : GameScreen
     {
         
         private new Game1 Game => (Game1)base.Game;

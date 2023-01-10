@@ -15,7 +15,7 @@ using MonoGame.Extended.Content;
 namespace ZombieChezLeComte
 {
     /// <summary>
-    /// Objet permettant de gérer tout les caractère animés du jeu
+    /// Classe permettant de gérer tout les caractère animés du jeu
     /// </summary>
     public class Charactere
     {
@@ -180,7 +180,7 @@ namespace ZombieChezLeComte
 
         /// <summary>
         /// Les fantômes/zombies doivent se déplacer à l'inverse de la camera pour rester fixe sur la map
-        /// Lors de ce movement ils ne doivent pas être animé d'où cette fonction
+        /// Lors de ce movement ils ne doivent pas être animé d'où cette méthode
         /// </summary>
         /// <param name="_vector2">Direction de déplacement uniquement</param>
         /// <param name="_delattime"></param>

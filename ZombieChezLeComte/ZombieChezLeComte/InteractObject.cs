@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe permettant de gérer les objets interactifs et tâche sur la map
+    /// </summary>
     public class InteractObject
     {
         private Rectangle interactRect;
@@ -55,6 +58,9 @@ namespace ZombieChezLeComte
             }
         }
 
+        /// <summary>
+        /// Si on veut les combiner avec un textInfo on peut lui donner un texte qu'il pourra donner au textInfo au moment voulu
+        /// </summary>
         public string InteractText
         {
             get
@@ -76,16 +82,15 @@ namespace ZombieChezLeComte
             this.InteractText = _interactText;
         }
 
+        /// <summary>
+        /// Méthode permettant de savoir si des coordonnées sont dans le rectangle de l'InteractObject
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
         public bool InteractWith(Vector2 pos)
         {
             return this.InteractRect.Contains(pos);
         }
 
-
-        public void Destroy()
-        {
-            //On le sort de l'écran
-            this.InteractRect = new Rectangle(-150, -150, 1, 1);
-        }
     }
 }

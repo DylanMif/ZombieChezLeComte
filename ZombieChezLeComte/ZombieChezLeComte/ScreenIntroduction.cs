@@ -12,11 +12,16 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ZombieChezLeComte
 {
-    internal class Introduction : GameScreen
+    /// <summary>
+    /// Screen gérant le texte introductif au début du jeu
+    /// </summary>
+    public class ScreenIntroduction : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public Introduction(Game1 game) : base(game) { }
+        public ScreenIntroduction(Game1 game) : base(game) { }
 
+        // Pour que les phrases s'affiche une par une nous les mettons déjà toutes dans une liste
+        // Chaque phrase aura son TextInfo associé
         private string[] introSentance;
         private TextInfo[] allTextInfo;
 
@@ -58,6 +63,8 @@ namespace ZombieChezLeComte
             {
                 allTextInfo[i].LoadContent(font);
             }
+
+            // On lance la première phrase
             allTextInfo[0].ActiveText(50000);
             base.LoadContent();
         }
@@ -67,6 +74,7 @@ namespace ZombieChezLeComte
             for (int i = 0; i < allTextInfo.Length; i++)
             {
                 allTextInfo[i].Update(gameTime);
+                // Lorsque le précedant est fini on lance le suivant
                 if(i != allTextInfo.Length-1 && allTextInfo[i].TextFullyWritten && !allTextInfo[i+1].WritingText)
                 {
                     allTextInfo[i+1].ActiveText(50000);

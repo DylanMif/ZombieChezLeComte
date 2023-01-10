@@ -20,6 +20,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ZombieChezLeComte
 {
+    /// <summary>
+    /// Classe permettant de gérer le fantôme portes
+    /// </summary>
     public class DoorGhost
     {
         private Charactere ghost;
@@ -32,7 +35,9 @@ namespace ZombieChezLeComte
         private float maxTemps;
         private float _timer;
 
-
+        /// <summary>
+        /// Les différentes positions que peut prendre le fantôme
+        /// </summary>
         public static Vector2[] positions = new Vector2[]
         {
             new Vector2(200, 45),
@@ -175,18 +180,21 @@ namespace ZombieChezLeComte
         {
             this.Ghost.Update(_gameTime);
             this.Ghost.MovementWithoutAnim(_commonNight.CameraMove, _commonNight.DeltaTime);
+            // Si le joueur le touche on tue le joueur
             if(this.Ghost.SpriteRect.Intersects(_commonNight.Player.SpriteRect) && !Constantes.GOD_MOD)
             {
                 _game.killBy = "doorGhost";
                 _game.LoadJumpScare();
             }
             _timer -= (float)_gameTime.GetElapsedSeconds();
+            // On joue le son si le joueur est assez proche
             if (this.Timer <= 0 && Vector2.Distance(_commonNight.Player.Position, this.Ghost.Position) <= 150)
             {
                 GhostSounds.Play();
                 MaxTemps = Aleatoire.Next(5, 6);
                 Timer = MaxTemps;
             }
+            // Il ne reste pas indéfiniment sur sa position donc après un certain temps on la change
             this.CurrentStayTime -= (float)_gameTime.ElapsedGameTime.TotalSeconds;
             if(this.CurrentStayTime < 0)
             {
@@ -198,6 +206,10 @@ namespace ZombieChezLeComte
         {
             this.Ghost.Draw(_sb);
         }
+
+        /// <summary>
+        /// Méthode permettant de déplacer le fantôme à une autre position aléatoire parmis ces posiitons possibles
+        /// </summary>
         public void ChangePos()
         {
             Random random = new Random();

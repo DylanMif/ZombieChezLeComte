@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace ZombieChezLeComte
 {
     /// <summary>
-    /// Objet permettant de gérer des boutons. Ils supportes des effets de survolement et de clique
+    /// Classe permettant de gérer des boutons. Ils supportes des effets de survolement et de clique
     /// </summary>
     public class Button
     {

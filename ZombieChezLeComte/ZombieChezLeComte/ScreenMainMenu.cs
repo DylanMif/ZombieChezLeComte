@@ -12,10 +12,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ZombieChezLeComte
 {
-    public class MainMenu : GameScreen
+    public class ScreenMainMenu : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public MainMenu(Game1 game) : base(game) { }
+        public ScreenMainMenu(Game1 game) : base(game) { }
 
         private Button newGameButton = new Button();
         private int newGameButtonXPos = 50;
@@ -59,6 +59,7 @@ namespace ZombieChezLeComte
                 Color.Transparent, 0, 0, Color.Gray, Color.White, Color.Red, "Quitter <<");
 
             titlePosition = new Vector2(0, 0);
+
             mainMenuImagePosition = new Vector2(600, 250);
 
             nightNumber = DataSaver.LoadNight();
@@ -73,7 +74,9 @@ namespace ZombieChezLeComte
             pixelFont = Content.Load<SpriteFont>("police");
             pixelTitleFont = Content.Load<SpriteFont>("TitleFont");
 
+            // La texture de fond des boutons
             buttonBgTex = Content.Load<Texture2D>("rectangle");
+
             newGameButton.LoadContent(pixelFont, buttonBgTex);
             continueButton.LoadContent(pixelFont, buttonBgTex);
             commandButton.LoadContent(pixelFont, buttonBgTex);
@@ -82,9 +85,6 @@ namespace ZombieChezLeComte
             
             mainMenuTexture = Content.Load<Texture2D>("mainMenuImage");
 
-            
-
-            
             base.LoadContent();
         }
 
@@ -95,7 +95,7 @@ namespace ZombieChezLeComte
             commandButton.Update(Mouse.GetState(), Game);
             quitButton.Update(Mouse.GetState(), Game);
 
-
+            // Si on clique sur le titre est que l'on a finit au moins une fois la nuit 5 alors on lance la nuit 6
             if(Mouse.GetState().LeftButton == ButtonState.Pressed && 
                 titleRect.Intersects(new Rectangle(Mouse.GetState().Position.X, Mouse.GetState().Position.Y, 1, 1)) && 
                 DataSaver.LoadEnd() == 1)

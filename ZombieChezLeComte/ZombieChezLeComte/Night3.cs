@@ -51,7 +51,7 @@ namespace ZombieChezLeComte
 
             bookshelfInteract.Initialize(new Vector2(4300, 6412), 142, 29, "rangerBiblio", "Vous rangez la bibliotheque");
             kitchenInteract.Initialize(new Vector2(3979, 6563), 33, 37, "rangerCuisine", "Vous rangez la cuisine");
-            hallInteract.Initialize(new Vector2(4595, 6442), 115, 138, "rangerHall", "Vous rangez la hall");
+            hallInteract.Initialize(new Vector2(4595, 6442), 115, 138, "rangerHall", "Vous rangez le hall");
             for(int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
@@ -69,7 +69,7 @@ namespace ZombieChezLeComte
             litInteraction[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "Ce lit est nickel");
             litInteraction[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Parfaitement range");
             litInteraction[2].Initialize(new Vector2(4098, 6078), 47, 103, "lit3", "Bizarre... lit range");
-            litInteraction[3].Initialize(new Vector2(4452, 6111), 37, 83, "lit4", "Personne est venu aujourd'hui ?");
+            litInteraction[3].Initialize(new Vector2(4452, 6111), 37, 83, "lit4", "Personne n'est venu aujourd'hui ?");
             deadZombieInteract.Initialize(new Vector2(3901, 6382), 21, 28, "deadZombie", "C'est un mort, au moins il ne bougera plus...");
             base.Initialize();
 

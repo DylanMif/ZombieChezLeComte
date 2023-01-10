@@ -58,9 +58,9 @@ namespace ZombieChezLeComte
             }
             litInteractions[0].Initialize(new Vector2(4675, 5902), 37, 73, "lit1", "Ca n'a aucun sens ce que je fais...");
             litInteractions[1].Initialize(new Vector2(4098, 5900), 63, 83, "lit2", "Pourquoi je dois mettre de la viande sur des lits?!?");
-            litInteractions[2].Initialize(new Vector2(4098, 6088), 47, 103, "lit3", "C'est moi qui devient fou ou cette maison tourne par rond?");
-            litInteractions[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "Je devrais demisionner... Ca devient trop dangereux");
-            couteuxFour.Initialize(new Vector2(3979, 6563), 33, 37, "couteux","Des couteux au four ?? Drole de nourriture...");
+            litInteractions[2].Initialize(new Vector2(4098, 6088), 47, 103, "lit3", "C'est moi qui deviens fou ou cette maison tourne par rond?");
+            litInteractions[3].Initialize(new Vector2(4452, 6131), 37, 73, "lit4", "Je devrais demissionner... Ca devient trop dangereux");
+            couteuxFour.Initialize(new Vector2(3979, 6563), 33, 37, "couteux","Des couteux au four?? Drole de nourriture...");
             for (int i = 0; i < kitchenPapers.Length; i++)
             {
                 kitchenPapers[i] = new InteractObject();
@@ -75,9 +75,9 @@ namespace ZombieChezLeComte
             {
                 laverLivres[i] = new InteractObject();
             }
-            laverLivres[0].Initialize(new Vector2(4482, 6381), 50, 50, "armoire1", "Les livres sont foutu maintenant");
+            laverLivres[0].Initialize(new Vector2(4482, 6381), 50, 50, "armoire1", "Les livres sont foutus maintenant");
             laverLivres[1].Initialize(new Vector2(4281, 6384), 50, 50, "armoire2", "Pourquoi laver les livres?");
-            laverLivres[2].Initialize(new Vector2(4184, 6384), 50, 50, "armoire3", "Decidemment, ca devient de plus en plus bizzare...");
+            laverLivres[2].Initialize(new Vector2(4184, 6384), 50, 50, "armoire3", "Decidemment, ca devient de plus en plus bizarre...");
             recupViande.Initialize(new Vector2(3918, 5718), 67, 702, "viande", "Toujours la meme viande ragoutante...");
             debutArme.Initialize(new Vector2(0, 0), 32, 26, "arme", "J'ai une epee. Vite l'eau benite de la buandrie !");
             zombie.Initialiaze(new Vector2(-350, 0), Constantes.ZOMBIE_SPEED);
@@ -156,7 +156,7 @@ namespace ZombieChezLeComte
                     {
                         knifeSound.Play();
                     }
-                    Additions.InteractionObjet(couteuxFour, textInfo, "Les couteaux sont deja au fourneau...");
+                    Additions.InteractionObjet(couteuxFour, textInfo, "Les couteaux sont deja aux fourneaux...");
                     uneTache = true;
                 }
                 for (int i = 0; i < laverLivres.Length; i++)
@@ -169,7 +169,7 @@ namespace ZombieChezLeComte
                         }
                         if (laverLivres[i].HasAlreadyInteractable == false)
                         {
-                            Additions.InteractionObjet(laverLivres[i], textInfo, "Les livres sont laver ici");
+                            Additions.InteractionObjet(laverLivres[i], textInfo, "Les livres sont laves ici");
                             nombreLivre += 1;
                             uneTache = true;
                         }

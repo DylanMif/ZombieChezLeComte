@@ -44,6 +44,8 @@ namespace ZombieChezLeComte
 
         private bool _sword;
 
+        private Texture2D miniMapTexture;
+        private Rectangle miniMapDrawRect;
         public bool Sword
         {
             get
@@ -173,6 +175,7 @@ namespace ZombieChezLeComte
             currentStamina = Constantes.MAX_STAMINA_TIME;
             this.Sword = false;
             _timer = 0;
+            miniMapDrawRect = new Rectangle(Constantes.WINDOW_WIDTH - 350, 0, 350, 300);
         }
         public void LoadContent(GraphicsDevice _graphicsDevice, TiledMap _tilMap, SpriteSheet _spriteSheet, Game1 _game)
         {
@@ -182,7 +185,8 @@ namespace ZombieChezLeComte
             this.MapLayer =  this.TiledMap.GetLayer<TiledMapTileLayer>("Collision");
             this.VisionBlock = _game.Content.Load<Texture2D>("vision");
             walkSound = _game.Content.Load<SoundEffect>("Walk");
-            _maxTime =(float) walkSound.Duration.TotalSeconds *2.4f;
+            _maxTime = (float) walkSound.Duration.TotalSeconds *2.4f;
+            miniMapTexture = _game.Content.Load<Texture2D>("miniMap");
         }
         public void Update(GameTime _gameTime)
         {
@@ -250,6 +254,8 @@ namespace ZombieChezLeComte
         public void DrawVision(SpriteBatch _sb)
         {
             _sb.Draw(this.VisionBlock, new Rectangle(0, 0, Constantes.WINDOW_WIDTH, Constantes.WINDOW_HEIGHT), Color.White);
+            // On la dessine ici car il faut qu'elle se dessine par dessus la zone noir
+            _sb.Draw(miniMapTexture, miniMapDrawRect, new Color(100, 100, 100));
         }
         public bool IsCollision(ushort x, ushort y)
         {

@@ -54,6 +54,7 @@ namespace ZombieChezLeComte
             _graphics.PreferredBackBufferHeight = Constantes.WINDOW_HEIGHT;
             _graphics.PreferredBackBufferWidth = Constantes.WINDOW_WIDTH;
             _graphics.ApplyChanges();
+            Window.Title = "Le Complot du Comte";
             base.Initialize();
 
             killBy = "zombie";

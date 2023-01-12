@@ -66,8 +66,6 @@ namespace ZombieChezLeComte
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            Console.WriteLine(DataSaver.LoadNight());
-            Console.WriteLine(DataSaver.LoadEnd());
             mainSong = Content.Load<Song>("mainMusic");
             outroMusic = Content.Load<Song>("outroMusic");
             MediaPlayer.IsRepeating = true;
